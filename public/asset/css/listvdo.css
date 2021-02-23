@@ -1,0 +1,61 @@
+.mainvdo {
+  /* position: absolute; */
+  width: 750px;
+  height: 400px;
+  background-color: black;
+  /* margin-right: 5px; */
+}
+
+.mainscore {
+  position: absolute;
+  width: 300px;
+  height: 400px;
+  background-color: black;
+}
+
+.listvdo {
+  width: 300px;
+  height: 200px;
+  /* position: absolute; */
+  background-color: indianred;
+}
+
+video {
+  position: absolute;
+  width: 750px;
+  height: 400px;
+}
+
+#tr:hover {
+  background-color: rgb(141, 247, 236);
+  cursor: pointer;
+  color: deeppink;
+  /* display: none; */
+}
+
+#titlename {
+  color: blue;
+  font-family: "Times New Roman", Times, serif;
+  font-weight: bold;
+}
+
+#meter::-webkit-meter-optimum-value {
+  background: rgb(255, 0, 128); /* Green */
+}
+/* #viewscoretitle {
+    position: absolute;
+    color: white;
+    left: 25px;
+    top: 50px;
+
+} */
+
+.nav #navlink {
+  font-size: 30px;
+  color: white;
+}
+main {
+  overflow-y: scroll;
+  height: 900px;
+  width: 100%;
+}
