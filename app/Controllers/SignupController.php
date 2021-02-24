@@ -41,34 +41,4 @@ class SignupController extends BaseController
             }
         }
     }
-
-    // public function save()
-    // {
-    //     $data = [];
-
-    //     helper(['form']);
-
-    //     if ($this->request->getMethod() == 'post') {
-    //         $rules = [
-    //             'name' => 'required',
-    //             'username' => 'required|is_unique[users.username ]',
-    //             'password' => 'required',
-    //             'confpassword' => 'matches[password]',
-    //         ];
-
-    //         if ($this->validate($rules)) {
-    //             $model = new UsersModel();
-    //             $data = [
-    //                 'name' => $this->request->getVar('name'),
-    //                 'username' => $this->request->getVar('username'),
-    //                 'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT)
-    //             ];
-    //             $model->save($data);
-    //             return redirect()->to('/login');
-    //         } else {
-    //             $data['validation'] = $this->validator;
-    //             echo view('/register', $data);
-    //         }
-    //     }
-    // }
 }

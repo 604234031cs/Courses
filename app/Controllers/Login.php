@@ -49,12 +49,12 @@ class Login extends BaseController
                     return redirect()->to('/');
                 }
             } else {
-                $session->setFlashdata('msg', 'Wrong Password');
-                return redirect()->to('/');
+                $session->setFlashdata('msg', 'Password ไม่ถูกต้อง');
+                return redirect()->to('/login');
             }
         } else {
-            $session->setFlashdata('msg', 'Email not found');
-            return redirect()->to('/');
+            $session->setFlashdata('msg', 'ไม่พบ username นี้');
+            return redirect()->to('/login');
         }
     }
 
@@ -62,6 +62,7 @@ class Login extends BaseController
     {
         $session = session();
         $session->destroy();
-        return redirect()->to('/');
+
+        return redirect()->to('/login');
     }
 }

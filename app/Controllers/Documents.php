@@ -2,13 +2,14 @@
 
 namespace App\Controllers;
 
+use App\Models\Documents as ModelsDocuments;
 use App\Models\Listvdo;
 
-class Videos extends BaseController
+class Documents extends BaseController
 {
-    public function addvideos()
+    public function adddocs()
     {
-        $model_video = new Listvdo();
+        $model_docs = new ModelsDocuments();
         $files = $this->request->getFileMultiple('fileupload');
         $id_courses = $this->request->getVar('id_courses');
         $id_lectures = $this->request->getVar('id_lectures');
@@ -28,17 +29,17 @@ class Videos extends BaseController
                 "id_category" => $id_courses
             ];
 
-            if ($model_video->insert($datset)) {
-                $file->move('upload/' . $url . '/allvdo', $url_video);
+            if ($model_docs->insert($datset)) {
+                $file->move('upload/' . $url . '/alldocs', $url_video);
             }   // echo $name . "<br>";
 
 
         }
-        return redirect()->to('/admin/' . $id_courses . '/' . $id_lectures);
+        return redirect()->to('/admin/document/' . $id_courses . '/' . $id_lectures);
     }
 
 
-    public function updatevideo()
+    public function updatedocs()
     {
         helper(['form']);
 

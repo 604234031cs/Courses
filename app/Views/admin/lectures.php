@@ -33,7 +33,7 @@
                                     <?= $get['name']; ?>
                                 </td>
                                 <td class="text-center">
-                                    <!-- <a href="" class="btn btn-primary">เพิ่มวิดีโอบรรยาย</a> -->
+                                    <a href="/admin/document/<?= $courses['id']; ?>/<?= $get['id']; ?>" class="btn btn-primary">เอกสาร</a>
                                     <a href="/admin/<?= $courses['id']; ?>/<?= $get['id']; ?>" class="btn btn-success">ดูวิดีโอ</a>
                                     <a onclick="editlectures('<?= $get['id']; ?>','<?= $get['name']; ?>')" href="" class="btn btn-warning" data-toggle="modal" data-target="#editlectures">แก้ไข</a>
                                     <!-- <a href="" class="btn btn-danger">ลบ</a> -->

@@ -17,7 +17,7 @@ class  Courses extends BaseController
         $colum = $model_courses->findAll();
 
         $count = count($colum) + 1;
-        $base_url = site_url('vdo/');
+
         $next_folder = 'category' . $count;
 
         $dataset = [
@@ -26,9 +26,9 @@ class  Courses extends BaseController
         ];
 
         if ($model_courses->insert($dataset) == true) {
-            mkdir('vdo/' . $next_folder);
-
-            mkdir('vdo/' . $next_folder . '/allvdo');
+            mkdir('upload/' . $next_folder);
+            mkdir('upload/' . $next_folder . '/allvdo');
+            mkdir('upload/' . $next_folder . '/alldocs');
         }
 
         return redirect()->to('/admin/courses');

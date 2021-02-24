@@ -6,8 +6,32 @@
   background-color: white;
 } */
 
-#disk_d {
-  height: 40px;
-  width: 500px;
-  color: red;
+meter::-webkit-meter-optimum-value {
+  /* Reset each sub-category to 20% */
+  background-image: linear-gradient(
+    90deg,
+    #ff00bf 20%,
+    #ff00bf 20%,
+    #ff00bf 20%,
+    #ff00bf 20%,
+    #ff00bf 20%,
+    #ff00bf 20%,
+    #ff00bf 20%,
+    #ff00bf 20%
+  );
+  transition: width 0.5s;
+  width: 100% !important; /* !important required. to override the inline styles in WebKit. */
+}
+
+#col a .card:hover {
+  color: rgb(255, 4, 180);
+  border-color: rgb(255, 4, 180);
+}
+#col:hover {
+  color: rgb(5, 184, 166);
+  border-color: rgb(44, 114, 107);
+}
+
+a {
+  color: blue;
 }

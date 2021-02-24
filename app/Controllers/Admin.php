@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\CourseCategory;
+use App\Models\Documents;
 use App\Models\Listvdo;
 use App\Models\Subcourses;
 use App\Models\Users;
@@ -16,8 +17,6 @@ class Admin extends BaseController
         $model_category = new CourseCategory();
 
         $data['category'] = $model_category->findAll();
-
-
 
         echo view('admin/templates/head');
         echo view('admin/courses', $data);
@@ -74,5 +73,32 @@ class Admin extends BaseController
         echo view('admin/templates/head');
         echo view('admin/showvideo', $data);
         echo view('admin/templates/footer');
+    }
+
+
+    public function documents($id_courses = null, $id_lectures = null)
+    {
+        $data = [];
+        $model_courses = new CourseCategory();
+        $model_lectures = new Subcourses();
+        $model_doc = new Documents();
+
+        $dataset = [
+            'id_category' => $id_courses,
+            'id_subcourses' => $id_lectures
+        ];
+
+        $data['docs'] = $model_doc->where($dataset)->findAll();
+
+        $data['courses'] = $model_courses->where('id', $id_courses)->first();
+        $data['lectures'] = $model_lectures->where('id', $id_lectures)->first();
+        $data['count'] = count($data['docs']);
+
+        // echo json_encode($data);
+
+        echo view('admin/templates/head');
+        echo view('admin/documents', $data);
+        echo view('admin/templates/footer');
+        // echo WRITEPATH .'upload';
     }
 }

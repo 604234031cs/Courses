@@ -40,8 +40,7 @@ class Home extends BaseController
 		FROM courses_category
 		LEFT JOIN score
 		ON courses_category.id = score.id_courses
-		and score.id_user = '$id_user'
-			");
+		and score.id_user = '$id_user'");
 		$data['courses'] = $query->getResult();
 
 

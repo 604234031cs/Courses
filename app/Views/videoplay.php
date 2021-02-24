@@ -53,7 +53,7 @@
                     <div class="card ">
                         <div class="mainvideo mt-3 ">
                             <video controls id="video" onended="endVideo()">
-                                <source src="<?php echo site_url('/vdo/' . $category['url'] . '/allvdo/' . $courses['url']); ?>" type="video/mp4" id="source">
+                                <source src="<?php echo site_url('/upload/' . $category['url'] . '/allvdo/' . $courses['url']); ?>" type="video/mp4" id="source">
                             </video>
                         </div>
                     </div>

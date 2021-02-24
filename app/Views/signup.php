@@ -7,11 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
 
-    <!-- <link rel="stylesheet" href="<?php echo site_url('asset/css/index.css'); ?>"> -->
+    <
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
 
-
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 
 <body>
@@ -22,6 +22,13 @@
         }
     </style>
     <section>
+        <?php if (session()->getFlashdata('msg')) : ?>
+            <script>
+                let msg = '<?php echo session()->getFlashdata('msg'); ?>';
+                // alert(msg);
+                swal('ไม่สำเร็จ!', msg, 'error');
+            </script>
+        <?php endif; ?>
         <link rel="stylesheet" href="<?php echo site_url('asset/css/index.css'); ?>">
         <div class="container mt-5">
             <div class="row">
@@ -62,7 +69,7 @@
                     </form>
                     <div class="form-group">
                         <!-- <label for="inputEmail4">Confirm Password</label> -->
-                        <a href="/" class="btn btn-block btn-success btn-sm ">SIGN IN</a>
+                        <a href="/login" class="btn btn-block btn-success btn-sm ">SIGN IN</a>
                     </div>
                 </div>
             </div>

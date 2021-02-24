@@ -6,11 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
-
     <!-- <link rel="stylesheet" href="<?php echo site_url('asset/css/index.css'); ?>"> -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
-
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 </head>
 
@@ -23,7 +22,7 @@
     </style>
     <section>
         <?php if (session()->getFlashdata('msg')) : ?>
-            <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js">
+            <script>
                 let msg = '<?php echo session()->getFlashdata('msg'); ?>';
                 // alert(msg);
                 swal('ไม่สำเร็จ!', msg, 'error');
@@ -37,13 +36,21 @@
                         <h3 class="text-center">SIGN IN</h3>
                         <hr>
                         <form action="/login/auth" method="post">
-                            <div class="form-group">
-                                <label for="inputEmail4">Username</label>
+                            <label for="">Username</label>
+                            <div class="input-group mb-3">
+                                <!-- <label for="inputEmail4">Username</label> -->
                                 <input type="text" class="form-control" name="username">
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2"><i class="fas fa-user"></i></span>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="inputEmail4">Password</label>
+                            <label for="inputEmail4">Password</label>
+                            <div class="input-group mb-3">
+
                                 <input type="password" class="form-control" name="password">
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2"><i class="fas fa-lock"></i></span>
+                                </div>
                                 <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
                             </div>
                             <div class="form-group">

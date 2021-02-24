@@ -1,5 +1,5 @@
 function playvdo(url, name, category, id) {
-  var flievideo = "http://localhost:8080/vdo/" + category + "/allvdo/" + url;
+  var flievideo = "http://localhost:8080/upload/" + category + "/allvdo/" + url;
   //   // console.log();
   document.getElementById("source").src = flievideo;
   document.getElementById("video").load();

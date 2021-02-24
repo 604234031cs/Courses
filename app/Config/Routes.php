@@ -51,6 +51,7 @@ $routes->group('admin', function ($routes) {
 	$routes->get('courses', 'Admin::courses', ['filter' => 'auth']);
 	$routes->get('lectures/(:num)', 'Admin::subcourses/$1', ['filter' => 'auth']);
 	$routes->get('(:num)/(:num)', 'Admin::videos/$1/$2', ['filter' => 'auth']);
+	$routes->get('document/(:num)/(:num)', 'Admin::documents/$1/$2', ['filter' => 'auth']);
 	// $routes->add('blog', 'Admin\Blog::index');
 });
 
@@ -67,6 +68,10 @@ $routes->post('updatelectures', 'Lectures::updatelectures');
 // CRUD Videos
 $routes->post('addvideos', 'Videos::addvideos');
 $routes->post('updatevideo', 'Videos::updatevideo');
+
+// CRUD Docs
+$routes->post('adddocs', 'Documents::adddocs');
+$routes->post('updatedocs', 'Documents::updatedocs');
 
 
 //Login
