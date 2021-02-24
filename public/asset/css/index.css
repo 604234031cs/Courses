@@ -23,6 +23,10 @@ meter::-webkit-meter-optimum-value {
   width: 100% !important; /* !important required. to override the inline styles in WebKit. */
 }
 
+progress-bar {
+  background-color: rgb(255, 4, 180);
+}
+
 #col a .card:hover {
   color: rgb(255, 4, 180);
   border-color: rgb(255, 4, 180);

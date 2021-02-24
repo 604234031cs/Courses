@@ -28,7 +28,10 @@
                                         }
                                         ?>
                                     </div>
-                                    <meter id="disk_d" min="0" low="49" max="100" value=<?= $score; ?> style="width: 100%;height:30px"></meter>
+                                    <!-- <meter id="disk_d" min="0" low="49" max="100" value=<?= $score; ?> style="width: 100%;height:30px">sds</meter> -->
+                                    <div class="progress mt-2">
+                                        <div class="progress-bar " role="progressbar" style="width: <?= $score; ?>%; background-color:#ff00bf" aria-valuenow="<?= $score; ?>" aria-valuemin="0" aria-valuemax="100"><?= $score . '  %'; ?></div>
+                                    </div>
                                 </div>
                                 <h5 class="card-title mt-3"><?= $get->name; ?></h5>
                                 <!-- <p class="card-text">Some example text.</p> -->
