@@ -82,7 +82,7 @@ $routes->get('/logout', 'Login::logout');
 
 //Ajax Controller
 $routes->post('/ajax/checkvideo', 'Ajaxdata::videocheck');
-
+$routes->post('/ajax/search', 'Ajaxdata::search');
 /**
  * --------------------------------------------------------------------
  * Additional Routing

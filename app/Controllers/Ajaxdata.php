@@ -91,4 +91,63 @@ class Ajaxdata extends BaseController
             $model_score->insert($dataset);
         }
     }
+
+    // public function search()
+    // {
+    //     $query = $this->request->getVar('query');
+    //     $data = [];
+    //     $session = session();
+    //     $db = \Config\Database::connect();
+    //     $model_data =  new CourseCategory();
+    //     if ($query == null && $query == '') {
+    //         $data['courses'] = $model_data->findAll();
+    //         $id_user = $session->get('id');
+    //         $query = $db->query("SELECT courses_category.id,courses_category.name,score.score
+    // 	FROM courses_category
+    // 	LEFT JOIN score
+    // 	ON courses_category.id = score.id_courses
+    // 	where score.id_user = '$id_user'");
+    //         $data['courses'] = $query->getResult();
+    //         $query = $this->request->getVar('query');
+    //         echo json_encode($data);
+    //     } else {
+    //         $data['courses'] = $model_data->findAll();
+    //         $id_user = $session->get('id');
+    //         $query = $db->query("SELECT courses_category.id,courses_category.name,score.score
+    // 	FROM courses_category
+    // 	LEFT JOIN score
+    // 	ON courses_category.id = score.id_courses
+    //      where courses_category.name like '%$query%'
+    //      and  score.id_user = '$id_user'
+    //     ");
+    //         $data['courses'] = $query->getResult();
+    //         $query = $this->request->getVar('query');
+    //         echo json_encode($data);
+    //         // echo json_encode($data);
+    //     }
+    //     // echo json_encode($query);
+    // }
+
+    public function search()
+    {
+        $query = $this->request->getVar('query');
+        $data = [];
+        $session = session();
+        $id_user = $session->get('id');
+        $db = \Config\Database::connect();
+        $model_courses =  new CourseCategory();
+        $model_score = new Score();
+        // $data['courses'] = $model_courses->findAll();
+        $data['score'] = $model_score->where('id_user', $id_user)->findAll();
+
+        if ($query == null && $query == '') {
+            $data['courses'] = $model_courses->findAll();
+            // $data['score'] = $model_score->where('id_user', $id_user)->findAll();
+        } else {
+            $query = $db->query("SELECT * FROM courses_category where name like '%$query%'");
+            $data['courses'] = $query->getResult();
+        }
+
+        echo json_encode($data);
+    }
 }

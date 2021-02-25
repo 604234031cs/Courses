@@ -27,26 +27,26 @@ class Home extends BaseController
 
 	public function homepage()
 	{
-		$data = [];
-		$session = session();
-		$db = \Config\Database::connect();
-		$model_data =  new CourseCategory();
-		$model_sscore  = new Score();
-		$data['courses'] = $model_data->findAll();
+		// $data = [];
+		// $session = session();
+		// $db = \Config\Database::connect();
+		// $model_data =  new CourseCategory();
+		// $model_sscore  = new Score();
+		// $data['courses'] = $model_data->findAll();
 
-		$id_user = $session->get('id');
+		// $id_user = $session->get('id');
 
-		$query = $db->query("SELECT courses_category.id,courses_category.name,score.score
-		FROM courses_category
-		LEFT JOIN score
-		ON courses_category.id = score.id_courses
-		and score.id_user = '$id_user'");
-		$data['courses'] = $query->getResult();
+		// $query = $db->query("SELECT courses_category.id,courses_category.name,score.score
+		// FROM courses_category
+		// LEFT JOIN score
+		// ON courses_category.id = score.id_courses
+		// and score.id_user = '$id_user'");
+		// $data['courses'] = $query->getResult();
 
 
 		// $data['score'] = $model_sscore->where("id_user", $id_user)->findAll();
 		echo view('template/head');
-		echo view('index', $data);
+		echo view('index');
 		echo view('template/footer');
 		// echo json_encode($data);
 
@@ -67,11 +67,18 @@ class Home extends BaseController
 
 		$query = $db->query("SELECT courses_vdo.name ,courses_vdo.url,courses_vdo.id_subcourses,courses_vdo.id
 								FROM courses_vdo,subcourses
-								WHERE courses_vdo.id_subcourses = subcourses.id");
+								WHERE courses_vdo.id_subcourses = subcourses.id
+								and subcourses.id_category = '$id'");
 		$data['list'] = $query->getResult();
-		if ($data['list'] != null) {
-			$data['calculat'] = $this->calculatelist($id_user, $id);
-		}
+		// echo $id;
+		// echo json_encode($data['list']);
+		// if ($data['list'] != null) {
+		$data['calculat'] = $this->calculatelist($id_user, $id);
+		// } else {
+		// $data['calculat'] = 0.00;
+		// }
+
+		// echo json_encode($data);
 		echo view('template/head');
 		echo view('courses', $data);
 		echo view('template/footer');
@@ -88,12 +95,18 @@ class Home extends BaseController
 
 		$data = $model_logvideo->where($check)->findAll();
 
+
 		$countlog = count($data);
 
 		$countList = $model_video->where('id_category', $id_category)->findAll();
+		$count =  count($countList);
 
-		$sum =  ($countlog * 100) / count($countList);
-
+		// echo count($countList);
+		if ($count <= 0) {
+			$sum = 0;
+		} else {
+			$sum =  ($countlog * 100) / $count;
+		}
 		return number_format($sum, 2, '.', '');
 	}
 
@@ -122,7 +135,6 @@ class Home extends BaseController
 		echo view('template/head');
 		echo view('videoplay', $data);
 		echo view('template/footer');
-		
 	}
 	//--------------------------------------------------------------------
 

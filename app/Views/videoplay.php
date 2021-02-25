@@ -11,8 +11,15 @@
                         <div class="mt-2 mx-auto p-4" style="font-size: 20px;color:white;">
                             <?php echo  $category['name']; ?>
                         </div>
-                        <div class="mx-auto">
-                            <meter low="49" high="50" min="0" max="100" value="<?= $calculat; ?>" style="width: 230px;height: 30px;" id="meter"></meter><br>
+                        <div class="mx-5">
+                            <div class="progress ">
+                                <div class="progress-bar progress-bar-striped " role="progressbar" style="width: <?= $calculat; ?>%; background-color:#ff00bf" aria-valuenow="<?= $calculat; ?>" aria-valuemin="0" aria-valuemax="100"><?= $calculat . '  %'; ?></div>
+                            </div>
+                            <!-- <meter low="49" high="50" min="0" max="100" value="<?= $calculat; ?>" style="width: 230px;height: 30px;" id="meter"></meter><br> -->
+
+                        </div>
+                        <div class="text-center mt-2 ">
+                            <strong style="color: white;font-size:2em">COMPLETE</strong>
                         </div>
                         <h3 class="text-center" style="color:white;font-size:30px" id="calculate"><?= $calculat . " %"; ?></h3>
                     </div>

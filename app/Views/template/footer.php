@@ -9,6 +9,7 @@
 <script src="<?php echo site_url('theme/dist/js/scripts.js'); ?>"></script>
 <script src="<?php echo site_url('asset/js/listvdo.js'); ?>"></script>
 
+<script src="<?php echo site_url('asset/js/index.js'); ?>"></script>
 
 <script>
     $(document).ready(function() {
