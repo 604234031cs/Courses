@@ -5,10 +5,10 @@
 
         <div class="card mt-4">
             <div class="card-header">
-                <form action="/addvideos" method="POST" enctype="multipart/form-data">
+                <form action="/addvideos" method="POST" enctype="multipart/form-data" >
                     <div class="form-group">
                         <label for="exampleFormControlFile1">อัพโหลดคลิป</label>
-                        <input type="file" name="fileupload[]" class="form-control-file" multiple>
+                        <input type="file" name="fileupload[]" class="form-control-file" multiple required>
                         <input type="text" name="url" id="url" value="<?= $courses['url']; ?>" hidden>
                         <input type="text" name="id_courses" id="id_courses" value="<?= $courses['id']; ?>" hidden>
                         <input type="text" name="id_lectures" id="id_lectures" value="<?= $lectures['id']; ?>" hidden>

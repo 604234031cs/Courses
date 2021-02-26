@@ -37,6 +37,13 @@
                 <div class="container-fluid">
                     <h3 class="mt-5 ml-3">
                         <strong>เนื้อหาในคอร์สนี้</strong>
+                        <div class="text-right">
+                            <?php if ($docs) : ?>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                    เอกสารประกอบ
+                                </button>
+                            <?php endif; ?>
+                        </div>
                     </h3>
                     <?php foreach ($sub as $getsub) : ?>
                         <div class="card mb-3">
@@ -45,6 +52,16 @@
                             </div>
                             <div class="card-body">
                                 <table class="table">
+                                    <?php $i = 1; ?>
+                                    <?php foreach ($docs as $getdoc) : ?>
+                                        <?php if ($getsub['id'] == $getdoc->id_subcourses) : ?>
+                                            <tr>
+                                                <a href="<?= site_url('upload/' . $category['url'] . '/alldocs/' . $getdoc->url); ?>"><i class="fas fa-download"></i> File<?= $i; ?></a> &nbsp;
+                                            </tr>
+                                        <?php endif; ?>
+                                        <?php $i++; ?>
+                                    <?php endforeach; ?>
+
                                     <?php foreach ($list as $getlist) : ?>
                                         <?php if ($getsub['id'] == $getlist->id_subcourses) : ?>
                                             <tr id="tr" onclick="openlink('<?= $category['id']; ?>',<?= $getlist->id ?>)">
@@ -56,8 +73,11 @@
                                                     <a href="/courses/<?= $category['id']; ?>/lectures/<?= $getlist->id ?>" class="btn" style="background-color:deeppink;color:white;">เริ่ม</a>
                                                 </td>
                                             </tr>
+                                            <tr>
+                                            </tr>
                                         <?php endif; ?>
                                     <?php endforeach; ?>
+
                                 </table>
                             </div>
                         </div>
@@ -67,3 +87,51 @@
         </div>
     </div>
 </section>
+
+<?php if ($docs) : ?>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">เอกสารประกอบ</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table class="table">
+                        <?php foreach ($sub as $getsub) : ?>
+                            <thead>
+                                <tr>
+                                    <!-- <td></td> -->
+                                    <th>
+                                        <?php echo $getsub['name']; ?>
+                                    </th>
+                                    <th>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <?php foreach ($docs as $getdoc) : ?>
+                                <?php if ($getsub['id'] == $getdoc->id_subcourses) : ?>
+                                    <tr>
+                                        <!-- <td></td> -->
+                                        <td>
+                                            <i class="fas fa-file-export"></i> <?= $getdoc->name; ?>
+                                        </td>
+                                        <td class="text-center">
+                                            <a href="<?= site_url('upload/' . $category['url'] . '/alldocs/' . $getdoc->url); ?>" class="btn" style="background-color:deeppink;color:white;">โหลด</a>
+                                        </td>
+                                    </tr>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        <?php endforeach; ?>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>

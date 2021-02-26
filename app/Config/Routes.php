@@ -42,8 +42,9 @@ $routes->post('/signup/save', 'SignupController::signup');
 $routes->get('/login', 'Home::index');
 
 $routes->get('/courses/(:num)', 'Home::listvdo/$1', ['filter' => 'auth']);
+$routes->get('/document/(:num)', 'Home::document/$1', ['filter' => 'auth']);
 $routes->get('/courses/(:num)/lectures/(:num)', 'Home::showvideo/$1/$2', ['filter' => 'auth']);
-
+$routes->get('/progress_course','Home::progress_course');
 
 
 // Admin

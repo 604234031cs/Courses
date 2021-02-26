@@ -60,16 +60,25 @@ class Home extends BaseController
 		$id_user = $session->get('id');
 
 		$model_category = new CourseCategory();
+		$model_documents  = new Documents();
 		$data['category'] = $model_category->where('id', $id)->first();
 
 		$model_subcoruses = new Subcourses();
 		$data['sub'] = $model_subcoruses->where('id_category', $id)->findAll();
+		// $data['doc'] = $model_documents->where('')->findAll();
 
 		$query = $db->query("SELECT courses_vdo.name ,courses_vdo.url,courses_vdo.id_subcourses,courses_vdo.id
 								FROM courses_vdo,subcourses
 								WHERE courses_vdo.id_subcourses = subcourses.id
 								and subcourses.id_category = '$id'");
 		$data['list'] = $query->getResult();
+
+		$query = $db->query("SELECT documents.name ,documents.url,documents.id_subcourses,documents.id
+		FROM documents,subcourses
+		WHERE documents.id_subcourses = subcourses.id
+		and subcourses.id_category = '$id'");
+
+		$data['docs'] = $query->getResult();
 		// echo $id;
 		// echo json_encode($data['list']);
 		// if ($data['list'] != null) {
@@ -83,6 +92,17 @@ class Home extends BaseController
 		echo view('courses', $data);
 		echo view('template/footer');
 	}
+
+	public function document($id = null)
+	{
+		$data = [];
+		echo $id;
+		// echo view('template/head');
+		// echo view('document', $data);
+		// echo view('template/footer');
+	}
+
+
 
 	public function calculatelist($id_user, $id_category)
 	{
@@ -134,6 +154,39 @@ class Home extends BaseController
 		$data['calculat'] = $this->calculatelist($id_user, $id_category);
 		echo view('template/head');
 		echo view('videoplay', $data);
+		echo view('template/footer');
+	}
+
+
+	public function progress_course()
+	{
+		$data = [];
+		$session = session();
+		$id_user = $session->get('id');
+		$db = \Config\Database::connect();
+		$model_data =  new CourseCategory();
+		$query = $db->query("SELECT courses_category.id,courses_category.name,score.score
+			FROM courses_category
+			LEFT JOIN score
+			ON courses_category.id = score.id_courses
+			where score.id_user = '$id_user'");
+		$data['courses'] = $query->getResult();
+
+
+		// echo json_encode($data);
+
+
+
+
+
+
+
+
+
+
+
+		echo view('template/head');
+		echo view('progress_course', $data);
 		echo view('template/footer');
 	}
 	//--------------------------------------------------------------------

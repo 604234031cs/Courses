@@ -4,10 +4,10 @@
         <h2 class="mt-4">เอกสารประกอบ</h2>
         <div class="card mb-4">
             <div class="card-header ">
-                <form action="/adddocs" method="post" enctype="multipart/form-data">
+                <form action="/adddocs" method="post" enctype="multipart/form-data" required    >
                     <div class="form-group">
                         <label for="">อัพโหลดเอกสาร</label><br>
-                        <input type="file" name="fileupload[]" id="" multiple>
+                        <input type="file" name="fileupload[]" id="" multiple required>
                         <input type="text" name="url" id="url" value="<?= $courses['url']; ?>" hidden>
                         <input type="text" name="id_courses" id="id_courses" value="<?= $courses['id']; ?>" hidden>
                         <input type="text" name="id_lectures" id="id_lectures" value="<?= $lectures['id']; ?>" hidden>
