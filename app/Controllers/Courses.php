@@ -22,7 +22,8 @@ class  Courses extends BaseController
 
         $dataset = [
             "name" => $this->request->getVar('add-courses'),
-            "url" => $next_folder
+            "url" => $next_folder,
+            "gc_id" => $this->request->getVar('group')
         ];
 
         if ($model_courses->insert($dataset) == true) {

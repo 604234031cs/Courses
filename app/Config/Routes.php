@@ -44,7 +44,7 @@ $routes->get('/login', 'Home::index');
 $routes->get('/courses/(:num)', 'Home::listvdo/$1', ['filter' => 'auth']);
 $routes->get('/document/(:num)', 'Home::document/$1', ['filter' => 'auth']);
 $routes->get('/courses/(:num)/lectures/(:num)', 'Home::showvideo/$1/$2', ['filter' => 'auth']);
-$routes->get('/progress_course','Home::progress_course');
+$routes->get('/progress_course', 'Home::progress_course');
 
 
 // Admin
@@ -53,6 +53,8 @@ $routes->group('admin', function ($routes) {
 	$routes->get('lectures/(:num)', 'Admin::subcourses/$1', ['filter' => 'auth']);
 	$routes->get('(:num)/(:num)', 'Admin::videos/$1/$2', ['filter' => 'auth']);
 	$routes->get('document/(:num)/(:num)', 'Admin::documents/$1/$2', ['filter' => 'auth']);
+	$routes->get('category', 'Admin::category', ['filter' => 'auth']);
+	$routes->get('category/(:num)', 'Admin::group_courses/$1', ['filter' => 'auth']);
 	// $routes->add('blog', 'Admin\Blog::index');
 });
 
@@ -74,6 +76,11 @@ $routes->post('updatevideo', 'Videos::updatevideo');
 $routes->post('adddocs', 'Documents::adddocs');
 $routes->post('updatedocs', 'Documents::updatedocs');
 
+// CRUD Category and Group
+$routes->post('addcategory', 'Category::addcategory');
+$routes->post('updatecategory', 'Category::updatecategory');
+$routes->post('addgroup', 'Category::addgroup');
+$routes->post('updategroup', 'Category::updategroup');
 
 //Login
 $routes->post('/login/auth', 'Login::login');
@@ -84,6 +91,7 @@ $routes->get('/logout', 'Login::logout');
 //Ajax Controller
 $routes->post('/ajax/checkvideo', 'Ajaxdata::videocheck');
 $routes->post('/ajax/search', 'Ajaxdata::search');
+$routes->post('/ajax/selact', 'Ajaxdata::selact');
 /**
  * --------------------------------------------------------------------
  * Additional Routing

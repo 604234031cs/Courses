@@ -2,8 +2,10 @@
 
 namespace App\Controllers;
 
+use App\Models\CategoryGroup;
 use App\Models\CourseCategory;
 use App\Models\Documents;
+use App\Models\Group;
 use App\Models\Listvdo;
 use App\Models\Subcourses;
 use App\Models\Users;
@@ -15,14 +17,41 @@ class Admin extends BaseController
         $data = [];
 
         $model_category = new CourseCategory();
+        $model_mainc = new CategoryGroup();
 
         $data['category'] = $model_category->findAll();
 
+        $data['main_c'] = $model_mainc->findAll();
         echo view('admin/templates/head');
         echo view('admin/courses', $data);
         echo view('admin/templates/footer');
         // $part = site_url()
+    }
 
+    public function category()
+    {
+        $data = [];
+        $model_mainc = new CategoryGroup();
+        $data['main'] = $model_mainc->findAll();
+        echo view('admin/templates/head');
+        echo view('admin/category', $data);
+        echo view('admin/templates/footer');
+    }
+
+    public function group_courses($id = null)
+    {
+        $data = [];
+        $model_mainc = new CategoryGroup();
+        $data['mains'] = $model_mainc->findAll();
+        $data['name'] = $model_mainc->where('id', $id)->first();
+        $model_group  = new Group();
+        $data['group'] = $model_group->where('c_id', $id)->findAll();
+
+
+
+        echo view('admin/templates/head');
+        echo view('admin/group', $data);
+        echo view('admin/templates/footer');
     }
 
     public function subcourses($id_courses = null)

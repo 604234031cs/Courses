@@ -1,5 +1,6 @@
 let myVideo = document.getElementById("video");
 function openvideo(url, name) {
+  alert(url)
   $("#showvideo").modal("show");
   document.getElementById("source").src = url;
   document.getElementById("video").load();

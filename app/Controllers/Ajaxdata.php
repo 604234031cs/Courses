@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\CourseCategory;
+use App\Models\Group;
 use App\Models\Listvdo;
 use App\Models\Logvideo;
 use App\Models\Score;
@@ -148,6 +149,18 @@ class Ajaxdata extends BaseController
             $data['courses'] = $query->getResult();
         }
 
+        echo json_encode($data);
+    }
+
+
+
+    public function selact()
+    {
+
+        $key = $this->request->getVar('key');
+        $data = [];
+        $model_group = new Group();
+        $data['group'] = $model_group->where('c_id', $key)->findAll();
         echo json_encode($data);
     }
 }

@@ -14,6 +14,7 @@
 <script src="<?= site_url('asset/js/lectures.js'); ?>"></script>
 <script src="<?= site_url('asset/js/video-list.js'); ?>"></script>
 <script src="<?= site_url('asset/js/subcourses.js'); ?>"></script>
+<script src="<?= site_url('asset/js/category.js'); ?>"></script>
 
 <script>
     $(document).ready(function() {

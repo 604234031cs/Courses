@@ -4,6 +4,7 @@
         <div class="card mb-4">
             <div class="card-header text-right">
                 <button class="btn btn-success" data-toggle="modal" data-target="#exampleModal">เพิ่มคอร์สเรียน</button>
+
             </div>
             <div class="card-body">
                 <table class="table" id="courses-list">
@@ -18,7 +19,7 @@
                         <?php $i = 1; ?>
                         <?php foreach ($category as $get) : ?>
                             <tr>
-                                <td>
+                                <td class="text-center">
                                     <?= $i; ?>
                                 </td>
                                 <td>
@@ -49,10 +50,23 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="/updatecourses" method="POST">
+                <form action="/addcourses" method="POST">
+                    <div class="form-group">
+                        <label for="">ประเภอคอร์สหลัก</label>
+                        <select class="form-control" onchange="autoselect(this.value)" id="main">
+                            <?php foreach ($main_c as $get) : ?>
+                                <option value="<?= $get['id']; ?>"><?= $get['name']; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="">หมวดหมู่</label>
+                        <select name="group" id="group" class="form-control">
+                        </select>
+                    </div>
                     <div class="form-group">
                         <label for="">ชื่อคอร์ส</label>
-                        <input type="text" name="add-courses" id="" class="form-control">
+                        <input type="text" name="add-courses" id="" class="form-control" required>
                     </div>
             </div>
             <div class="modal-footer">
@@ -75,6 +89,21 @@
             </div>
             <div class="modal-body">
                 <form action="/updatecourses" method="POST">
+                    <div class="form-group">
+                        <label for="">ประเภอคอร์สหลัก</label>
+                        <select class="form-control" onchange="autoselect(this.value)" id="main">
+                            <?php foreach ($main_c as $get) : ?>
+                                <option value="<?= $get['id']; ?>"><?= $get['name']; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="">หมวดหมู่</label>
+                        <select name="group" id="group" class="form-control">
+                        </select>
+                    </div>
+
                     <div class="form-group">
                         <label for="">ชื่อคอร์ส</label>
                         <input type="text" name="edit_name" id="edit_name" class="form-control">

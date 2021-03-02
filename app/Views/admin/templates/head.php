@@ -51,6 +51,10 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             คอร์สเรียน
                         </a>
+                        <a class="nav-link" href="/admin/category">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            ประเภทคอร์ส
+                        </a>
 
                         <a class="nav-link" href="#">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
