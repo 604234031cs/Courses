@@ -1,9 +1,12 @@
-function edit(name, id) {
-  // alert('Edit');
+function edit(name, id, ca_name, ca_id, gr_name, gr_id) {
   $("#editcourses").modal("show");
   $("#edit_name").val(name);
   $("#edit_id").val(id);
+  $("#option").val(ca_id);
+  $("#option").html(ca_name);
+  loadpage2(gr_name, gr_id);
 }
+
 loadpage();
 function autoselect(value) {
   var option = "";
@@ -31,10 +34,63 @@ function autoselect(value) {
   });
 }
 
+function autoselect2(value) {
+  var option = "";
+  $("#group_e").empty();
+  $.ajax({
+    url: "/ajax/selact",
+    type: "post",
+    data: {
+      key: value,
+    },
+    success: function (resulte) {
+      var json = JSON.parse(resulte);
+      json["group"].forEach((element) => {
+        // console.log(element["name"]);
+        option +=
+          "<option value='" +
+          element["id"] +
+          "'>" +
+          element["name"] +
+          "</option>";
+      });
 
+      $("#group_e").append(option);
+    },
+  });
+}
+
+function loadpage2(gr_name, gr_id) {
+  var value = $("#main2").val();
+
+  var option = "";
+  $("#group_e").empty();
+  $.ajax({
+    url: "/ajax/selact",
+    type: "post",
+    data: {
+      key: value,
+    },
+    success: function (resulte) {
+      var json = JSON.parse(resulte);
+      json["group"].forEach((element) => {
+        // console.log(element["name"]);
+        option +=
+          "<option value='" +
+          element["id"] +
+          "'>" +
+          element["name"] +
+          "</option>";
+      });
+
+      $("#group_e").append(option);
+    },
+  });
+}
 function loadpage() {
   var value = $("#main").val();
   var option = "";
+  $("#group").empty();
   $.ajax({
     url: "/ajax/selact",
     type: "post",

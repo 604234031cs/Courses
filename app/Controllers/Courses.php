@@ -26,6 +26,9 @@ class  Courses extends BaseController
             "gc_id" => $this->request->getVar('group')
         ];
 
+
+
+
         if ($model_courses->insert($dataset) == true) {
             mkdir('upload/' . $next_folder);
             mkdir('upload/' . $next_folder . '/allvdo');
@@ -46,7 +49,8 @@ class  Courses extends BaseController
         $id = $this->request->getVar('edit_id');
 
         $dataset = [
-            "name" => $this->request->getVar('edit_name')
+            "name" => $this->request->getVar('edit_name'),
+            "gc_id" => $this->request->getVar('group_e')
         ];
 
         $model_courses->update($id, $dataset);

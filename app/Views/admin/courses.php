@@ -27,7 +27,7 @@
                                 </td>
                                 <td class="text-center">
                                     <a href="/admin/lectures/<?= $get['id']; ?>" class="btn btn-success ">เพิ่มหัวข้อ</a>
-                                    <a onclick="edit('<?= $get['name']; ?>','<?= $get['id']; ?>')" href="" class="btn btn-warning " data-toggle="modal" data-target="#editcourses">แก้ไข</a>
+                                    <a onclick="edit('<?= $get['name']; ?>','<?= $get['id']; ?>','<?= $get['ca_name']; ?>','<?= $get['ca_id']; ?>','<?= $get['gr_name']; ?>','<?= $get['gr_id']; ?>')" href="" class="btn btn-warning " data-toggle="modal" data-target="#editcourses">แก้ไข</a>
                                     <!-- <a href="" class="btn btn-danger">ลบ</a> -->
                                 </td>
                             </tr>
@@ -54,6 +54,7 @@
                     <div class="form-group">
                         <label for="">ประเภอคอร์สหลัก</label>
                         <select class="form-control" onchange="autoselect(this.value)" id="main">
+
                             <?php foreach ($main_c as $get) : ?>
                                 <option value="<?= $get['id']; ?>"><?= $get['name']; ?></option>
                             <?php endforeach; ?>
@@ -91,7 +92,9 @@
                 <form action="/updatecourses" method="POST">
                     <div class="form-group">
                         <label for="">ประเภอคอร์สหลัก</label>
-                        <select class="form-control" onchange="autoselect(this.value)" id="main">
+                        <option value=""></option>
+                        <select class="form-control" onchange="autoselect2(this.value)" id="main2">
+                            <option value="" id="option"></option>
                             <?php foreach ($main_c as $get) : ?>
                                 <option value="<?= $get['id']; ?>"><?= $get['name']; ?></option>
                             <?php endforeach; ?>
@@ -100,7 +103,10 @@
 
                     <div class="form-group">
                         <label for="">หมวดหมู่</label>
-                        <select name="group" id="group" class="form-control">
+                        <span id="option2-value"></span>
+                        <span id="option2-html"></span>
+                        <select name="group_e" id="group_e" class="form-control">
+                            <!-- <option value="" id="option2"></option> -->
                         </select>
                     </div>
 

@@ -15,12 +15,19 @@ class Admin extends BaseController
     public function courses()
     {
         $data = [];
+        $db = \Config\Database::connect();
+        $query = $db->query('SELECT courses_category.id,courses_category.name ,courses_category.url,
+        category.id as ca_id,category.name as ca_name,group_courses.name as gr_name,group_courses.id as gr_id
+        FROM courses_category,category,group_courses 
+        WHERE category.id = group_courses.c_id
+        and courses_category.gc_id = group_courses.id');
 
-        $model_category = new CourseCategory();
+
+        // $model_category = new CourseCategory();
         $model_mainc = new CategoryGroup();
 
-        $data['category'] = $model_category->findAll();
-
+        $data['category'] = $query->getResult('array');
+        // echo json_encode($data);
         $data['main_c'] = $model_mainc->findAll();
         echo view('admin/templates/head');
         echo view('admin/courses', $data);
