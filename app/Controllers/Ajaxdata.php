@@ -160,7 +160,12 @@ class Ajaxdata extends BaseController
         $key = $this->request->getVar('key');
         $data = [];
         $model_group = new Group();
-        $data['group'] = $model_group->where('c_id', $key)->findAll();
-        echo json_encode($data);
+        if ($key == null && $key == '') {
+            $data['group'] = $model_group->findAll();
+            echo json_encode($data);
+        } else {
+            $data['group'] = $model_group->where('c_id', $key)->findAll();
+            echo json_encode($data);
+        }
     }
 }

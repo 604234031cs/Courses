@@ -117,3 +117,40 @@ function getscore(json, id) {
   return score;
 }
 
+function autoselect(value) {
+  var option = "";
+  $("#group_sel").empty();
+  $.ajax({
+    url: "/ajax/selact",
+    type: "post",
+    data: {
+      key: value,
+    },
+    success: function (resulte) {
+      var json = JSON.parse(resulte);
+      option += "<option value='' disabled selected>หมวดหมู่</option>";
+      json["group"].forEach((element) => {
+        // console.log(element["name"]);
+
+        option +=
+          "<option value='" +
+          element["id"] +
+          "'>" +
+          element["name"] +
+          "</option>";
+      });
+      $("#group_sel").append(option);
+      let name_sel = $("#group_sel option:selected").text();
+      // alert(name_sel);
+      $("#group-name ").html(name_sel);
+    },
+  });
+}
+
+function changevalue(value) {
+  // alert(value);
+  let name_sel = $("#group_sel option:selected").text();
+  // alert(name_sel);
+  $("#group-name ").html(name_sel);
+  window.location.href = "/category/" + $("#group_sel option:selected").val();
+}

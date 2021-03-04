@@ -6,7 +6,7 @@
                 <div class="sb-sidenav-menu">
                     <div class="nav">
                         <div class="card">
-                            <img src="https://process.fs.teachablecdn.com/ADNupMnWyR7kCWRvm76Laz/resize=width:705/https://www.filepicker.io/api/file/kSbQ546LSOiDrock3pNG" width="332" height="187">
+                            <img src="https://process.fs.teachablecdn.com/ADNupMnWyR7kCWRvm76Laz/resize=width:705/https://www.filepicker.io/api/file/kSbQ546LSOiDrock3pNG" width="300" height="187">
                         </div>
                         <div class="mt-2 mx-auto p-4" style="font-size: 20px;color:white;">
                             <?php echo $category['name']; ?>

@@ -40,6 +40,7 @@ $routes->get('/', 'Home::homepage', ['filter' => 'auth']);
 $routes->get('/signup', 'Home::signup');
 $routes->post('/signup/save', 'SignupController::signup');
 $routes->get('/login', 'Home::index');
+$routes->get('/category/(:num)', 'Home::category/$1');
 
 $routes->get('/courses/(:num)', 'Home::listvdo/$1', ['filter' => 'auth']);
 $routes->get('/document/(:num)', 'Home::document/$1', ['filter' => 'auth']);

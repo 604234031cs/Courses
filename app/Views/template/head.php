@@ -102,7 +102,7 @@ $group = $query->getResult();
 
     <nav class="sb-topnav navbar navbar-expand navbar-dark " style="background-color: turquoise;">
         <div class="container">
-            <!-- <a class="navbar-brand" href="/">Start Bootstrap</a>  -->
+            <a class="navbar-brand" href="/">COURSES</a>
             <ul class="navbar-nav mr-auto ml-md-0">
                 <!-- <li class="nav-item dropdown">
                     <a class="navbar-brand dropdown-toggle" id="userDropdown" href="/" data-toggle="dropdown">คอร์สเรียน</a>
@@ -123,13 +123,13 @@ $group = $query->getResult();
                                 <ul class="submenu dropdown-menu">
                                     <?php foreach ($group as $get) : ?>
                                         <?php if ($get->c_id == $list->id) : ?>
-                                            <li><a class="dropdown-item" href=""><?= $get->name ?></a></li>
+                                            <li><a class="dropdown-item" href="/category/<?= $get->id; ?>"><?= $get->name ?></a></li>
                                         <?php endif; ?>
                                     <?php endforeach; ?>
                                 </ul>
                             </li>
                         <?php endforeach; ?>
-                        <li><a class="dropdown-item" href="#"> คอร์สเรียนทั้งหมด </a></li>
+                        <li><a class="dropdown-item" href="/"> คอร์สเรียนทั้งหมด </a></li>
 
                     </ul>
                 </li>

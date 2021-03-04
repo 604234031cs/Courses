@@ -2,7 +2,9 @@
 
 namespace App\Controllers;
 
+use App\Models\CategoryGroup;
 use App\Models\CourseCategory;
+use App\Models\Group;
 use App\Models\Listvdo;
 use App\Models\Logvideo;
 use App\Models\Score;
@@ -27,12 +29,12 @@ class Home extends BaseController
 
 	public function homepage()
 	{
-		// $data = [];
+		$data = [];
 		// $session = session();
 		// $db = \Config\Database::connect();
-		// $model_data =  new CourseCategory();
+		$model_data =  new CourseCategory();
 		// $model_sscore  = new Score();
-		// $data['courses'] = $model_data->findAll();
+		$data['courses'] = $model_data->findAll();
 
 		// $id_user = $session->get('id');
 
@@ -46,11 +48,32 @@ class Home extends BaseController
 
 		// $data['score'] = $model_sscore->where("id_user", $id_user)->findAll();
 		echo view('template/head');
-		echo view('index');
+		echo view('index', $data);
 		echo view('template/footer');
 		// echo json_encode($data);
 
 
+	}
+
+
+	public function category($id = null)
+	{
+		$data = [];
+
+		$modle_group = new Group();
+		$model_courses = new CourseCategory();
+		$model_category = new CategoryGroup();
+
+		$data['category']  = $model_category->findAll();
+
+		$data['group'] = $modle_group->where('id', $id)->first();
+
+		$data['courses'] =  $model_courses->where('gc_id', $id)->findAll();
+		// echo json_encode($data);
+
+		echo view('template/head');
+		echo view('index_category', $data);
+		echo view('template/footer');
 	}
 
 	public function listvdo($id = null)
