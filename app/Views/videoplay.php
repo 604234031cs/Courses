@@ -59,10 +59,11 @@
                     </h3>
                     <div class="card ">
                         <div class="mainvideo mt-3 ">
-                            <video controls id="video" onended="endVideo()" onplay="playvideo()">
+                            <video controls id="video" onended="endVideo()" onplay="playvideo()" ontimeupdate="updatetime(this)">
                                 <source src="<?php echo site_url('/upload/' . $category['url'] . '/allvdo/' . $courses['url']); ?>" type="video/mp4" id="source">
                             </video>
                         </div>
+                        <strong>Durations : </strong> <span id="sh_time"></span>
                     </div>
                 </div>
             </main>

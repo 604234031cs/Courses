@@ -1,3 +1,4 @@
+let myVideo = document.getElementById("video");
 function playvdo(url, name, category, id) {
   var flievideo = "http://localhost:8080/upload/" + category + "/allvdo/" + url;
   //   // console.log();
@@ -33,6 +34,10 @@ function endVideo() {
 
 function openlink(c, l) {
   window.location.href = "/courses/" + c + "/lectures/" + l;
+}
+
+function updatetime(event) {
+  $("#sh_time").html(event.currentTime);
 }
 
 function playvideo() {
