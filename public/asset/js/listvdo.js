@@ -18,9 +18,9 @@ function endVideo() {
     type: "post",
     url: "/ajax/checkvideo",
     data: {
-      'id_user': id_user,
-      'id_video': id_video,
-      'id_category': id_category,
+      id_user: id_user,
+      id_video: id_video,
+      id_category: id_category,
     },
     success: function (result) {
       console.log(result);
@@ -33,4 +33,35 @@ function endVideo() {
 
 function openlink(c, l) {
   window.location.href = "/courses/" + c + "/lectures/" + l;
+}
+
+function playvideo() {
+  var id_user = $("#id_user").html();
+  var id_video = $("#id_video").html();
+  var id_category = $("#id_category").html();
+
+  // $.ajax({
+  //   type: "post",
+  //   url: "/ajax/checkvideo",
+  //   data: {
+  //     id_user: id_user,
+  //     id_video: id_video,
+  //     id_category: id_category,
+  //   },
+  //   success: function (result) {
+  //     console.log(result);
+  //     let val = JSON.parse(result);
+  //     // console.log(val);
+  //     $("#calculate").html(val + "%");
+  //   },
+  // });
+  // alert(id_user);
+  // alert(id_video);
+  // alert(id_category);
+
+  // $.ajax({
+  //   url:'',
+  //   type:'',
+  //   data:'',
+  // });
 }
