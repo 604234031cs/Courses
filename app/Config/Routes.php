@@ -93,6 +93,9 @@ $routes->get('/logout', 'Login::logout');
 $routes->post('/ajax/checkvideo', 'Ajaxdata::videocheck');
 $routes->post('/ajax/search', 'Ajaxdata::search');
 $routes->post('/ajax/selact', 'Ajaxdata::selact');
+$routes->post('/ajax/updateduration', 'Ajaxdata::duration');
+$routes->post('/ajax/endvideo', 'Ajaxdata::endvideo');
+$routes->post('/ajax/getcurrtiem', 'Ajaxdata::currtime');
 /**
  * --------------------------------------------------------------------
  * Additional Routing

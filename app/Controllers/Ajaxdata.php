@@ -22,13 +22,11 @@ class Ajaxdata extends BaseController
         // $id_user = 2;
         // $id_video = 4;
         // $id_category = 1;
-
         $check = [
             'id_user' => $id_user,
             'id_vdo' => $id_video,
             'category' => $id_category
         ];
-
         $data = $model_logvideo->where($check)->findAll();
         $count = count($data);
         // echo json_encode($count);
@@ -36,20 +34,110 @@ class Ajaxdata extends BaseController
             $insert = [
                 'id_user' => $id_user,
                 'id_vdo' => $id_video,
-                "status" => 1,
-                'category' => $id_category
+                "status" => 0,
+                'category' => $id_category,
+                'duration' => 0
             ];
             $model_logvideo->insert($insert);
-            $persent = $this->calculatevideo($id_category, $id_user);
+            // $persent = $this->calculatevideo($id_category, $id_user);
             // $updatescore = $this->updatescrore($id_category, $id_user);
-            $status = [
-                "status" => 200,
-                "value" => "Success Insert",
-                "calculate" => $persent
-            ];
-            echo json_encode($persent);
+            // $status = [
+            //     "status" => 200,
+            //     "value" => "Success Insert",
+            //     "calculate" => $persent
+            // ];
+            // echo json_encode($persent);
         }
     }
+
+    public function duration()
+    {
+
+        $model_logvideo = new Logvideo();
+        $id_user = $this->request->getVar('id_user');
+        $id_video = $this->request->getVar('id_vdo');
+        $duration = $this->request->getVar('duration');
+
+        // $id_user = 2;
+        // $id_video = 1;
+        // $duration = 150;
+
+        // $datacheck = [
+        //     'id_user' => $id_user,
+        //     'id_vdo' => $id_video
+        // ];
+
+        $update  = [
+            'duration' => $duration
+        ];
+        $id_update = $this->getidupdate($id_user, $id_video);
+        // echo $id_update[0]->id;
+        if ($id_update != null && $id_update != '') {
+            $model_logvideo->update((int)$id_update[0]->id, $update);
+        }
+    }
+
+    public function getidupdate($user, $video)
+    {
+        $db = \Config\Database::connect();
+        $sql = $db->query("SELECT id FROM logvdo where id_user='$user' and id_vdo = '$video' and status = 0");
+        return $sql->getResult();
+    }
+
+    public function endvideo()
+    {
+        $id_user = $this->request->getVar('id_user');
+        $id_video = $this->request->getVar('id_video');
+        $id_category = $this->request->getVar('id_category');
+
+        // $id_user = 2;
+        // $id_video = 2;
+        // $id_category = 1;
+        // $id_category = $this->request->getVar('id_category');
+        $model_logvideo = new Logvideo();
+
+        $id_update = $this->getidupdate($id_user, $id_video);
+
+        if ($id_update != null && $id_update != '') {
+            $dataupdate  = [
+                "status" => 1
+            ];
+            $model_logvideo->update((int)$id_update[0]->id, $dataupdate);
+        }
+
+        $persent = $this->calculatevideo($id_category, $id_user);
+
+
+        // $status = [
+        //     "status" => 200,
+        //     "value" => "Success Insert",
+        //     "calculate" => $persent
+        // ];
+        echo json_encode($persent);
+        // $updatescore = $this->updatescrore($id_category, $id_user);
+    }
+
+
+    public function currtime()
+    {
+        $model_logvideo = new Logvideo();
+        $db = \Config\Database::connect();
+        $id_user = $this->request->getVar('id_user');
+        $id_video = $this->request->getVar('id_video');
+        $dataset = [
+            "id_user" => $id_user,
+            "id_vdo" => $id_video
+        ];
+
+        // $query = $db->query("SELECT * FROM logvdo where id_user ='$id_user' and id_vdo ='$id_video' ");
+        $data['currtiem'] = $model_logvideo->where($dataset)->first();
+
+
+        echo json_encode($data['currtiem']);
+    }
+
+
+
 
     public function calculatevideo($id_category, $id_user)
     {
@@ -57,7 +145,8 @@ class Ajaxdata extends BaseController
         $model_logvideo = new Logvideo();
         $check = [
             "id_user" => $id_user,
-            "category" => $id_category
+            "category" => $id_category,
+            "status" => 1
         ];
         $data = $model_logvideo->where($check)->findAll();
         $countlog = count($data);

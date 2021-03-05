@@ -133,7 +133,8 @@ class Home extends BaseController
 		$model_logvideo = new Logvideo();
 		$check = [
 			"id_user" => $id_user,
-			"category" => $id_category
+			"category" => $id_category,
+			"status" => 1
 		];
 
 		$data = $model_logvideo->where($check)->findAll();
@@ -175,6 +176,7 @@ class Home extends BaseController
 		$data['list'] = $query->getResult();
 
 		$data['calculat'] = $this->calculatelist($id_user, $id_category);
+		// echo json_encode($data);
 		echo view('template/head');
 		echo view('videoplay', $data);
 		echo view('template/footer');
@@ -195,18 +197,7 @@ class Home extends BaseController
 			where score.id_user = '$id_user'");
 		$data['courses'] = $query->getResult();
 
-
 		// echo json_encode($data);
-
-
-
-
-
-
-
-
-
-
 
 		echo view('template/head');
 		echo view('progress_course', $data);

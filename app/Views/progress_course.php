@@ -8,7 +8,7 @@
                 <div class="row">
                     <?php foreach ($courses as $get) : ?>
 
-                        <div class="col col-lg">
+                        <div class="col col-lg-4">
                             <a href="/courses/<?= $get->id; ?>" style="text-decoration: none; color:black;">
                                 <div class="card mb-4 " style="height:370px">
                                     <img class="card-img-top" src="https://process.fs.teachablecdn.com/ADNupMnWyR7kCWRvm76Laz/resize=width:705/https://www.filepicker.io/api/file/5Cr0YJWRBqYw3zpCKImc" alt="Card image" width="321" height="121">

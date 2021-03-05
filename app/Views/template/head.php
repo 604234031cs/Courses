@@ -102,7 +102,7 @@ $group = $query->getResult();
 
     <nav class="sb-topnav navbar navbar-expand navbar-dark " style="background-color: turquoise;">
         <div class="container">
-            <a class="navbar-brand" href="/">COURSES</a>
+            <a class="navbar-brand" href="/"><strong>COURSES</strong></a>
             <ul class="navbar-nav mr-auto ml-md-0">
                 <!-- <li class="nav-item dropdown">
                     <a class="navbar-brand dropdown-toggle" id="userDropdown" href="/" data-toggle="dropdown">คอร์สเรียน</a>
