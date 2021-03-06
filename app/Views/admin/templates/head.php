@@ -1,3 +1,12 @@
+<?php
+
+use App\Models\Regis;
+
+$model_regist = new Regis();
+
+$regis = $model_regist->findAll();
+$count_regis = count($regis);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,7 +27,7 @@
 
 <body>
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark" style="position: sticky;top:0;">
-        <a class="navbar-brand" href="">Start Bootstrap</a>
+        <a class="navbar-brand" href=""><strong>Courses</strong></a>
         <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
         <!-- Navbar Search-->
         <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
@@ -56,9 +65,9 @@
                             ประเภทคอร์ส
                         </a>
 
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="/admin/register">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                            ผู้ใช้ระบบ
+                            ผู้ใช้ระบบ &nbsp;<span class="badge badge-light"><?= $count_regis; ?></span>
                         </a>
 
                     </div>

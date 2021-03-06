@@ -1,22 +1,61 @@
 let myVideo = document.getElementById("video");
+document.getElementById("progree").style.width = $("#with").html() + "%";
 function playvdo(url, name, category, id) {
   var id_user = $("#id_user").html();
-
   var flievideo = "http://localhost:8080/upload/" + category + "/allvdo/" + url;
   // console.log("id_user=>" + id_user + "::id_video=>" + id);
-  document.getElementById("source").src = flievideo;
-  // myVideo.play();
-  console.log(myVideo.played);
-  myVideo.load();
-
-  // document.getElementById("video").autoplay = true;
+  $.ajax({
+    type: "post",
+    url: "/ajax/getcurrtiem",
+    data: {
+      id_user: id_user,
+      id_video: id,
+    },
+    success: function (result) {
+      let val = JSON.parse(result);
+      document.getElementById("source").src = flievideo;
+      // console.log(myVideo.played);
+      myVideo.load();
+      if (val["duration"] != null && val["duration"] != "") {
+        myVideo.currentTime = val["duration"];
+      } else {
+        myVideo.currentTime = 0;
+      }
+    },
+  });
   $("#videoname").html(name);
   $("#id_video").html(id);
   window.scrollTo(0, 0);
 }
-// myVideo.onprogress  = function () {
-//   alert("Browser has loaded the current frame");
-// };
+loadpagestart();
+function loadpagestart() {
+  var id_user = $("#id_user").html();
+  var id_video = $("#id_video").html();
+  var url = $("#id_category").html();
+  var url = $("#urlvideo").html();
+  var category = $("#url").html();
+  var flievideo = "http://localhost:8080/upload/" + category + "/allvdo/" + url;
+  $.ajax({
+    type: "post",
+    url: "/ajax/getcurrtiem",
+    data: {
+      id_user: id_user,
+      id_video: id_video,
+    },
+    success: function (result) {
+      let val = JSON.parse(result);
+      document.getElementById("source").src = flievideo;
+      // console.log(myVideo.played);
+      // alert(val["duration"]);
+      myVideo.load();
+      if (val["duration"] != null && val["duration"] != "") {
+        myVideo.currentTime = val["duration"];
+      } else {
+        myVideo.currentTime = 0;
+      }
+    },
+  });
+}
 
 function endVideo() {
   var id_user = $("#id_user").html();
@@ -35,8 +74,11 @@ function endVideo() {
       let val = JSON.parse(result);
       // console.log(val);
       $("#calculate").html(val + "%");
-      // document.getElementsByClassName("progress-bar").style.width = val + "%";
-      $(".progress-bar").html;
+      document.getElementById("progree").style.width = val + "%";
+      // document.getElementById("progree") = val;
+      alert(document.getElementById("progree").style.width);
+      // alert(document.getElementById("progree").);
+      document.getElementById("progree").innerHTML = val + "%";
     },
   });
 }
@@ -66,10 +108,6 @@ function updatetime(event) {
   });
 }
 
-function load() {
-  alert("Metadata for video loaded");
-}
-
 function playvideo() {
   var id_user = $("#id_user").html();
   var id_video = $("#id_video").html();
@@ -95,9 +133,10 @@ function playvideo() {
   // alert(id_category);
 }
 
-function sertime() {
-  // myVideo.currentTime(10);
-  alert(
-    "Start: " + myVideo.seekable.start(0) + " End: " + myVideo.seekable.end(0)
-  );
-}
+// function sertime() {
+//   // myVideo.currentTime(10);
+//   alert(
+//     "Start: " +  document.getElementById("video").seekable.start(0) +
+//       " End: " +  document.getElementById("video").seekable.end(0)
+//   );
+// }

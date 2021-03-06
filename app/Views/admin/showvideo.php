@@ -1,7 +1,7 @@
 <section>
     <div class="container-fluid">
         <h1 class="mt-4"><?= $courses['name']; ?></h1>
-        <h2 class="mt-4">หัวขอบรรยาย : <?= $lectures['name']; ?></h2>
+        <h2 class="mt-4">หัวข้อบรรยาย : <?= $lectures['name']; ?></h2>
 
         <div class="card mt-4">
             <div class="card-header">

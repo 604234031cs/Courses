@@ -10,6 +10,7 @@ use App\Models\Score;
 
 class Ajaxdata extends BaseController
 {
+
     public function videocheck()
     {
         $db = \Config\Database::connect();
@@ -66,7 +67,6 @@ class Ajaxdata extends BaseController
         //     'id_user' => $id_user,
         //     'id_vdo' => $id_video
         // ];
-
         $update  = [
             'duration' => $duration
         ];
@@ -127,6 +127,7 @@ class Ajaxdata extends BaseController
         $dataset = [
             "id_user" => $id_user,
             "id_vdo" => $id_video
+
         ];
 
         // $query = $db->query("SELECT * FROM logvdo where id_user ='$id_user' and id_vdo ='$id_video' ");
@@ -135,9 +136,6 @@ class Ajaxdata extends BaseController
 
         echo json_encode($data['currtiem']);
     }
-
-
-
 
     public function calculatevideo($id_category, $id_user)
     {

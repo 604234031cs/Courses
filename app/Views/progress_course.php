@@ -35,13 +35,10 @@
                                         <p class="mt-3" style="font-size: 15x;"><strong><?= $get->name; ?></strong></p>
                                     </div>
                                     <button class="btn btn-block btn-color">เรียนต่อ</button>
-
                                 </div>
                             </a>
                         </div>
-
                     <?php endforeach; ?>
-
                 </div>
             </div>
         </div>

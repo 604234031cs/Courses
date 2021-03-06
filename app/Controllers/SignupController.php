@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\Regis;
 use App\Models\Users;
 
 class SignupController extends BaseController
@@ -24,17 +25,17 @@ class SignupController extends BaseController
             // $this->validate($rules);
 
             if ($this->validate($rules)) {
-                $user_model  = new Users();
+                $user_model  = new Regis();
                 $data = [
-                    'name' => $this->request->getVar('name'),
-                    'lastname' => $this->request->getVar('lastname'),
-                    'username' => $this->request->getVar('username'),
-                    'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
-                    'status' => '1'
+                    'r_name' => $this->request->getVar('name'),
+                    'r_lastname' => $this->request->getVar('lastname'),
+                    'r_username' => $this->request->getVar('username'),
+                    'r_password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
+
                 ];
-                $session->setFlashdata('msg','ลงทะเบียนเรียบร้อยแล้ว');
+                $session->setFlashdata('msg', 'รอการอนุมัติการใช้งาน');
                 $user_model->save($data);
-                return redirect()->to('/');
+                return redirect()->to('/login');
                 // echo strlen($data['password']);
             } else {
                 echo $this->validator->listErrors();

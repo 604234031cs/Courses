@@ -7,6 +7,7 @@ use App\Models\CourseCategory;
 use App\Models\Documents;
 use App\Models\Group;
 use App\Models\Listvdo;
+use App\Models\Regis;
 use App\Models\Subcourses;
 use App\Models\Users;
 
@@ -136,5 +137,42 @@ class Admin extends BaseController
         echo view('admin/documents', $data);
         echo view('admin/templates/footer');
         // echo WRITEPATH .'upload';
+    }
+
+
+    public function list_regis()
+    {
+        $model_regis = new Regis();
+        $data['list_regis'] = $model_regis->findAll();
+        echo view('admin/templates/head');
+        echo view('admin/register', $data);
+        echo view('admin/templates/footer');
+    }
+
+
+    public function approve($id_regis = null, $status = null)
+    {
+        $model_regis = new Regis();
+        $model_user = new Users();
+        if ($status != null && $id_regis != null) {
+            if ($status == 1) {
+                $regis = $model_regis->find($id_regis);
+                $dataset = [
+                    "name" => $regis['r_name'],
+                    "lastname" => $regis['r_lastname'],
+                    "username" => $regis['r_username'],
+                    "password" => $regis['r_password'],
+                    "status" => 1
+                ];
+                if ($model_user->insert($dataset)) {
+                    $model_regis->delete($id_regis);
+
+                    return redirect()->to('/admin/register');
+                }
+            } else {
+                $model_regis->delete($id_regis);
+                return redirect()->to('/admin/register');
+            }
+        }
     }
 }

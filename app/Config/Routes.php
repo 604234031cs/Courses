@@ -42,11 +42,16 @@ $routes->post('/signup/save', 'SignupController::signup');
 $routes->get('/login', 'Home::index');
 $routes->get('/category/(:num)', 'Home::category/$1');
 
+
+//tesrt
+$routes->get('/test', 'Home::test');
+
+
+
 $routes->get('/courses/(:num)', 'Home::listvdo/$1', ['filter' => 'auth']);
 $routes->get('/document/(:num)', 'Home::document/$1', ['filter' => 'auth']);
 $routes->get('/courses/(:num)/lectures/(:num)', 'Home::showvideo/$1/$2', ['filter' => 'auth']);
 $routes->get('/progress_course', 'Home::progress_course');
-
 
 // Admin
 $routes->group('admin', function ($routes) {
@@ -56,6 +61,8 @@ $routes->group('admin', function ($routes) {
 	$routes->get('document/(:num)/(:num)', 'Admin::documents/$1/$2', ['filter' => 'auth']);
 	$routes->get('category', 'Admin::category', ['filter' => 'auth']);
 	$routes->get('category/(:num)', 'Admin::group_courses/$1', ['filter' => 'auth']);
+	$routes->get('register', 'Admin::list_regis', ['filter' => 'auth']);
+	$routes->get('register/(:num)/(:num)', 'Admin::approve/$1/$2', ['filter' => 'auth']);
 	// $routes->add('blog', 'Admin\Blog::index');
 });
 

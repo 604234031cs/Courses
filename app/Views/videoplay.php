@@ -12,8 +12,9 @@
                             <?php echo  $category['name']; ?>
                         </div>
                         <div class="mx-5">
+                            <span id="with" style="display: none;"><?= $calculat; ?></span>
                             <div class="progress">
-                                <div class="progress-bar progress-bar-striped " role="progressbar" style="width: <?= $calculat; ?>%; background-color:#ff00bf;" aria-valuenow="<?= $calculat; ?>" aria-valuemin="0" aria-valuemax="100"><?= $calculat . '  %'; ?></div>
+                                <div id="progree" class="progress-bar progress-bar-striped " role="progressbar" style="background-color:#ff00bf;" aria-valuenow="<?= $calculat; ?>" aria-valuemin="0" aria-valuemax="100"><?= $calculat . '  %'; ?></div>
                             </div>
                             <!-- <meter low="49" high="50" min="0" max="100" value="<?= $calculat; ?>" style="width: 230px;height: 30px;" id="meter"></meter><br> -->
 
@@ -54,19 +55,18 @@
                     <span id="id_user" style="display: none;"><?= $_SESSION['id']; ?></span>
                     <span id="id_video" style="display: none;"><?= $courses['id']; ?></span>
                     <span id="id_category" style="display: none;"><?= $category['id']; ?></span>
+                    <span id="urlvideo" style="display: none;"><?= $courses['url']; ?></span>
+                    <span id="url" style="display: none;"><?= $category['url']; ?></span>
                     <h3 class="mt-5 ml-3">
                         <i class="fab fa-youtube"></i> <strong id="videoname"> <?php echo $courses['name']; ?></strong>
                     </h3>
                     <div class="card ">
                         <div class="mainvideo mt-3 ">
-                            <video id="video" onended="endVideo()" onplay="playvideo()" onpause="updatetime(this)" controls currentSrc=10>
+                            <video id="video" onended="endVideo()" onplay="playvideo()" onpause="updatetime(this)" controls>
                                 <source src="<?php echo site_url('/upload/' . $category['url'] . '/allvdo/' . $courses['url']); ?>" type="video/mp4" id="source">
                             </video>
                         </div>
                         <br>
-                        <span id="mySpan"></span></p>
-                        <button type="button" class="btn btn-secondary" onclick="sertime()">setcurrent</button>
-                        <strong>Durations : </strong> <span id="sh_time"></span>
                     </div>
                 </div>
             </main>

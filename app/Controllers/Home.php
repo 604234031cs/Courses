@@ -12,6 +12,21 @@ use App\Models\Subcourses;
 
 class Home extends BaseController
 {
+
+	// public function test()
+	// {
+	// 	$encrypter  = \Config\Services::encrypter();
+	// 	$k = $encrypter->encrypt('1.1.1.mp4');
+	// 	// echo "encrypt : " . $k . "<br>";
+	// 	// echo $encrypter->decrypt($k);
+	// 	$data['key'] = $k;
+	// 	echo view('test', $data);
+	// }
+
+	// public function uoloadtest()
+	// {
+	// }
+
 	public function index()
 	{
 		// echo view('template/head');
@@ -189,12 +204,18 @@ class Home extends BaseController
 		$session = session();
 		$id_user = $session->get('id');
 		$db = \Config\Database::connect();
-		$model_data =  new CourseCategory();
+		// $model_data =  new CourseCategory();
+		// $model_logvideo = new Logvideo();
+		// $model_sscore = new Score();
+
+		// $data['log'] = $model_logvideo->where('id_user', $id_user)->findAll();
+		// $data['score'] = $model_sscore->where('id_user', $id_user)->first();
+
+
 		$query = $db->query("SELECT courses_category.id,courses_category.name,score.score
-			FROM courses_category
-			LEFT JOIN score
-			ON courses_category.id = score.id_courses
-			where score.id_user = '$id_user'");
+				FROM courses_category,score
+				where courses_category.id = score.id_courses
+				and score.id_user = '$id_user'");
 		$data['courses'] = $query->getResult();
 
 		// echo json_encode($data);

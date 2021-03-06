@@ -19,6 +19,6 @@ function editvideo(name, id) {
   $("#video-id").val(id);
 }
 
-function endvideo() {
-  alert("END VIDEo");
-}
+// function endvideo() {
+//   alert("END VIDEo");
+// }

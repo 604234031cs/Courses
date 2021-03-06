@@ -18,6 +18,7 @@ class Videos extends BaseController
         foreach ($files  as $file) {
             $count = $count + 1;
             $type = '.' . $file->guessExtension();
+
             $url_video = (string)$id_courses . '.' . (string)$id_lectures . '.' . (string)$count . $type;
             $name  = str_replace($type, ' ', $file->getName(), $var);
 
