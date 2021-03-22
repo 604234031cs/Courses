@@ -7,7 +7,7 @@
                 <button class="btn btn-success">เพิ่มตัวเลือก</button>
             </div>
             <div class="card-header">
-                <?= $question['q_name']; ?>
+                <span style="font-size:1.2em;"><?= $question['q_name']; ?></span>
             </div>
             <div class="card-body">
                 <table class="table">

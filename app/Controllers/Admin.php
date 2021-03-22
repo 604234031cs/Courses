@@ -184,7 +184,7 @@ class Admin extends BaseController
         $model_question = new Question();
         // $model_val_question = new Value_question();
         $data['question'] =  $model_question->where('courses_id', $id)->findAll();
-        // $data['id'] = $id;
+        $data['id'] = $id;
 
         echo view("admin/templates/head");
         echo view("admin/question", $data);
