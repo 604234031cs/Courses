@@ -190,4 +190,16 @@ class Admin extends BaseController
         echo view("admin/question", $data);
         echo view("admin/templates/footer");
     }
+
+    function val_question($id = null)
+    {
+        $model_question = new Question();
+        $model_val_question = new Value_question();
+        $data['question'] =  $model_question->where('q_id', $id)->first();
+        $data['val_question'] = $model_val_question->where('q_id', $id)->findAll();
+
+        echo view("admin/templates/head");
+        echo view("admin/val_question", $data);
+        echo view("admin/templates/footer");
+    }
 }

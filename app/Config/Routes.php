@@ -69,6 +69,7 @@ $routes->group('admin', function ($routes) {
 	$routes->get('register', 'Admin::list_regis', ['filter' => 'auth']);
 	$routes->get('register/(:num)/(:num)', 'Admin::approve/$1/$2', ['filter' => 'auth']);
 	$routes->get('question/(:num)', 'Admin::question/$1');
+	$routes->get('val_question/(:num)', 'Admin::val_question/$1');
 	// $routes->add('blog', 'Admin\Blog::index');
 });
 
@@ -109,8 +110,8 @@ $routes->post('/ajax/selact', 'Ajaxdata::selact');
 $routes->post('/ajax/updateduration', 'Ajaxdata::duration');
 $routes->post('/ajax/endvideo', 'Ajaxdata::endvideo');
 $routes->post('/ajax/getcurrtiem', 'Ajaxdata::currtime');
-$routes->post('/ajax/showquestion', 'Ajaxdata::showquestion');
-$routes->post('/ajax/showvalquestion', 'Ajaxdata::show_val_question');
+// $routes->post('/ajax/showquestion', 'Ajaxdata::showquestion');
+// $routes->post('/ajax/showvalquestion', 'Ajaxdata::show_val_question');
 /**
  * --------------------------------------------------------------------
  * Additional Routing
