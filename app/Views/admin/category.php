@@ -31,7 +31,7 @@
                                     <?= $get['name']; ?>
                                 </td>
                                 <td>
-                                    <a href="category/<?= $get['id']; ?>" class="btn btn-success">เพิ่มหมวดหมู่</a>
+                                    <a href="<?= base_url('/admin/category/' . $get['id']); ?>" class="btn btn-success">เพิ่มหมวดหมู่</a>
                                     <button onclick="editcategory('<?= $get['id']; ?>','<?= $get['name']; ?>')" class="btn btn-warning" data-toggle="modal" data-target="#modaledit">แก้ไข</button>
                                 </td>
                             </tr>
@@ -54,7 +54,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="/addcategory" method="post">
+                <form action="<?= base_url('/addcategory') ?>" method="post">
                     <div class="form-group">
                         <label for="">ชื่อประเภทคอร์ส</label>
                         <input type="text" name="name" id="" class="form-control">
@@ -80,7 +80,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="/updatecategory" method="post">
+                <form action="<?= base_url('/updatecategory') ?>" method="post">
                     <div class="form-group">
                         <input type="text" name="ca_name" id="ca_name" class="form-control">
                         <input type="text" name="id_category" id="id_category" hidden>

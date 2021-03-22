@@ -37,12 +37,12 @@ function clearinput() {
     } else {
         document.getElementById("save").disabled = true;
     }
-    console.log(rows);
+    // console.log(rows);
 
 }
 
 function delcol(x) {
   var str = "#coltr" + x;
-  console.log($(str));
+  // console.log($(str));
   $(str).remove();
 }

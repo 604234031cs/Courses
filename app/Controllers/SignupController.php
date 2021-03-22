@@ -35,7 +35,7 @@ class SignupController extends BaseController
                 ];
                 $session->setFlashdata('msg', 'รอการอนุมัติการใช้งาน');
                 $user_model->save($data);
-                return redirect()->to('/login');
+                return redirect()->to(base_url('/login'));
                 // echo strlen($data['password']);
             } else {
                 echo $this->validator->listErrors();

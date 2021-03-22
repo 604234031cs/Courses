@@ -1,25 +1,35 @@
 let myVideo = document.getElementById("video");
-document.getElementById("progree").style.width = $("#with").html() + "%";
-function playvdo(url, name, category, id) {
+var base_url = window.location.origin + "/courses";
+
+$(".hidden").hide();
+// $(".hidden").show(1000);
+
+$("#progree").css("width", $("#with").html() + "%");
+// document.getElementById("progree").style.width = $("#with").html() + "%";
+
+function playvdo(url, name, id) {
   var id_user = $("#id_user").html();
-  var flievideo = "http://localhost:8080/upload/" + category + "/allvdo/" + url;
+  // var flievideo = base_url + "/upload/" + category + "/allvdo/" + url;
+  var flievideo = base_url + "/videos/" + url;
   // console.log("id_user=>" + id_user + "::id_video=>" + id);
+  // alert(id);
   $.ajax({
     type: "post",
-    url: "/ajax/getcurrtiem",
+    url: base_url + "/ajax/getcurrtiem",
     data: {
       id_user: id_user,
       id_video: id,
     },
     success: function (result) {
       let val = JSON.parse(result);
-      document.getElementById("source").src = flievideo;
-      // console.log(myVideo.played);
+      document.getElementById("video").src = flievideo;
       myVideo.load();
-      if (val["duration"] != null && val["duration"] != "") {
-        myVideo.currentTime = val["duration"];
-      } else {
-        myVideo.currentTime = 0;
+      if (val != null) {
+        if (val["duration"] != null && val["duration"] != "") {
+          myVideo.currentTime = val["duration"];
+        } else {
+          myVideo.currentTime = 0;
+        }
       }
     },
   });
@@ -27,31 +37,39 @@ function playvdo(url, name, category, id) {
   $("#id_video").html(id);
   window.scrollTo(0, 0);
 }
+
 loadpagestart();
 function loadpagestart() {
   var id_user = $("#id_user").html();
   var id_video = $("#id_video").html();
   var url = $("#id_category").html();
   var url = $("#urlvideo").html();
-  var category = $("#url").html();
-  var flievideo = "http://localhost:8080/upload/" + category + "/allvdo/" + url;
+  // var category = $("#url").html();
+  var category = $("#key").val();
+  var flievideo = base_url + "/videos/" + category;
   $.ajax({
     type: "post",
-    url: "/ajax/getcurrtiem",
+    url: base_url + "/ajax/getcurrtiem",
     data: {
       id_user: id_user,
       id_video: id_video,
     },
     success: function (result) {
       let val = JSON.parse(result);
-      document.getElementById("source").src = flievideo;
-      // console.log(myVideo.played);
-      // alert(val["duration"]);
-      myVideo.load();
-      if (val["duration"] != null && val["duration"] != "") {
-        myVideo.currentTime = val["duration"];
-      } else {
-        myVideo.currentTime = 0;
+      if (myVideo != null) {
+        myVideo.src = flievideo;
+        myVideo.load();
+      }
+
+      // console.log(val);
+      // alert(id_video);
+
+      if (val != null) {
+        if (val["duration"] != null && val["duration"] != "") {
+          myVideo.currentTime = val["duration"];
+        } else {
+          myVideo.currentTime = 0;
+        }
       }
     },
   });
@@ -61,22 +79,23 @@ function endVideo() {
   var id_user = $("#id_user").html();
   var id_video = $("#id_video").html();
   var id_category = $("#id_category").html();
+
   $.ajax({
     type: "post",
-    url: "/ajax/endvideo",
+    url: base_url + "/ajax/endvideo",
     data: {
       id_user: id_user,
       id_video: id_video,
       id_category: id_category,
     },
     success: function (result) {
-      console.log(result);
+      // console.log(result);
       let val = JSON.parse(result);
       // console.log(val);
       $("#calculate").html(val + "%");
       document.getElementById("progree").style.width = val + "%";
       // document.getElementById("progree") = val;
-      alert(document.getElementById("progree").style.width);
+      // alert(document.getElementById("progree").style.width);
       // alert(document.getElementById("progree").);
       document.getElementById("progree").innerHTML = val + "%";
     },
@@ -84,7 +103,8 @@ function endVideo() {
 }
 
 function openlink(c, l) {
-  window.location.href = "/courses/" + c + "/lectures/" + l;
+  // alert(base_url + "/courses/" + c + "/lectures/" + l);
+  window.location.href = base_url + "/courses/" + c + "/lectures/" + l;
 }
 
 function updatetime(event) {
@@ -97,7 +117,7 @@ function updatetime(event) {
   var currentTime = event.currentTime;
 
   $.ajax({
-    url: "/ajax/updateduration",
+    url: base_url + "/ajax/updateduration",
     type: "post",
     data: {
       id_user: id_user,
@@ -115,7 +135,7 @@ function playvideo() {
 
   $.ajax({
     type: "post",
-    url: "/ajax/checkvideo",
+    url: base_url + "/ajax/checkvideo",
     data: {
       id_user: id_user,
       id_video: id_video,

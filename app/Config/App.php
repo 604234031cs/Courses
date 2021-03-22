@@ -1,4 +1,6 @@
-<?php namespace Config;
+<?php
+
+namespace Config;
 
 use CodeIgniter\Config\BaseConfig;
 
@@ -21,7 +23,8 @@ class App extends BaseConfig
 	| environments.
 	|
 	*/
-	public $baseURL = 'http://localhost:8080/';
+	// public $baseURL = 'http://localhost:8080/';
+	public $baseURL = 'http://localhost/courses/';
 
 	/*
 	|--------------------------------------------------------------------------
@@ -50,7 +53,8 @@ class App extends BaseConfig
 	|
 	| WARNING: If you set this to 'PATH_INFO', URIs will always be URL-decoded!
 	*/
-	public $uriProtocol = 'REQUEST_URI';
+	// public $uriProtocol = 'REQUEST_URI';
+	public $uriProtocol = 'PATH_INFO';
 
 	/*
 	|--------------------------------------------------------------------------

@@ -6,7 +6,9 @@ use App\Models\CourseCategory;
 use App\Models\Group;
 use App\Models\Listvdo;
 use App\Models\Logvideo;
+use App\Models\Question;
 use App\Models\Score;
+use App\Models\Value_question;
 
 class Ajaxdata extends BaseController
 {
@@ -100,7 +102,8 @@ class Ajaxdata extends BaseController
 
         if ($id_update != null && $id_update != '') {
             $dataupdate  = [
-                "status" => 1
+                "status" => 1,
+                "duration" => 0
             ];
             $model_logvideo->update((int)$id_update[0]->id, $dataupdate);
         }
@@ -254,5 +257,28 @@ class Ajaxdata extends BaseController
             $data['group'] = $model_group->where('c_id', $key)->findAll();
             echo json_encode($data);
         }
+    }
+
+
+    public function showquestion()
+    {
+        $key = $this->request->getVar('key');
+        // $key = 2;
+        $model_question = new Question();
+        // $model_val_question = new Value_question();
+        $data =  $model_question->where('courses_id', $key)->findAll();
+        // $data['val_question'] =  $model_val_question->where('q_id',1)->findAll();
+        echo json_encode($data);
+    }
+
+    public function show_val_question()
+    {
+        $key = $this->request->getVar('key');
+        // $key = 2;
+        // $model_question = new Question();
+        $model_val_question = new Value_question();
+        // $data =  $model_question->where('courses_id', $key)->findAll();
+        $data =  $model_val_question->where('q_id', $key)->findAll();
+        echo json_encode($data);
     }
 }

@@ -4,7 +4,6 @@
         <div class="card mb-4">
             <div class="card-header text-right">
                 <button class="btn btn-success" data-toggle="modal" data-target="#exampleModal">เพิ่มคอร์สเรียน</button>
-
             </div>
             <div class="card-body">
                 <table class="table" id="courses-list">
@@ -26,9 +25,9 @@
                                     <?= $get['name']; ?>
                                 </td>
                                 <td class="text-center">
-                                    <a href="/admin/lectures/<?= $get['id']; ?>" class="btn btn-success ">เพิ่มหัวข้อ</a>
-                                    <a onclick="edit('<?= $get['name']; ?>','<?= $get['id']; ?>','<?= $get['ca_name']; ?>','<?= $get['ca_id']; ?>','<?= $get['gr_name']; ?>','<?= $get['gr_id']; ?>')" href="" class="btn btn-warning " data-toggle="modal" data-target="#editcourses">แก้ไข</a>
-                                    <!-- <a href="" class="btn btn-danger">ลบ</a> -->
+                                    <a href="<?= base_url('/admin/lectures/' . $get['id']) ?>" class="btn btn-success ">เพิ่มหัวข้อ</a>
+                                    <a onclick="edit('<?= $get['name']; ?>','<?= $get['id']; ?>','<?= $get['ca_name']; ?>','<?= $get['ca_id']; ?>','<?= $get['gr_name']; ?>','<?= $get['gr_id']; ?>','<?= $get['img']; ?>')" href="" class="btn btn-warning " data-toggle="modal" data-target="#editcourses">แก้ไข</a>
+                                    <a href="<?= base_url('/admin/question/' . $get['id']); ?>" class="btn btn-primary">คำถาม</a>
                                 </td>
                             </tr>
                             <?php $i++; ?>
@@ -50,11 +49,10 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="/addcourses" method="POST">
+                <form action="<?= base_url('/addcourses') ?>" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="">ประเภอคอร์สหลัก</label>
                         <select class="form-control" onchange="autoselect(this.value)" id="main">
-
                             <?php foreach ($main_c as $get) : ?>
                                 <option value="<?= $get['id']; ?>"><?= $get['name']; ?></option>
                             <?php endforeach; ?>
@@ -68,6 +66,10 @@
                     <div class="form-group">
                         <label for="">ชื่อคอร์ส</label>
                         <input type="text" name="add-courses" id="" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="">ภาพหน้าปก</label>
+                        <input type="file" name="file_img" class="form-control">
                     </div>
             </div>
             <div class="modal-footer">
@@ -89,7 +91,14 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="/updatecourses" method="POST">
+                <form action="<?= base_url('/updatecourses') ?>" method="POST" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <input type="text" name="file_check" id="file_check" value="" hidden>
+                        <img src="" alt="Not file" id="show-img" class="img-thumbnail" width="100%">
+                    </div>
+                    <div class="form-group">
+                        <input type="file" name="_img" id="" onchange="readURL(this);">
+                    </div>
                     <div class="form-group">
                         <label for="">ประเภอคอร์สหลัก</label>
                         <option value=""></option>

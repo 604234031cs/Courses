@@ -35,7 +35,7 @@ class Login extends BaseController
                         'logged_in' => true
                     ];
                     $session->set($ses_data);
-                    return redirect()->to('/admin/courses');
+                    return redirect()->to(base_url('/admin/courses'));
                 } else {
                     $ses_data = [
                         'id' => $data['id'],
@@ -46,15 +46,15 @@ class Login extends BaseController
                         'logged_in' => true
                     ];
                     $session->set($ses_data);
-                    return redirect()->to('/');
+                    return redirect()->to(base_url('/'));
                 }
             } else {
                 $session->setFlashdata('msg', 'Password ไม่ถูกต้อง');
-                return redirect()->to('/login');
+                return redirect()->to(base_url('/login'));
             }
         } else {
             $session->setFlashdata('msg', 'ไม่พบ username นี้');
-            return redirect()->to('/login');
+            return redirect()->to(base_url('/login'));
         }
     }
 
@@ -63,6 +63,6 @@ class Login extends BaseController
         $session = session();
         $session->destroy();
 
-        return redirect()->to('/login');
+        return redirect()->to(base_url('/login'));
     }
 }

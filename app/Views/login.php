@@ -28,14 +28,14 @@
                 swal('ไม่สำเร็จ!', msg, 'error');
             </script>
         <?php endif; ?>
-        <link rel="stylesheet" href="<?php echo site_url('asset/css/index.css'); ?>">
+        <link rel="stylesheet" href="<?php echo base_url('public/asset/css/index.css'); ?>">
         <div class="container mt-5">
             <div class="row">
                 <div class="col-12 col-sm-8 offset-sm-2 col-md-5 offset-md-3 mt-5   from-wrapper">
                     <div class="container  mt-5 p-5 bg-white ">
                         <h3 class="text-center">SIGN IN</h3>
                         <hr>
-                        <form action="/login/auth" method="post">
+                        <form action="<?= base_url('/login/auth'); ?>" method="post">
                             <label for="">Username</label>
                             <div class="input-group mb-3">
                                 <!-- <label for="inputEmail4">Username</label> -->
@@ -59,18 +59,14 @@
                         </form>
                         <div class="form-group">
                             <!-- <label for="inputEmail4">Confirm Password</label> -->
-                            <a href="/signup" class="btn btn-block btn-primary btn-sm ">SIGN UP</a>
+                            <a href="<?= base_url('/signup') ?>" class="btn btn-block btn-primary btn-sm ">SIGN UP</a>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- <video width="320" height="240" controls>
-            <source src="<?php echo site_url('vdo/category1/allvdo/1.1.mp4'); ?>" type="video/mp4">
-        </video> -->
-            <!-- <iframe onended="myfuntion()" width="560" height="315" src="https://www.youtube.com/embed/bjeurG0jH9w" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
         </div>
 
-        <!-- col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 mt-5 pt-3 pb-3 -->
+
 
     </section>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

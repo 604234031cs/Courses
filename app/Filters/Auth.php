@@ -13,7 +13,7 @@ class Auth implements FilterInterface
         if (!session()->get('logged_in')) {
             $session = session();
             $session->setFlashdata('msg', 'กรุณา Login ก่อนเข้าใช้');
-            return redirect()->to('/login');
+            return redirect()->to(base_url('/login'));
         }
     }
 

@@ -1,15 +1,18 @@
 <section>
-    <link rel="stylesheet" href="<?php echo site_url('asset/css/listvdo.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('public/asset/css/listvdo.css'); ?>">
+
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
             <nav class="sb-sidenav accordion " id="sidenavAccordion" style="background-color:turquoise;">
                 <div class="sb-sidenav-menu">
+                    <img src="<?= base_url() . '/public/img/' . $category['img']; ?>" height="150">
                     <div class="nav">
-                        <div class="card">
-                            <img src="https://process.fs.teachablecdn.com/ADNupMnWyR7kCWRvm76Laz/resize=width:705/https://www.filepicker.io/api/file/kSbQ546LSOiDrock3pNG" width="300" height="187">
-                        </div>
+                        <!-- <div class="card"> -->
+
+                        <!-- </div> -->
                         <div class="mt-2 mx-auto p-4" style="font-size: 20px;color:white;">
-                            <?php echo $category['name']; ?>
+                            <?= $category['name']; ?>
+
                         </div>
                         <div class="mx-5">
                             <div class="progress mt-2">
@@ -23,19 +26,18 @@
                         </div>
                         <h3 class="text-center" style="color:white;font-size:30px"><?= $calculat . " %"; ?></h3>
                         <a id="navlink" class="nav-link " href="#">
-                            <div class="sb-nav-link-icon"><i class="fas fa-columns" style="color: white;width:33px;height:35px"></i></div>
-                            เนื้อหาในคอรส์นี้
+                            <i class="fas fa-columns" style="color: white;width:33px;height:35px"></i>
+                            <span style="font-size: 1.5rem;">เนื้อหาในคอร์สนี้</span>
                         </a>
                     </div>
                 </div>
 
             </nav>
         </div>
-
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid">
-                    <h3 class="mt-5 ml-3">
+                    <h3 class="mt-3 ml-3">
                         <strong>เนื้อหาในคอร์สนี้</strong>
                         <div class="text-right">
                             <?php if ($docs) : ?>
@@ -56,7 +58,7 @@
                                     <?php foreach ($docs as $getdoc) : ?>
                                         <?php if ($getsub['id'] == $getdoc->id_subcourses) : ?>
                                             <tr>
-                                                <a href="<?= site_url('upload/' . $category['url'] . '/alldocs/' . $getdoc->url); ?>"><i class="fas fa-download"></i> File<?= $i; ?></a> &nbsp;
+                                                <a href="<?= base_url('/upload/' . $category['url'] . '/alldocs/' . $getdoc->url); ?>"><i class="fas fa-download"></i> File<?= $i; ?></a> &nbsp;
                                             </tr>
                                         <?php endif; ?>
                                         <?php $i++; ?>
@@ -70,7 +72,7 @@
                                                     <i class="fab fa-youtube"></i> <?= $getlist->name; ?>
                                                 </td>
                                                 <td class="text-center">
-                                                    <a href="/courses/<?= $category['id']; ?>/lectures/<?= $getlist->id ?>" class="btn" style="background-color:deeppink;color:white;">เริ่ม</a>
+                                                    <a href="<?= base_url('/courses/' . $category['id'] . '/lectures/' . $getlist->id); ?>" class="btn" style="background-color:deeppink;color:white;">เริ่ม</a>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -119,7 +121,7 @@
                                             <i class="fas fa-file-export"></i> <?= $getdoc->name; ?>
                                         </td>
                                         <td class="text-center">
-                                            <a href="<?= site_url('upload/' . $category['url'] . '/alldocs/' . $getdoc->url); ?>" class="btn" style="background-color:deeppink;color:white;">โหลด</a>
+                                            <a href="<?= base_url('/upload/' . $category['url'] . '/alldocs/' . $getdoc->url); ?>" class="btn" style="background-color:deeppink;color:white;">โหลด</a>
                                         </td>
                                     </tr>
                                 <?php endif; ?>

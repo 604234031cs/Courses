@@ -7,9 +7,11 @@ use App\Models\CourseCategory;
 use App\Models\Documents;
 use App\Models\Group;
 use App\Models\Listvdo;
+use App\Models\Question;
 use App\Models\Regis;
 use App\Models\Subcourses;
 use App\Models\Users;
+use App\Models\Value_question;
 
 class Admin extends BaseController
 {
@@ -17,7 +19,7 @@ class Admin extends BaseController
     {
         $data = [];
         $db = \Config\Database::connect();
-        $query = $db->query('SELECT courses_category.id,courses_category.name ,courses_category.url,
+        $query = $db->query('SELECT courses_category.id,courses_category.name ,courses_category.url,courses_category.img,
         category.id as ca_id,category.name as ca_name,group_courses.name as gr_name,group_courses.id as gr_id
         FROM courses_category,category,group_courses 
         WHERE category.id = group_courses.c_id
@@ -69,7 +71,7 @@ class Admin extends BaseController
 
         $model_courses = new CourseCategory();
         if ($id_courses == null) {
-            return redirect()->to('/admin/courses');
+            return redirect()->to(base_url('/admin/courses'));
         }
 
         $model_subcourses = new Subcourses();
@@ -167,12 +169,25 @@ class Admin extends BaseController
                 if ($model_user->insert($dataset)) {
                     $model_regis->delete($id_regis);
 
-                    return redirect()->to('/admin/register');
+                    return redirect()->to(base_url('/admin/register'));
                 }
             } else {
                 $model_regis->delete($id_regis);
-                return redirect()->to('/admin/register');
+                return redirect()->to(base_url('/admin/register'));
             }
         }
+    }
+
+
+    function question($id = null)
+    {
+        $model_question = new Question();
+        // $model_val_question = new Value_question();
+        $data['question'] =  $model_question->where('courses_id', $id)->findAll();
+        // $data['id'] = $id;
+
+        echo view("admin/templates/head");
+        echo view("admin/question", $data);
+        echo view("admin/templates/footer");
     }
 }

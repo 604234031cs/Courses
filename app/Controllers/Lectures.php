@@ -33,7 +33,7 @@ class  Lectures extends BaseController
         // ];
 
 
-        return redirect()->to('/admin/lectures/' . $id_courses);
+        return redirect()->to(base_url('/admin/lectures/' . $id_courses));
     }
 
 
@@ -52,6 +52,6 @@ class  Lectures extends BaseController
 
         $model_lectures->update($id, $dataset);
 
-        return redirect()->to('/admin/lectures/' . $id_courses);
+        return redirect()->to(base_url('/admin/lectures/' . $id_courses));
     }
 }

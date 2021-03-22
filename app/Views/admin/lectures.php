@@ -33,8 +33,8 @@
                                     <?= $get['name']; ?>
                                 </td>
                                 <td class="text-center">
-                                    <a href="/admin/document/<?= $courses['id']; ?>/<?= $get['id']; ?>" class="btn btn-primary">เอกสาร</a>
-                                    <a href="/admin/<?= $courses['id']; ?>/<?= $get['id']; ?>" class="btn btn-success">ดูวิดีโอ</a>
+                                    <a href="<?= base_url('/admin/document/' . $courses['id'] . '/' . $get['id']); ?>" class="btn btn-primary">เอกสาร</a>
+                                    <a href="<?= base_url('/admin/' . $courses['id'] . '/' . $get['id']); ?>" class="btn btn-success">ดูวิดีโอ</a>
                                     <a onclick="editlectures('<?= $get['id']; ?>','<?= $get['name']; ?>')" href="" class="btn btn-warning" data-toggle="modal" data-target="#editlectures">แก้ไข</a>
                                     <!-- <a href="" class="btn btn-danger">ลบ</a> -->
                                 </td>
@@ -61,7 +61,7 @@
             <div class="modal-body">
                 <button class="btn btn-primary mb-3" onclick="addinput()">เพิ่ม</button>
                 <button class="btn btn-warning mb-3" onclick="clearinput()">Clare</button>
-                <form action="/addlectures" method="post">
+                <form action="<?= base_url('/addlectures') ?>" method="post">
                     <table class="table" id="mytable">
                         <thead>
                             <tr>
@@ -104,7 +104,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="/updatelectures" method="post">
+                <form action="<?= base_url('/updatelectures'); ?>" method="post">
                     <div class="form-group">
                         <label for="">หัวข้อบรรยาย</label>
                         <input type="text" name="edit-lectures" id="edit-lectures" class="form-control">

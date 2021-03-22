@@ -8,5 +8,5 @@ class CourseCategory extends Model
 {
     protected $table = 'courses_category';
     protected $primaryKey  = 'id';
-    protected $allowedFields = ['name', 'url', 'gc_id'];
+    protected $allowedFields = ['name', 'url', 'gc_id', 'img'];
 }

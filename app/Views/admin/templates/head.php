@@ -19,7 +19,7 @@ $count_regis = count($regis);
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.css">
 
-    <link href="<?php echo site_url('theme/dist/css/styles.css'); ?>" rel="stylesheet" />
+    <link href="<?php echo base_url('public/theme/dist/css/styles.css'); ?>" rel="stylesheet" />
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
@@ -46,7 +46,7 @@ $count_regis = count($regis);
                     <a class="dropdown-item" href="#">Settings</a>
                     <a class="dropdown-item" href="#">Activity Log</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="/logout">Logout</a>
+                    <a class="dropdown-item" href="<?= base_url('/logout'); ?>">Logout</a>
                 </div>
             </li>
         </ul>
@@ -56,16 +56,16 @@ $count_regis = count($regis);
             <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                 <div class="sb-sidenav-menu">
                     <div class="nav">
-                        <a class="nav-link" href="/admin/courses">
+                        <a class="nav-link" href="<?= base_url('/admin/courses'); ?>">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             คอร์สเรียน
                         </a>
-                        <a class="nav-link" href="/admin/category">
+                        <a class="nav-link" href="<?= base_url('/admin/category'); ?>">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             ประเภทคอร์ส
                         </a>
 
-                        <a class="nav-link" href="/admin/register">
+                        <a class="nav-link" href="<?= base_url('/admin/register'); ?>">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             ผู้ใช้ระบบ &nbsp;<span class="badge badge-light"><?= $count_regis; ?></span>
                         </a>
@@ -130,5 +130,6 @@ $count_regis = count($regis);
                 </div>
             </nav>
         </div>
+      
         <div id="layoutSidenav_content">
             <main>

@@ -18,7 +18,7 @@ class Category extends BaseController
 
         $modal_main->insert($dataset);
 
-        return redirect()->to('/admin/category');
+        return redirect()->to(base_url('/admin/category'));
     }
 
     public function addgroup()
@@ -40,7 +40,7 @@ class Category extends BaseController
             }
         }
 
-        return redirect()->to('admin/category/' . $id_category);
+        return redirect()->to(base_url('admin/category/' . $id_category));
     }
 
     public function updatecategory()
@@ -53,7 +53,7 @@ class Category extends BaseController
 
         $modal_main->update($this->request->getVar('id_category'), $dataset);
 
-        return redirect()->to('admin/category');
+        return redirect()->to(base_url('admin/category'));
     }
 
     public function updategroup()
@@ -71,6 +71,6 @@ class Category extends BaseController
         // echo $this->request->getVar('gr_name');
         // echo $this->request->getVar('ca_id');
 
-        return redirect()->to('admin/category/' . $id_ca);
+        return redirect()->to(base_url('admin/category/' . $id_ca));
     }
 }

@@ -27,10 +27,28 @@ class Home extends BaseController
 	// {
 	// }
 
+	public function video_has($key = null)
+	{
+		$model_video = new Listvdo();
+
+		$video = $model_video->where('name_key', $key)->first();
+
+		// print_r($video);
+		// echo $video['url'];
+
+		// if ($key = '2') {
+
+		return redirect()->to(base_url() . '/upload/category' . $video['id_category'] . '/allvdo/' . $video['url']);
+		// }
+		// echo "ss";
+	}
+
+
 	public function index()
 	{
 		// echo view('template/head');
 		echo view('login');
+		// echo view('responsivepage');
 		// echo view('template/footer');
 	}
 
@@ -185,7 +203,7 @@ class Home extends BaseController
 		$data['category'] = $model_category->where('id', $id_category)->first();
 		$data['courses'] = $model_courses->where('id', $id_video)->first();
 
-		$query = $db->query("SELECT courses_vdo.name ,courses_vdo.url,courses_vdo.id_subcourses,courses_vdo.id
+		$query = $db->query("SELECT courses_vdo.name ,courses_vdo.url,courses_vdo.id_subcourses,courses_vdo.id,courses_vdo.name_key
 		FROM courses_vdo,subcourses
 		WHERE courses_vdo.id_subcourses = subcourses.id");
 		$data['list'] = $query->getResult();
@@ -224,6 +242,8 @@ class Home extends BaseController
 		echo view('progress_course', $data);
 		echo view('template/footer');
 	}
+
+
 	//--------------------------------------------------------------------
 
 }

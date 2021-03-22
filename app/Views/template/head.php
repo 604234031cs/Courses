@@ -22,7 +22,7 @@ $group = $query->getResult();
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.css">
 
-    <link href="<?php echo site_url('theme/dist/css/styles.css'); ?>" rel="stylesheet" />
+    <link href="<?php echo base_url('public/theme/dist/css/styles.css'); ?>" rel="stylesheet" />
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
@@ -57,6 +57,8 @@ $group = $query->getResult();
         .nav-link {
             color: white;
         }
+
+
 
         @media (min-width: 992px) {
             .dropdown-menu .dropdown-toggle:after {
@@ -101,65 +103,49 @@ $group = $query->getResult();
 <body>
 
     <nav class="sb-topnav navbar navbar-expand navbar-dark " style="background-color: turquoise;">
-        <div class="container">
-            <a class="navbar-brand" href="/"><strong>COURSES</strong></a>
-            <ul class="navbar-nav mr-auto ml-md-0">
-                <!-- <li class="nav-item dropdown">
-                    <a class="navbar-brand dropdown-toggle" id="userDropdown" href="/" data-toggle="dropdown">คอร์สเรียน</a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                        <div class=" dropdown-header"><strong>ประเภทคอร์สหลัก</strong></div>
-                        <?php foreach ($cetegory as $list) : ?>
-                            <a class="dropdown-item" href="#"><?= $list->name ?></a>
-                        <?php endforeach; ?>
-                        <a class="dropdown-item" href="#">คอร์สเรียนทั้งหมด</a>
-                    </div>
-                </li> -->
-                <li class="nav-item dropdown">
-                    <a class="navbar-brand dropdown-toggle" id="userDropdown" href="/" data-toggle="dropdown">คอร์สเรียน</a>
-                    <ul class="dropdown-menu">
-                        <div class=" dropdown-header"><strong>ประเภทคอร์สหลัก</strong></div>
-                        <?php foreach ($cetegory as $list) : ?>
-                            <li><a class="dropdown-item" href="#"><?= $list->name ?> &raquo</a>
-                                <ul class="submenu dropdown-menu">
-                                    <?php foreach ($group as $get) : ?>
-                                        <?php if ($get->c_id == $list->id) : ?>
-                                            <li><a class="dropdown-item" href="/category/<?= $get->id; ?>"><?= $get->name ?></a></li>
-                                        <?php endif; ?>
-                                    <?php endforeach; ?>
-                                </ul>
-                            </li>
-                        <?php endforeach; ?>
-                        <li><a class="dropdown-item" href="/"> คอร์สเรียนทั้งหมด </a></li>
+        <a class="navbar-brand" href="<?= base_url('/') ?>"><strong>COURSES</strong></a>
+        <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
+        <ul class="navbar-nav mr-auto ml-lg-5">
+            <li class="nav-item dropdown a ml-5">
+                <a class="navbar-brand dropdown-toggle ml-5" id="userDropdown" href="<?= base_url('/') ?>" data-toggle="dropdown">คอร์สเรียน</a>
+                <ul class="dropdown-menu">
+                    <div class=" dropdown-header"><strong>ประเภทคอร์สหลัก</strong></div>
+                    <?php foreach ($cetegory as $list) : ?>
+                        <li><a class="dropdown-item" href="#"><?= $list->name ?> &raquo</a>
+                            <ul class="submenu dropdown-menu">
+                                <?php foreach ($group as $get) : ?>
+                                    <?php if ($get->c_id == $list->id) : ?>
+                                        <li><a class="dropdown-item" href="<?= base_url('/category/' . $get->id); ?>"><?= $get->name ?></a></li>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+                            </ul>
+                        </li>
+                    <?php endforeach; ?>
+                    <li><a class="dropdown-item " href="<?= base_url('/') ?>"> คอร์สเรียนทั้งหมด </a></li>
 
-                    </ul>
-                </li>
-            </ul>
-            <!-- <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button> -->
-            <!-- Navbar Search-->
-
-        </div>
-        <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-            <!-- <div class="input-group">
-                <input class="form-control" type="text" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
-                <div class="input-group-append">
-                    <button class="btn btn-primary" type="button"><i class="fas fa-search"></i></button>
-                </div>
-            </div> -->
-        </form>
-        <!-- Navbar-->
-        <ul class="navbar-nav ml-auto ml-md-0">
-            <li class="nav-item">
-                <a href="/progress_course" class="nav-link" style="color:white;">คอร์สที่ดูล่าสุด</a>
-
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                    <a class="dropdown-item" href="#">Settings</a>
-                    <a class="dropdown-item" href="#">Activity Log</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="/logout">Logout</a>
-                </div>
+                </ul>
             </li>
         </ul>
+        <div class="container-fluid ml-lg-5">
+            <!-- <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button> -->
+            <!-- Navbar Search-->
+            <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+            </form>
+            <!-- Navbar-->
+            <ul class="navbar-nav ml-auto ml-md-0">
+                <li class="nav-item b dropdown">
+                    <a href="<?= base_url('/progress_course'); ?>" class="nav-link" style="color:white;">คอร์สที่ดูล่าสุด</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                        <!-- <a class="dropdown-item" href="#">Settings</a>
+                    <a class="dropdown-item" href="#">Activity Log</a> -->
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="<?= base_url('/logout'); ?>">Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </nav>
+    <!-- <span id='base_url' style="display: none;"> <?= base_url(); ?></span> -->

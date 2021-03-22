@@ -1,9 +1,11 @@
 let myVideo = document.getElementById("video");
+
 function openvideo(url, name) {
-  alert(url)
+  var base_url = window.location.origin + "/courses";
+  // alert(base_url);
   $("#showvideo").modal("show");
-  document.getElementById("source").src = url;
-  document.getElementById("video").load();
+  document.getElementById("video").src = base_url + "/videos/" + url;
+  myVideo.load();
   $("#videoname").html(name);
   //   $("#id_video").html(id);
 }

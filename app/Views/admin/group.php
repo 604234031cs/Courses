@@ -46,7 +46,7 @@
             <div class="modal-body">
                 <button class="btn btn-primary mb-3" onclick="addinput2()">เพิ่ม</button>
                 <button class="btn btn-warning mb-3" onclick="clearinpu2t()">Clare</button>
-                <form action="/addgroup" method="POST">
+                <form action="<?= base_url('/addgroup') ?>" method="POST">
                     <table class="table" id="mytable">
                         <thead>
                             <tr>
@@ -81,11 +81,11 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="/updategroup" method="post">
+                <form action="<?= base_url('/updategroup'); ?>" method="post">
                     <div class="form-group">
                         <label for="">ประเภทคอร์ส</label>
                         <select name="ca_id" class="form-control">
-                            <option value="<?= $name['id']; ?>" ><?= $name['name']; ?></option>
+                            <option value="<?= $name['id']; ?>"><?= $name['name']; ?></option>
                             <?php foreach ($mains as $get) : ?>
                                 <option value="<?= $get['id'] ?>"><?= $get['name']; ?></option>
                             <?php endforeach; ?>

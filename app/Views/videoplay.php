@@ -1,5 +1,5 @@
 <section>
-    <link rel="stylesheet" href="<?php echo site_url('asset/css/videoplay.css'); ?>">
+    <link rel="stylesheet" href="<?php echo site_url('public/asset/css/videoplay.css'); ?>">
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
             <nav class="sb-sidenav accordion " id="sidenavAccordion" style="background-color:turquoise;">
@@ -28,16 +28,17 @@
                         <div class="card ml-1 mr-1 mb-3">
                             <div class="card-header">
                                 <strong> <?php echo $getsub['name']; ?></strong>
+
                             </div>
                             <div class="card-body">
                                 <table class="table">
                                     <?php foreach ($list as $getlist) : ?>
                                         <?php if ($getsub['id'] == $getlist->id_subcourses) : ?>
-                                            <tr id="tr" onclick="playvdo('<?= $getlist->url; ?>','<?= $getlist->name; ?>','<?= $category['url']; ?>','<?= $getlist->id; ?>')">
+                                            <tr id="tr" onclick="playvdo('<?= $getlist->name_key; ?>','<?= $getlist->name; ?>','<?= $getlist->id; ?>')">
                                                 <td>
+                                                    <?= $getlist->id; ?>
                                                     <i class="fab fa-youtube"></i> <?= $getlist->name; ?>
                                                 </td>
-
                                             </tr>
                                         <?php endif; ?>
                                     <?php endforeach; ?>
@@ -54,22 +55,55 @@
                 <div class="container-fluid ">
                     <span id="id_user" style="display: none;"><?= $_SESSION['id']; ?></span>
                     <span id="id_video" style="display: none;"><?= $courses['id']; ?></span>
-                    <span id="id_category" style="display: none;"><?= $category['id']; ?></span>
-                    <span id="urlvideo" style="display: none;"><?= $courses['url']; ?></span>
-                    <span id="url" style="display: none;"><?= $category['url']; ?></span>
-                    <h3 class="mt-5 ml-3">
+                    <span id="id_category" style="display: none;"><?= $category['id'] ?></span>
+                    <h3 class="mt-3 ml-3">
                         <i class="fab fa-youtube"></i> <strong id="videoname"> <?php echo $courses['name']; ?></strong>
+                        <input type="text" class="hidden">
                     </h3>
                     <div class="card ">
-                        <div class="mainvideo mt-3 ">
-                            <video id="video" onended="endVideo()" onplay="playvideo()" onpause="updatetime(this)" controls>
-                                <source src="<?php echo site_url('/upload/' . $category['url'] . '/allvdo/' . $courses['url']); ?>" type="video/mp4" id="source">
+                        <input type="text" hidden id="key" value="<?= $courses['name_key']; ?>">
+                        <div class="mainvideo mt-2 ">
+                            <video src="<?= base_url('/videos/' . $courses['name_key']); ?>" id="video" onended="endVideo()" onplay="playvideo()" onpause="updatetime(this)" controls="controls" controlsList="nodownload">
+                                <!-- <source src="<?= base_url('/videos/' . "key_1"); ?>" type="video/mp4" id="source"> -->
                             </video>
                         </div>
                         <br>
                     </div>
                 </div>
+
+                <div class="main2">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm">
+                                <?php foreach ($sub as $getsub) : ?>
+                                    <div class="card ml-1 mr-1 mb-3">
+                                        <div class="card-header">
+                                            <strong> <?php echo $getsub['name']; ?></strong>
+                                        </div>
+                                        <div class="card-body">
+                                            <table class="table">
+                                                <?php foreach ($list as $getlist) : ?>
+                                                    <?php if ($getsub['id'] == $getlist->id_subcourses) : ?>
+                                                        <tr id="tr" onclick="playvdo('<?= $getlist->name_key; ?>','<?= $getlist->name; ?>','<?= $getlist->id; ?>')">
+                                                            <td>
+                                                                <i class="fab fa-youtube"></i> <?= $getlist->name; ?>
+                                                            </td>
+                                                        </tr>
+                                                    <?php endif; ?>
+                                                <?php endforeach; ?>
+                                            </table>
+                                        </div>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </main>
+
         </div>
     </div>
+
+
+
 </section>

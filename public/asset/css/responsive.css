@@ -1,0 +1,12 @@
+.row {
+  border-color: chartreuse;
+  border-style: solid;
+}
+.col {
+  background-color: coral;
+}
+.card {
+  width: auto;
+  height: 300px;
+  
+}

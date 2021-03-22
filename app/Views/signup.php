@@ -27,11 +27,11 @@
                 swal('ไม่สำเร็จ!', msg, 'error');
             </script>
         <?php endif; ?>
-        <link rel="stylesheet" href="<?php echo site_url('asset/css/index.css'); ?>">
+        <link rel="stylesheet" href="<?php echo base_url('public/asset/css/index.css'); ?>">
         <div class="container mt-5">
             <div class="row">
                 <div class="col-12 col-sm-8 offset-sm-2 col-md-5 offset-md-3 mt-5   from-wrapper">
-                    <form action="/signup/save" method="post">
+                    <form action="<?= base_url('/signup/save') ?>" method="post">
                         <div class="container  mt-5 p-5 bg-white ">
                             <h3 class="text-center">SIGN UP</h3>
                             <hr>
@@ -67,7 +67,7 @@
                     </form>
                     <div class="form-group">
                         <!-- <label for="inputEmail4">Confirm Password</label> -->
-                        <a href="/login" class="btn btn-block btn-success btn-sm ">SIGN IN</a>
+                        <a href="<?= base_url('/login'); ?>" class="btn btn-block btn-success btn-sm ">SIGN IN</a>
                     </div>
                 </div>
             </div>

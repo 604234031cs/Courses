@@ -1,10 +1,28 @@
-function edit(name, id, ca_name, ca_id, gr_name, gr_id) {
+var base_url = window.location.origin + "/courses";
+
+// var base_url = "<?php echo base_url();?>";
+
+function edit(name, id, ca_name, ca_id, gr_name, gr_id, img) {
+  $("input").val();
   $("#editcourses").modal("show");
   $("#edit_name").val(name);
   $("#edit_id").val(id);
   $("#option").val(ca_id);
   $("#option").html(ca_name);
+  $("#file_check").val(img);
+  $("#show-img").attr("src", base_url + "/public/img/" + img);
   loadpage2(gr_name, gr_id);
+}
+
+function readURL(input) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      $("#show-img").attr("src", e.target.result);
+    };
+
+    reader.readAsDataURL(input.files[0]);
+  }
 }
 
 loadpage();
@@ -12,7 +30,7 @@ function autoselect(value) {
   var option = "";
   $("#group").empty();
   $.ajax({
-    url: "/ajax/selact",
+    url: base_url + "/ajax/selact",
     type: "post",
     data: {
       key: value,
@@ -38,7 +56,7 @@ function autoselect2(value) {
   var option = "";
   $("#group_e").empty();
   $.ajax({
-    url: "/ajax/selact",
+    url: base_url + "/ajax/selact",
     type: "post",
     data: {
       key: value,
@@ -66,7 +84,7 @@ function loadpage2(gr_name, gr_id) {
   var option = "";
   $("#group_e").empty();
   $.ajax({
-    url: "/ajax/selact",
+    url: base_url + "/ajax/selact",
     type: "post",
     data: {
       key: value,
@@ -92,7 +110,7 @@ function loadpage() {
   var option = "";
   $("#group").empty();
   $.ajax({
-    url: "/ajax/selact",
+    url: base_url + "/ajax/selact",
     type: "post",
     data: {
       key: value,
@@ -161,11 +179,11 @@ function clearinput2() {
   } else {
     document.getElementById("save").disabled = true;
   }
-  console.log(rows);
+  // console.log(rows);
 }
 
 function delcol2(x) {
   var str = "#coltr" + x;
-  console.log($(str));
+  // console.log($(str));
   $(str).remove();
 }

@@ -1,7 +1,8 @@
 <section>
-    <link rel="stylesheet" href="<?php echo site_url('asset/css/listvdo.css'); ?>">
+    <!-- <link rel="stylesheet" href="<?php echo base_url('public/asset/css/listvdo.css'); ?>"> -->
+
     <main>
-        <link rel="stylesheet" href="<?php echo site_url('asset/css/index.css'); ?>">
+        <link rel="stylesheet" href="<?php echo base_url('public/asset/css/index.css'); ?>">
         <div class="container  mt-5">
             <!-- onchange="myform.submit()" -->
             <h3 class="mb-3">คอร์สเรียนทั้งหมด</h3>
@@ -13,7 +14,22 @@
                 </div>
             </div>
             <div class="row mt-5" id="row">
+                <!-- <?php for ($i = 1; $i <= 31; $i++) : ?>
+                    <div class="col-sm">
+                        <div class="card mb-4">
+                            <img src="https://process.fs.teachablecdn.com/ADNupMnWyR7kCWRvm76Laz/resize=width:705/https://www.filepicker.io/api/file/5Cr0YJWRBqYw3zpCKImc" alt="" class="card-img-top">
+                            <div class="card-body">
+                                <div class="ml-5 mr-5">
+                                    <div class="text-center"><strong>COMPLETE</strong></div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                <?php endfor; ?> -->
             </div>
-        </div>
     </main>
+
 </section>

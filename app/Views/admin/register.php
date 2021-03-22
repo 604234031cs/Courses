@@ -27,8 +27,8 @@
                         <td><?= $get['r_username']; ?></td>
                         <td><?= $get['r_password']; ?></td>
                         <td>
-                            <a href="/admin/register/<?= $get['id']; ?>/1" class="btn btn-success"><i class="fas fa-check"></i> อนุุมัติ</a>
-                            <a href="/admin/register/<?= $get['id']; ?>/0" class="btn btn-danger"><i class="fas fa-times"></i> ไม่อนุมัติ</a>
+                            <a href="<?= base_url('/admin/register/' . $get['id'] . '/1'); ?>" class="btn btn-success"><i class="fas fa-check"></i> อนุุมัติ</a>
+                            <a href="<?= base_url('/admin/register/' . $get['id'] . '/0'); ?>" class="btn btn-danger"><i class="fas fa-times"></i> ไม่อนุมัติ</a>
                         </td>
                     </tr>
                     <?php $i++; ?>

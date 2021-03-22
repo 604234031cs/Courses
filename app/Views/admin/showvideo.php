@@ -5,7 +5,7 @@
 
         <div class="card mt-4">
             <div class="card-header">
-                <form action="/addvideos" method="POST" enctype="multipart/form-data" >
+                <form action="<?= base_url('/addvideos') ?>" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="exampleFormControlFile1">อัพโหลดคลิป</label>
                         <input type="file" name="fileupload[]" class="form-control-file" multiple required>
@@ -43,8 +43,9 @@
                                     <?= $get['name']; ?>
                                 </td>
                                 <td class="text-center">
+                                    <input type="text" name="" id="base-url" value="<?= base_url(); ?>" hidden>
                                     <button class="btn btn-warning" data-toggle="modal" data-target="#editvideo" onclick="editvideo('<?= $get['name']; ?>','<?= $get['id']; ?>')">แก้ไข</button>
-                                    <button class="btn btn-secondary" data-toggle="modal" data-target="#showvideo" onclick="openvideo('<?= site_url('upload/' . $courses['url'] . '/allvdo/' . $get['url']); ?>','<?= $get['name']; ?>')">ดูคลิป</button>
+                                    <button class="btn btn-secondary" data-toggle="modal" data-target="#showvideo" onclick="openvideo('<?= $get['name_key']; ?>','<?= $get['name']; ?>')">ดูคลิป</button>
                                     <!-- <button class="btn btn-danger">ลบ</button> -->
                                 </td>
                             </tr>
@@ -67,11 +68,11 @@
                 </button>
             </div>
             <div class="modal-body">
-                <video controls id="video" width="100%">
-                    <source src="" id="source">
-                    </source>
+                <video controls id="video" width="100%" src="">
+                    <!-- <source src="" id="source">
+                    </source> -->
                 </video>
-                
+
             </div>
             <!-- <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -91,7 +92,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="/updatevideo" method="POST">
+                <form action="<?= base_url('/updatevideo') ?>" method="POST">
                     <div class="form-group">
                         <label for="">คลิป</label>
                         <input type="text" name="id_courses" value="<?= $courses['id']; ?>" hidden>

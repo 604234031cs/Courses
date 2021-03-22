@@ -4,7 +4,7 @@
         <h2 class="mt-4">เอกสารประกอบ</h2>
         <div class="card mb-4">
             <div class="card-header ">
-                <form action="/adddocs" method="post" enctype="multipart/form-data" required    >
+                <form action="<?= base_url('/adddocs'); ?>" method="post" enctype="multipart/form-data" required>
                     <div class="form-group">
                         <label for="">อัพโหลดเอกสาร</label><br>
                         <input type="file" name="fileupload[]" id="" multiple required>
@@ -44,7 +44,7 @@
                                 <td><?= $get['name']; ?></td>
                                 <td class="text-center">
                                     <button class="btn btn-warning" data-toggle="modal" data-target="#editdoc" onclick="editdoc('<?= $get['name']; ?>','<?= $get['id']; ?>')">แก้ไข</button>
-                                    <a href="<?= site_url('upload/' . $courses['url'] . '/alldocs/' . $get['url']); ?>" class="btn btn-secondary">โหลดไฟล์</a>
+                                    <a href="<?= base_url('/upload/' . $courses['url'] . '/alldocs/' . $get['url']); ?>" class="btn btn-secondary">โหลดไฟล์</a>
                                 </td>
                                 <!-- <button class="btn-btn-warning"></button> -->
                             </tr>

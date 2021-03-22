@@ -1,5 +1,5 @@
 <section>
-    <link rel="stylesheet" href="<?php echo site_url('asset/css/index.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('/public/asset/css/index.css'); ?>">
     <div class="container  mt-5">
         <div class="container-fluid">
             <div class="container">
@@ -9,7 +9,7 @@
                     <?php foreach ($courses as $get) : ?>
 
                         <div class="col col-lg-4">
-                            <a href="/courses/<?= $get->id; ?>" style="text-decoration: none; color:black;">
+                            <a href="<?= base_url('/courses/' . $get->id); ?>" style="text-decoration: none; color:black;">
                                 <div class="card mb-4 " style="height:370px">
                                     <img class="card-img-top" src="https://process.fs.teachablecdn.com/ADNupMnWyR7kCWRvm76Laz/resize=width:705/https://www.filepicker.io/api/file/5Cr0YJWRBqYw3zpCKImc" alt="Card image" width="321" height="121">
                                     <div class="card-body">

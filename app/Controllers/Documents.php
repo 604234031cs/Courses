@@ -15,27 +15,28 @@ class Documents extends BaseController
         $id_lectures = $this->request->getVar('id_lectures');
         $count = $this->request->getVar('count');
         $url = $this->request->getVar('url');
+        if ($this->request->getMethod() == 'post') {
+            foreach ($files  as $file) {
+                $count = $count + 1;
+                $type = '.' . $file->guessExtension();
+                $url_video = (string)$id_courses . '.' . (string)$id_lectures . '.' . (string)$count . $type;
+                $name  = str_replace($type, ' ', $file->getName(), $var);
 
-        foreach ($files  as $file) {
-            $count = $count + 1;
-            $type = '.' . $file->guessExtension();
-            $url_video = (string)$id_courses . '.' . (string)$id_lectures . '.' . (string)$count . $type;
-            $name  = str_replace($type, ' ', $file->getName(), $var);
+                $datset = [
+                    "name" => $name,
+                    "url" => $url_video,
+                    "id_subcourses" => $id_lectures,
+                    "id_category" => $id_courses
+                ];
 
-            $datset = [
-                "name" => $name,
-                "url" => $url_video,
-                "id_subcourses" => $id_lectures,
-                "id_category" => $id_courses
-            ];
-
-            if ($model_docs->insert($datset)) {
-                $file->move('upload/' . $url . '/alldocs', $url_video);
-            }   // echo $name . "<br>";
+                if ($model_docs->insert($datset)) {
+                    $file->move(FCPATH . 'upload/' . $url . '/alldocs', $url_video);
+                }   // echo $name . "<br>";
 
 
+            }
+            return redirect()->to(base_url('/admin/document/' . $id_courses . '/' . $id_lectures));
         }
-        return redirect()->to('/admin/document/' . $id_courses . '/' . $id_lectures);
     }
 
 
@@ -53,6 +54,6 @@ class Documents extends BaseController
         ];
 
         $model_videos->update($id_edit, $dataset);
-        return redirect()->to('/admin/' . $id_courses . '/' . $id_lectures);
+        return redirect()->to(base_url('/admin/' . $id_courses . '/' . $id_lectures));
     }
 }
