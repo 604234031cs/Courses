@@ -182,10 +182,11 @@ class Admin extends BaseController
     function question($id = null)
     {
         $model_question = new Question();
+        $model_val_question = new Value_question();
         // $model_val_question = new Value_question();
         $data['question'] =  $model_question->where('courses_id', $id)->findAll();
         $data['id'] = $id;
-
+        // $data['val_question'] = $model_val_question->where('q_id', $data['id'])->findAll();
         echo view("admin/templates/head");
         echo view("admin/question", $data);
         echo view("admin/templates/footer");
@@ -193,13 +194,14 @@ class Admin extends BaseController
 
     function val_question($id = null)
     {
-        $model_question = new Question();
+        // $model_question = new Question();
         $model_val_question = new Value_question();
-        $data['question'] =  $model_question->where('q_id', $id)->first();
+        // $data['question'] =  $model_question->where('q_id', $id)->first();
         $data['val_question'] = $model_val_question->where('q_id', $id)->findAll();
 
-        echo view("admin/templates/head");
-        echo view("admin/val_question", $data);
-        echo view("admin/templates/footer");
+        // echo view("admin/templates/head");
+        // echo view("admin/val_question", $data);
+        // echo view("admin/templates/footer");
+        echo json_encode($data['val_question']);
     }
 }

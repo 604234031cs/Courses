@@ -53,6 +53,7 @@ $routes->get('/category/(:num)', 'Home::category/$1');
 
 
 
+
 $routes->get('/courses/(:num)', 'Home::listvdo/$1', ['filter' => 'auth']);
 $routes->get('/document/(:num)', 'Home::document/$1', ['filter' => 'auth']);
 $routes->get('/courses/(:num)/lectures/(:num)', 'Home::showvideo/$1/$2', ['filter' => 'auth']);
@@ -69,7 +70,7 @@ $routes->group('admin', function ($routes) {
 	$routes->get('register', 'Admin::list_regis', ['filter' => 'auth']);
 	$routes->get('register/(:num)/(:num)', 'Admin::approve/$1/$2', ['filter' => 'auth']);
 	$routes->get('question/(:num)', 'Admin::question/$1');
-	$routes->get('val_question/(:num)', 'Admin::val_question/$1');
+	$routes->post('val_question/(:num)', 'Admin::val_question/$1');
 	// $routes->add('blog', 'Admin\Blog::index');
 });
 
@@ -101,6 +102,8 @@ $routes->post('updategroup', 'Category::updategroup');
 $routes->post('/login/auth', 'Login::login');
 $routes->get('/logout', 'Login::logout');
 
+//Question
+$routes->post('/addquestion', 'QuestionController::addquestion');
 
 
 //Ajax Controller

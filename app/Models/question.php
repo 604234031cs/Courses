@@ -8,5 +8,5 @@ class Question extends Model
 {
     protected $table = 'question';
     protected $primaryKey  = 'q_id';
-    protected $allowedFields = ['q_name', 'courses_id'];
+    protected $allowedFields = ['q_name', 'courses_id', 'answer'];
 }
