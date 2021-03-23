@@ -113,6 +113,8 @@ $routes->post('/ajax/selact', 'Ajaxdata::selact');
 $routes->post('/ajax/updateduration', 'Ajaxdata::duration');
 $routes->post('/ajax/endvideo', 'Ajaxdata::endvideo');
 $routes->post('/ajax/getcurrtiem', 'Ajaxdata::currtime');
+$routes->get('/ajax/reanswer/(:num)/(:num)', 'Ajaxdata::reanswer/$1/$2');
+
 // $routes->post('/ajax/showquestion', 'Ajaxdata::showquestion');
 // $routes->post('/ajax/showvalquestion', 'Ajaxdata::show_val_question');
 /**

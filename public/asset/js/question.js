@@ -161,10 +161,7 @@ function viewoption(question, answer) {
           "<div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>";
         tr +=
           "\
-          <a class='dropdown-item' onclick='reanswer(" +
-          show["s_id"] +
-          question +
-          ")'>ตั้งเป็นคำตอบที่ถูก</a>\
+          <a href='"+base_url+"/ajax/reanswer/"+question+'/'+show['option_number']+"' class='dropdown-item'>ตั้งเป็นคำตอบที่ถูก</a>\
           <a class='dropdown-item' >Another action</a>\
           <a class='dropdown-item' >Something else here</a>\
           ";
@@ -180,5 +177,15 @@ function viewoption(question, answer) {
 }
 
 function reanswer(answer, quesion) {
-  alert(answer, quesion);
+  $.ajax({
+    url: base_url + "/ajax/reanswer",
+    type: "post",
+    data: {
+      quesion: quesion,
+      answer: answer,
+    },
+    success: function (result) {
+      let object = JSON.parse(result);
+    },
+  });
 }

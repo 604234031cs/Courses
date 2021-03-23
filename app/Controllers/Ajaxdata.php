@@ -281,4 +281,16 @@ class Ajaxdata extends BaseController
         $data =  $model_val_question->where('q_id', $key)->findAll();
         echo json_encode($data);
     }
+
+
+    public function reanswer($question, $answer)
+    {
+        $modal_question = new Question();
+        $dataset = [
+            'answer' => $answer
+        ];
+        $modal_question->update($question, $dataset);
+
+        return redirect()->to('url');
+    }
 }
