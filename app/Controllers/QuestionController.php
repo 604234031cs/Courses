@@ -56,4 +56,24 @@ class QuestionController extends BaseController
             // echo $this->request->getVar('option_value' . $i) . "<br>";
         }
     }
+
+
+
+    public function editoption()
+    {
+
+        helper(['form']);
+
+        $s_id = $this->request->getVar('s_id');
+        $option_title = $this->request->getVar('option_title');
+        $s_courses = $this->request->getVar('s_courses');
+        $modal_option = new Value_question();
+
+        $dataset = [
+            'sl_name' => $option_title
+        ];
+        $modal_option->update($s_id, $dataset);
+
+        return redirect()->to(base_url('/admin/question/' . $s_courses));
+    }
 }

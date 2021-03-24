@@ -18,7 +18,7 @@
             <tbody>
                 <?php $i = 1; ?>
                 <?php foreach ($list_regis as $get) : ?>
-                    <tr class="text-center">
+                    <tr class="text-center tr-hover">
                         <td>
                             <?= $i; ?>
                         </td>

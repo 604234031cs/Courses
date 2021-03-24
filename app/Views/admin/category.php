@@ -23,7 +23,7 @@
                     <tbody>
                         <?php $i = 1; ?>
                         <?php foreach ($main as $get) : ?>
-                            <tr class="text-center">
+                            <tr class="text-center tr-hover">
                                 <td>
                                     <?= $i; ?>
                                 </td>

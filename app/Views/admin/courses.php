@@ -17,8 +17,8 @@
                     <tbody>
                         <?php $i = 1; ?>
                         <?php foreach ($category as $get) : ?>
-                            <tr>
-                                <td class="text-center">
+                            <tr class="tr-hover">
+                                <td class="text-center ">
                                     <?= $i; ?>
                                 </td>
                                 <td>

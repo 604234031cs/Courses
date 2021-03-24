@@ -283,14 +283,59 @@ class Ajaxdata extends BaseController
     }
 
 
-    public function reanswer($question, $answer)
+    public function reanswer()
     {
+        $question = $this->request->getVar('quesion');
+        $answer = $this->request->getVar('answer');
+
         $modal_question = new Question();
         $dataset = [
             'answer' => $answer
         ];
-        $modal_question->update($question, $dataset);
+        if ($modal_question->update($question, $dataset)) {
+            $status = [
+                'status' => 'success'
+            ];
+        } else {
+            $status = [
+                'status' => 'error'
+            ];
+        }
+        echo json_encode($status);
+        // 
+    }
 
-        return redirect()->to('url');
+    public function delanswer($del, $q_id)
+    {
+        $db = \Config\Database::connect();
+        $model_val_question = new Value_question();
+        $query = $db->query("SELECT * FROM select_value where q_id='$q_id' and s_id='$del'");
+        $data = $query->getResult();
+        $model_val_question->delete($del);
+
+        $options = $model_val_question->where('q_id', $q_id)->findAll();
+        // echo $data[0]->option_number . "<br>";
+        // $options = $model_val_question->where('q_id', $q_id)->findAll();
+
+        foreach ($options as $get) {
+            // echo $get['option_number'];
+            if ($get['option_number'] > $data[0]->option_number) {
+                // echo $get['option_number'] . "<br>";
+                $op_num = $get['option_number'] - 1;
+                $dataset = [
+                    "option_number" => $op_num
+                ];
+                $model_val_question->update($get['s_id'], $dataset);
+            }
+        }
+    }
+
+    public function option($s_id)
+    {
+        $model_val_question = new Value_question();
+
+        $data['option'] = $model_val_question->where('s_id', $s_id)->first();
+
+        echo json_encode($data['option']);
     }
 }

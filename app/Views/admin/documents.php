@@ -39,7 +39,7 @@
                     <tbody>
                         <?php $i = 1; ?>
                         <?php foreach ($docs as $get) : ?>
-                            <tr>
+                            <tr class="tr-hover">
                                 <td class="text-center"> <?= $i; ?></td>
                                 <td><?= $get['name']; ?></td>
                                 <td class="text-center">

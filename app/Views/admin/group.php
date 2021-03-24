@@ -18,7 +18,7 @@
                     <tbody>
                         <?php $i = 1; ?>
                         <?php foreach ($group as $get) : ?>
-                            <tr class="text-center">
+                            <tr class="text-center tr-hover">
                                 <td><?= $i; ?></td>
                                 <td><?= $get['name']; ?></td>
                                 <td>

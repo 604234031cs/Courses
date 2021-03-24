@@ -25,7 +25,7 @@
                     <tbody>
                         <?php $i = 1; ?>
                         <?php foreach ($subcourses as $get) : ?>
-                            <tr>
+                            <tr class="tr-hover">
                                 <td class="text-center">
                                     <?= $i; ?>
                                 </td>

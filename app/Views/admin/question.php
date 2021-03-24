@@ -17,8 +17,8 @@
                     </thead>
                     <tbody><?php $i = 1; ?>
                         <?php foreach ($question as $get) : ?>
-                            <tr class="text-center">
-                                <td><?= $i++; ?></td>
+                            <tr class="text-center tr-hover">
+                                <td><?= $i; ?></td>
                                 <td><?= $get['q_name'] ?></td>
                                 <td>
                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#option-view-modal" onclick="viewoption('<?= $get['q_id']; ?>','<?= $get['answer']; ?>')">
@@ -98,7 +98,6 @@
     </div>
 </div>
 
-
 <div class="modal fade" id="option-view-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
@@ -109,7 +108,11 @@
                 </button>
             </div>
             <div class="modal-body">
+
                 <table class="table" id="table-option">
+                    <div class="card-header text-right">
+                        <button class="btn btn-primary" onclick="addoption2()">เพิ่มช่อง</button>
+                    </div>
                     <thead class='text-center'>
                         <tr>
                             <th>ตัวเลือกที่</th>
@@ -117,12 +120,45 @@
                             <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody class="text-center"></tbody>
+                    <form action="" method="post">
+                        <tbody class="text-center"></tbody>
+                        <input type="text" id="rows2" name="rows2">
                 </table>
+                <div class="form-group text-center" id="btn-submit2">
+                    <!-- <button class="btn btn-success" id="" disabled>เพิ่มตัวเลือก</button> -->
+                </div>
+                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="editopton" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="<?= base_url('/editoption') ?>" method="post">
+                    <input type="text" name="s_id" id="s_id" value="" hidden>
+                    <input type="text" name="s_courses" id="s_courses" hidden value="<?= $id; ?>">
+                    <div class="form-group">
+                        <input type="text" name="option_title" id="option_tilte" class="form-control">
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+                </form>
             </div>
         </div>
     </div>

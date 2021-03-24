@@ -48,7 +48,7 @@ $routes->get('/signup', 'Home::signup');
 $routes->post('/signup/save', 'SignupController::signup');
 $routes->get('/login', 'Home::index');
 $routes->get('/category/(:num)', 'Home::category/$1');
-
+$routes->get('/quiz/(:num)', 'Home::quiz/$1');
 
 
 
@@ -105,6 +105,11 @@ $routes->get('/logout', 'Login::logout');
 //Question
 $routes->post('/addquestion', 'QuestionController::addquestion');
 
+//Option 
+$routes->post('/ajax/reanswer', 'Ajaxdata::reanswer');
+$routes->get('/ajax/delanswer/(:num)/(:num)', 'AJaxdata::delanswer/$1/$2');
+$routes->get('/option/(:num)', 'Ajaxdata::option/$1');
+$routes->post('/editoption', 'QuestionController::editoption');
 
 //Ajax Controller
 $routes->post('/ajax/checkvideo', 'Ajaxdata::videocheck');
@@ -113,7 +118,8 @@ $routes->post('/ajax/selact', 'Ajaxdata::selact');
 $routes->post('/ajax/updateduration', 'Ajaxdata::duration');
 $routes->post('/ajax/endvideo', 'Ajaxdata::endvideo');
 $routes->post('/ajax/getcurrtiem', 'Ajaxdata::currtime');
-$routes->get('/ajax/reanswer/(:num)/(:num)', 'Ajaxdata::reanswer/$1/$2');
+
+
 
 // $routes->post('/ajax/showquestion', 'Ajaxdata::showquestion');
 // $routes->post('/ajax/showvalquestion', 'Ajaxdata::show_val_question');

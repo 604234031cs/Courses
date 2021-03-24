@@ -7,6 +7,7 @@ use App\Models\CourseCategory;
 use App\Models\Group;
 use App\Models\Listvdo;
 use App\Models\Logvideo;
+use App\Models\Question;
 use App\Models\Score;
 use App\Models\Subcourses;
 
@@ -241,6 +242,88 @@ class Home extends BaseController
 		echo view('template/head');
 		echo view('progress_course', $data);
 		echo view('template/footer');
+	}
+
+
+	public function quiz($id)
+	{
+
+		$session = session();
+		$model_score = new Score();
+
+		$feil = [
+			"id_courses" => $id,
+			"id_user" => $session->get('id'),
+		];
+
+		$data = $model_score->where($feil)->first();
+
+		if ($data['score'] >= 50) {
+			$modal_question = new Question();
+			$data['question'] = $modal_question->where('courses_id', $id)->findAll();
+			$db = \Config\Database::connect();
+			$query  = $db->query("SELECT question.q_id,question.q_name,
+			GROUP_CONCAT(select_value.option_number) as option_number, 
+			GROUP_CONCAT(select_value.sl_name) as option_title, 
+			select_value.s_id
+			FROM question LEFT JOIN select_value ON question.q_id = select_value.q_id 
+			WHERE question.courses_id = $id
+			GROUP BY question.q_id
+			");
+			$data['quiz'] = $query->getResult();
+			// echo json_encode($data['quiz']);
+			$arr = array($data['quiz'][0]->option_number);
+			$arr = array();
+			$t = array();
+			$o = array();
+			// echo count(explode(',', $data['quiz'][0]->option_number));
+			foreach ($data['quiz'] as $get) {
+				// $question = [
+				// 	"question" => $get->q_name
+				// ];
+				// array_push($arr, $question);
+				$count = count(explode(',', $data['quiz'][0]->option_number));
+				$a = explode(',', $get->option_number);
+				$b = explode(',', $get->option_title);
+				for ($i = 0; $i < $count - 1; $i++) {
+					$option = [
+						"question" => $get->q_name,
+						"title" => $b,
+						'option' => $a,
+					];
+				}
+
+				array_push($arr, $option);
+				// array_push($arr, $b);
+			}
+			// echo json_encode($arr[0]['title'][0]);
+			// foreach($data['quiz'] as $get){
+
+
+			// }
+			// echo count($arr);
+			// foreach ($arr as $get) {
+			// 	echo $get['title'][0];
+			// 	# code...
+			// }
+
+
+			// echo json_encode($arr);
+			// echo $arr[0];
+
+			$data['quiz'] = $arr;
+
+			// print_r(explode(",", $data['quiz'][0]->option_number));
+			echo view('template/head');
+			echo view('quiz', $data);
+			echo view('template/footer');
+		} else {
+			return redirect()->to(base_url('/courses/' . $id));
+		}
+
+		// echo json_encode();
+
+
 	}
 
 

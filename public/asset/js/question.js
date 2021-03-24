@@ -160,32 +160,97 @@ function viewoption(question, answer) {
         tr +=
           "<div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>";
         tr +=
-          "\
-          <a href='"+base_url+"/ajax/reanswer/"+question+'/'+show['option_number']+"' class='dropdown-item'>ตั้งเป็นคำตอบที่ถูก</a>\
-          <a class='dropdown-item' >Another action</a>\
-          <a class='dropdown-item' >Something else here</a>\
-          ";
+          "<a class='dropdown-item' onclick='reanswer(" +
+          question.toString() +
+          "," +
+          show["option_number"].toString() +
+          ")'>ตั้งเป็นคำตอบที่ถูก</a>\
+          <a class='dropdown-item' data-toggle='modal' data-target='#editopton' onclick='modal_edit_option(" +
+          show["s_id"] +
+          ")'>แก้ไข</a>\
+          <a class='dropdown-item' onclick='delanswer(" +
+          show["s_id"] +
+          "," +
+          question +
+          ")'>ลบ</a>  ";
         tr += "</div></div>";
         tr += "</td>";
         tr += "</tr>";
         num++;
       });
-
       $("#table-option > tbody:last").append(tr);
     },
   });
 }
 
-function reanswer(answer, quesion) {
+function reanswer(quesion, option) {
   $.ajax({
     url: base_url + "/ajax/reanswer",
     type: "post",
     data: {
       quesion: quesion,
-      answer: answer,
+      answer: option,
     },
     success: function (result) {
-      let object = JSON.parse(result);
+      // let object = JSON.parse(result);
+      window.location.reload();
     },
   });
 }
+
+function delanswer(del, q_id) {
+  $.ajax({
+    url: base_url + "/ajax/delanswer/" + del + "/" + q_id,
+    type: "get",
+    success: function (result) {
+      // let object = JSON.parse(result);
+      window.location.reload();
+    },
+  });
+}
+
+function modal_edit_option(s_id) {
+  // console.log(s_id);
+
+  $.ajax({
+    url: base_url + "/option/" + s_id,
+    type: "get",
+    success: function (result) {
+      let json = JSON.parse(result);
+      // console.log(json['s_id']);
+      $(".modal-body .form-group #option_tilte").val(json["sl_name"]);
+      $(".modal-body #s_id").val(json["s_id"]);
+    },
+  });
+}
+var rows2 = 1;
+function addoption2() {
+  var tr = "";
+  var btn = "";
+  $("#btn-submit2").empty();
+  tr += "<tr id='_coltr" + rows2 + "'>";
+  tr += "<td colspan=2>";
+  tr += "<input class='form-control' type='text' required>";
+  tr += "</td>";
+  tr += "<td>";
+  tr +=
+    "<button class='btn btn-danger'onclick='delcol2(" +
+    rows2 +
+    ")'>ลบ</button>";
+  tr += "</tr>";
+  btn = "<button type='submit' class='btn btn-success'>เพิ่มตัวเลือก</button>";
+  $("#rows2").val(rows2);
+  rows2++;
+
+  $("#table-option > tbody:last").append(tr);
+  $("#btn-submit2").append(btn);
+}
+
+function delcol2(x) {
+  var str = "#_coltr" + x;
+  // console.log(str);
+  // answer_del(x);
+  $(str).remove();
+}
+
+function delbnt2() {}

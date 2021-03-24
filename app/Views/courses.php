@@ -1,6 +1,5 @@
 <section>
     <link rel="stylesheet" href="<?php echo base_url('public/asset/css/listvdo.css'); ?>">
-
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
             <nav class="sb-sidenav accordion " id="sidenavAccordion" style="background-color:turquoise;">
@@ -16,7 +15,7 @@
                         </div>
                         <div class="mx-5">
                             <div class="progress mt-2">
-                                <div class="progress-bar progress-bar-striped " role="progressbar" style="width: <?= $calculat; ?>%; background-color:#ff00bf" aria-valuenow="<?= $calculat; ?>" aria-valuemin="0" aria-valuemax="100"><?= $calculat . '  %'; ?></div>
+                                <div class="progress-bar progress-bar-striped " role="progressbar" style="width: <?= $calculat; ?>%; background-color:#ff00bf" aria-valuenow="<?= $calculat; ?>" aria-valuemin="0" aria-valuemax="100.00"><?= $calculat . '  %'; ?></div>
                             </div>
                             <!-- <meter low="49" high="50" min="0" max="100" value="<?= $calculat; ?>" style="width: 230px;height: 30px;" id="meter"></meter><br> -->
 
@@ -29,6 +28,9 @@
                             <i class="fas fa-columns" style="color: white;width:33px;height:35px"></i>
                             <span style="font-size: 1.5rem;">เนื้อหาในคอร์สนี้</span>
                         </a>
+                        <?php if ($calculat >= 50) : ?>
+                            <a class="nav-link" href="<?= base_url('/quiz/' . $category['id']); ?>" style="font-size: 1.5rem;"><span>แบบทดสอบ</span></a>
+                        <?php endif; ?>
                     </div>
                 </div>
 

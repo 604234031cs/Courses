@@ -35,7 +35,7 @@
                     <tbody>
                         <?php $i = 1; ?>
                         <?php foreach ($videos as $get) : ?>
-                            <tr>
+                            <tr class="tr-hover">
                                 <td class="text-center">
                                     <?= $i; ?>
                                 </td>
