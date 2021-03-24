@@ -313,7 +313,7 @@ class Home extends BaseController
 			// echo $arr[0];
 
 			$data['quiz'] = $arr;
-
+			$data['id_courses'] = $id;
 			// print_r(explode(",", $data['quiz'][0]->option_number));
 			echo view('template/head');
 			echo view('quiz', $data);
@@ -328,10 +328,23 @@ class Home extends BaseController
 	public function successquiz()
 	{
 		helper(['form']);
+		$modal_question = new Question();
+		$id_courses = $this->request->getVar('id_courses');
 		$quiz_num = $this->request->getVar('quiz_num');
+		$score_quize = 0;
 		for ($i = 1; $i <= $quiz_num; $i++) {
-			echo $this->request->getVar('quetion' . $i) . "<br>";
+			$dataset = [
+				"courses_id" => $id_courses,
+				"q_id" => $this->request->getVar('q_id' . $i),
+				"answer" => $this->request->getVar('quetion' . $i)
+			];
+
+			$data = $modal_question->where($dataset)->first();
+			if ($data != null) {
+				$score_quize += 1;
+			}
 		}
+		echo $score_quize;
 	}
 
 

@@ -18,7 +18,7 @@
                         <?php foreach ($quiz as $get) : ?>
                             <div class="card mt-3">
                                 <div class="card-header">
-                                    <?= $i . '. ' . $get['question']; ?>
+                                    <span style="font-size: 1.5em;"> <?= $i . '. ' . $get['question']; ?></span>
                                     <input type="text" name="q_id<?= $i; ?>" id="" value="<?= $get['q_id'] ?>" hidden>
                                 </div>
                                 <div class="card-body">
@@ -37,9 +37,9 @@
                             </div>
                             <?php $i++; ?>
                         <?php endforeach; ?>
-                        <input type="text" value="<?= --$i ?>" name="quiz_num">
-
-                        <div class="form-group text-right">
+                        <input type="text" value="<?= --$i ?>" name="quiz_num" hidden>
+                        <input type="text" value="<?= $id_courses ?>" name="id_courses" hidden>
+                        <div class="form-group text-right mt-2">
                             <button class="btn btn-success">ส่งคำตอบ</button>
                         </div>
                 </div>
