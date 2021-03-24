@@ -288,6 +288,7 @@ class Home extends BaseController
 				for ($i = 0; $i < $count - 1; $i++) {
 					$option = [
 						"question" => $get->q_name,
+						"q_id" => $get->q_id,
 						"title" => $b,
 						'option' => $a,
 					];
@@ -322,8 +323,15 @@ class Home extends BaseController
 		}
 
 		// echo json_encode();
+	}
 
-
+	public function successquiz()
+	{
+		helper(['form']);
+		$quiz_num = $this->request->getVar('quiz_num');
+		for ($i = 1; $i <= $quiz_num; $i++) {
+			echo $this->request->getVar('quetion' . $i) . "<br>";
+		}
 	}
 
 

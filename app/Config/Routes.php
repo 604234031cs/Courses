@@ -50,14 +50,15 @@ $routes->get('/login', 'Home::index');
 $routes->get('/category/(:num)', 'Home::category/$1');
 $routes->get('/quiz/(:num)', 'Home::quiz/$1');
 
-
-
-
-
 $routes->get('/courses/(:num)', 'Home::listvdo/$1', ['filter' => 'auth']);
 $routes->get('/document/(:num)', 'Home::document/$1', ['filter' => 'auth']);
 $routes->get('/courses/(:num)/lectures/(:num)', 'Home::showvideo/$1/$2', ['filter' => 'auth']);
 $routes->get('/progress_course', 'Home::progress_course');
+
+///Quiz
+$routes->post('/succesquiz', 'Home::successquiz');
+
+
 
 // Admin
 $routes->group('admin', function ($routes) {
