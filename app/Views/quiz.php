@@ -29,7 +29,6 @@
                                             <?= $show ?>
                                         </label>
                                     </div>
-
                                     <?php $j++; ?>
                                 <?php endforeach; ?>
                             </div>
