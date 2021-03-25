@@ -411,7 +411,7 @@ class Home extends BaseController
 	public function showscorepage()
 	{
 		$session = session();
-		$id_user = $session->get('id');
+		// $id_user = $session->get('id');
 		$data['score'] = $session->get('score_quiz');
 		$data['quiz_num'] = $session->get('quiz_num');
 		$data['total'] = ($data['score'] * 100) / $data['quiz_num'];
