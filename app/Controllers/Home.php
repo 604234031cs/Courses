@@ -10,6 +10,7 @@ use App\Models\Logvideo;
 use App\Models\Question;
 use App\Models\Score;
 use App\Models\Subcourses;
+use App\Models\User_exam_quiz;
 
 class Home extends BaseController
 {
@@ -251,16 +252,33 @@ class Home extends BaseController
 		$session = session();
 		$model_score = new Score();
 
+
+
+		// $model
+		// echo $id;
 		$feil = [
 			"id_courses" => $id,
 			"id_user" => $session->get('id'),
 		];
 
+
+
+
 		$data = $model_score->where($feil)->first();
+
 
 		if ($data['score'] >= 50) {
 			$modal_question = new Question();
+			$modal_user_exam = new User_exam_quiz();
+
+			$feil2 = [
+				"courses_id" => $id,
+				"id_user" => $session->get('id'),
+			];
+			$data['user_exam'] = $modal_user_exam->where($feil2)->first();
 			$data['question'] = $modal_question->where('courses_id', $id)->findAll();
+
+
 			$db = \Config\Database::connect();
 			$query  = $db->query("SELECT question.q_id,question.q_name,
 			GROUP_CONCAT(select_value.option_number) as option_number, 
@@ -272,31 +290,33 @@ class Home extends BaseController
 			");
 			$data['quiz'] = $query->getResult();
 			// echo json_encode($data['quiz']);
-			$arr = array($data['quiz'][0]->option_number);
+			// $arr = array($data['quiz'][0]->option_number);
 			$arr = array();
-			$t = array();
-			$o = array();
+			// echo json_encode($data['quiz']);
 			// echo count(explode(',', $data['quiz'][0]->option_number));
 			foreach ($data['quiz'] as $get) {
 				// $question = [
 				// 	"question" => $get->q_name
 				// ];
 				// array_push($arr, $question);
-				$count = count(explode(',', $data['quiz'][0]->option_number));
+				// $count = count(explode(',', $data['quiz'][0]->option_number));
 				$a = explode(',', $get->option_number);
 				$b = explode(',', $get->option_title);
-				for ($i = 0; $i < $count - 1; $i++) {
-					$option = [
-						"question" => $get->q_name,
-						"q_id" => $get->q_id,
-						"title" => $b,
-						'option' => $a,
-					];
-				}
-
+				// for ($i = 0; $i < $count - 1; $i++) {
+				$option = [
+					"question" => $get->q_name,
+					"q_id" => $get->q_id,
+					"title" => $b,
+					'option' => $a,
+				];
+				// }
 				array_push($arr, $option);
+
 				// array_push($arr, $b);
 			}
+
+
+			// echo json_encode($arr);
 			// echo json_encode($arr[0]['title'][0]);
 			// foreach($data['quiz'] as $get){
 
@@ -315,6 +335,7 @@ class Home extends BaseController
 			$data['quiz'] = $arr;
 			$data['id_courses'] = $id;
 			// print_r(explode(",", $data['quiz'][0]->option_number));
+			// echo json_encode($data['user_exam']);
 			echo view('template/head');
 			echo view('quiz', $data);
 			echo view('template/footer');
@@ -327,11 +348,19 @@ class Home extends BaseController
 
 	public function successquiz()
 	{
+
+
 		helper(['form']);
 		$modal_question = new Question();
+		$modal_user_exam = new User_exam_quiz();
+		$session = session();
 		$id_courses = $this->request->getVar('id_courses');
 		$quiz_num = $this->request->getVar('quiz_num');
+		$id_exam_quiz = $this->request->getVar('id_exam_quiz');
+		$score_exam = $this->request->getVar('score_exam');
 		$score_quize = 0;
+
+
 		for ($i = 1; $i <= $quiz_num; $i++) {
 			$dataset = [
 				"courses_id" => $id_courses,
@@ -344,8 +373,69 @@ class Home extends BaseController
 				$score_quize += 1;
 			}
 		}
-		echo $score_quize;
+
+		$dataset = [
+			"courses_id" => $id_courses,
+			"id_user" => $session->get('id'),
+			"score_exam" => ($score_exam > ($score_quize * 100) / $quiz_num) ? $score_exam : ($score_quize * 100) / $quiz_num
+		];
+		// ($score_quize * 100) / $quiz_num
+		// $exam_check = $modal_user_exam->where()->first();
+
+		if ($id_exam_quiz != "" && $id_exam_quiz != null) {
+			if ($modal_user_exam->update($id_exam_quiz, $dataset)) {
+				$ses_data = [
+					"score_quiz" => $score_quize,
+					"quiz_num" => $quiz_num
+				];
+				$session->set($ses_data);
+				return redirect()->to(base_url('/quzi_score'));
+			} else {
+				echo "RROR";
+			}
+		} else {
+
+			if ($modal_user_exam->insert($dataset)) {
+				$ses_data = [
+					"score_quiz" => $score_quize,
+					"quiz_num" => $quiz_num
+				];
+				$session->set($ses_data);
+				return redirect()->to(base_url('/quzi_score'));
+			} else {
+				echo "RROR";
+			}
+		}
 	}
+
+	public function showscorepage()
+	{
+		$session = session();
+		$id_user = $session->get('id');
+		$data['score'] = $session->get('score_quiz');
+		$data['quiz_num'] = $session->get('quiz_num');
+		$data['total'] = ($data['score'] * 100) / $data['quiz_num'];
+
+
+		// echo (1 * 100) / 2;
+
+		// $modal_user_exam = new User_exam_quiz();
+
+		// $dataset = [
+		// 	"courses_id" => $id_courses,
+		// 	"id_user" => $id_user
+		// ];
+		// $data['user_exam'] = $modal_user_exam->where($dataset)->first();
+
+
+
+		echo view('template/head');
+		echo view('show_score_exam', $data);
+		echo view('template/footer');
+	}
+
+
+
 
 
 	//--------------------------------------------------------------------
