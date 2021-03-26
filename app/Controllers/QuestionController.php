@@ -41,8 +41,8 @@ class QuestionController extends BaseController
                     ];
 
                     $modal_question->update($id_question, $dataupdate);
-                    echo $j . $answer . "<br>";
-                    echo "Option True";
+                    // echo $j . $answer . "<br>";
+                    // echo "Option True";
                 }
                 $datainsert = [
                     'sl_name' => $option_title,
@@ -55,6 +55,7 @@ class QuestionController extends BaseController
             }
             // echo $this->request->getVar('option_value' . $i) . "<br>";
         }
+        return  redirect()->to(base_url('/admin/question/' . $id_courses));
     }
 
 

@@ -13,7 +13,7 @@
                             <?= $category['name']; ?>
 
                         </div>
-                        <div class="mx-5">
+                        <div class="mx-2">
                             <div class="progress mt-2">
                                 <div class="progress-bar progress-bar-striped " role="progressbar" style="width: <?= $calculat; ?>%; background-color:#ff00bf" aria-valuenow="<?= $calculat; ?>" aria-valuemin="0" aria-valuemax="100.00"><?= $calculat . '  %'; ?></div>
                             </div>
@@ -24,10 +24,9 @@
                             <strong style="color: white;font-size:2em">COMPLETE</strong>
                         </div>
                         <h3 class="text-center" style="color:white;font-size:30px"><?= $calculat . " %"; ?></h3>
-                        <a id="navlink" class="nav-link " href="#">
-                            <i class="fas fa-columns" style="color: white;width:33px;height:35px"></i>
+                        <div id="navlink" class="nav-link " href="#">
                             <span style="font-size: 1.5rem;">เนื้อหาในคอร์สนี้</span>
-                        </a>
+                        </div>
                         <?php if ($calculat >= 50) : ?>
                             <a class="nav-link" href="<?= base_url('/quiz/' . $category['id']); ?>" style="font-size: 1.5rem;"><span>แบบทดสอบ</span></a>
                         <?php endif; ?>

@@ -55,6 +55,7 @@
                             <button class="btn btn-secondary" id="claer" onclick="clearinput()">ล้างตัวเลือก</button>
                         </div>
                         <form action="<?= base_url('/addquestion'); ?>" method="post">
+        
                             <div class="form-group">
                                 <label for="">คำถาม</label>
                                 <input type="text" name="question-add" id="question-add" class="form-control" oninput="validatevalue()" required>
@@ -122,7 +123,7 @@
                     </thead>
                     <form action="" method="post">
                         <tbody class="text-center"></tbody>
-                        <input type="text" id="rows2" name="rows2">
+                        <input type="text" id="rows2" name="rows2" hidden>
                 </table>
                 <div class="form-group text-center" id="btn-submit2">
                     <!-- <button class="btn btn-success" id="" disabled>เพิ่มตัวเลือก</button> -->

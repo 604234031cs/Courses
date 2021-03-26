@@ -232,7 +232,7 @@ class Home extends BaseController
 		// $data['score'] = $model_sscore->where('id_user', $id_user)->first();
 
 
-		$query = $db->query("SELECT courses_category.id,courses_category.name,score.score
+		$query = $db->query("SELECT courses_category.id,courses_category.name,score.score,courses_category.img
 				FROM courses_category,score
 				where courses_category.id = score.id_courses
 				and score.id_user = '$id_user'");

@@ -309,11 +309,17 @@ class Ajaxdata extends BaseController
     {
         $db = \Config\Database::connect();
         $model_val_question = new Value_question();
+        $model_question = new Question();
         $query = $db->query("SELECT * FROM select_value where q_id='$q_id' and s_id='$del'");
         $data = $query->getResult();
         $model_val_question->delete($del);
 
         $options = $model_val_question->where('q_id', $q_id)->findAll();
+        $update = [
+            'answer' => null
+        ];
+        $model_question->update($q_id, $update);
+
         // echo $data[0]->option_number . "<br>";
         // $options = $model_val_question->where('q_id', $q_id)->findAll();
 

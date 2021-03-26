@@ -10,11 +10,11 @@
         <div id="layoutSidenav_content">
             <div class="container-fluid">
                 <div class="container">
-                    <h3 class="mt-3 ml-3">
+                    <h3 class="mt-3 ml-3 h3">
                         แบบทดสอบ
                     </h3>
                     <div class="text-right">
-                        <h5>คะแนนล่าสุด <?= $user_exam['score_exam'] ?>% </h5>
+                        <h5 class="h5">คะแนนที่ได้ <?= $user_exam['score_exam'] ?></h5>
 
                     </div>
                     <form action="<?= base_url('/succesquiz') ?>" method="POST">
@@ -24,7 +24,7 @@
                         <?php foreach ($quiz as $get) : ?>
                             <div class="card mt-3">
                                 <div class="card-header">
-                                    <span style="font-size: 1.5em;"> <?= $i . '. ' . $get['question']; ?></span>
+                                    <span style="font-size: 1em;"> <?= $i . '. ' . $get['question']; ?></span>
                                     <input type="text" name="q_id<?= $i; ?>" id="" value="<?= $get['q_id'] ?>" hidden>
                                 </div>
                                 <div class="card-body">
@@ -34,7 +34,7 @@
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" name="quetion<?= $i ?>" id="exampleRadios1" value="<?= $get['option'][$j]; ?>">
                                             <label class="form-check-label" for="exampleRadios1">
-                                                <?= $get['option'][$j]; ?> <?= $show ?>
+                                                <?= $show ?>
                                             </label>
                                         </div>
                                         <?php $j++; ?>
