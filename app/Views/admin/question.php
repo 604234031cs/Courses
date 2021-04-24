@@ -1,13 +1,19 @@
 <section>
+    <title>คำถาม</title>
+    <div class="card" >
+        <div class="card-header">
+            <h1 class="mt-2 ml-4">คำถาม</h1>
+        </div>
 
-    <div class="container-fluid">
-        <h1 class="mt-4">คำถาม</h1>
+    </div>
+    <div class="container-fluid mt-4">
+
         <div class="card mb-4">
             <div class="card-header text-right">
                 <button class="btn btn-success" data-toggle="modal" data-target="#question-add-modal" onclick='openmodal();'>เพิ่มคำถาม</button>
             </div>
             <div class="card-body">
-                <table class="table" id="courses-list">
+                <table class="table " id="courses-list">
                     <thead>
                         <tr class="text-center">
                             <th>#</th>
@@ -25,7 +31,7 @@
                                         ตัวเลือก
                                     </button>
                                     <!-- <a href="<?= base_url('/admin/val_question/' . $get['q_id']); ?>" class="btn btn-primary">ตัวเลือก</a> -->
-                                    <button class="btn btn-warning">แก้ไข</button>
+                                    <button class="btn btn-warning" data-toggle="modal" data-target="#editquestion" onclick="openmodal_edit_question('<?= $get['q_id']; ?>','<?= $get['q_name'] ?>')">แก้ไข</button>
                                 </td>
                             </tr>
                             <?php $i++; ?>
@@ -55,7 +61,7 @@
                             <button class="btn btn-secondary" id="claer" onclick="clearinput()">ล้างตัวเลือก</button>
                         </div>
                         <form action="<?= base_url('/addquestion'); ?>" method="post">
-        
+
                             <div class="form-group">
                                 <label for="">คำถาม</label>
                                 <input type="text" name="question-add" id="question-add" class="form-control" oninput="validatevalue()" required>
@@ -109,37 +115,50 @@
                 </button>
             </div>
             <div class="modal-body">
-
-                <table class="table" id="table-option">
-                    <div class="card-header text-right">
-                        <button class="btn btn-primary" onclick="addoption2()">เพิ่มช่อง</button>
-                    </div>
-                    <thead class='text-center'>
-                        <tr>
-                            <th>ตัวเลือกที่</th>
-                            <th>Option Title</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <form action="" method="post">
-                        <tbody class="text-center"></tbody>
-                        <input type="text" id="rows2" name="rows2" hidden>
-                </table>
-                <div class="form-group text-center" id="btn-submit2">
-                    <!-- <button class="btn btn-success" id="" disabled>เพิ่มตัวเลือก</button> -->
+                <div class="card-header text-right">
+                    <button class="btn btn-primary" onclick="addoption2()">เพิ่มช่อง</button>
                 </div>
-                </form>
+                <form action="<?= base_url('/option_afeter_add') ?>" method="post">
+                    <input type="text" name="q_id" id="q_id" hidden>
+                    <input type="text" name="course_id" id="course_id" value="<?= $id; ?>" hidden>
+                    <table class="table" id="table-option">
+                        <thead class='text-center'>
+                            <tr>
+                                <th>ตัวเลือกที่</th>
+                                <th>Option Title</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody class="text-center">
+
+
+                        </tbody>
+                        <input type="text" id="rows2" name="rows2" hidden>
+                        <!-- <button type="submit" class='btn btn-success'>เพิ่มตัวเลือก</button> -->
+
+                    </table>
+
+                    <!-- <div class="form-group text-center" id="btn-submit2"> -->
+
+                    <!-- <button class="btn btn-success" id="" disabled>เพิ่มตัวเลือก</button> -->
+                    <!-- </div> -->
+                    <button type="submit" class="btn btn-success">เพิ่มตัวเลือก</button>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
                 <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
             </div>
+            </form>
         </div>
     </div>
 </div>
 
 
-<div class="modal fade" id="editopton" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+<!-- <div class="modal fade" id="editopton" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -159,6 +178,36 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-primary">Save changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+
+<!--Model Edit Questions-->
+<div class="modal fade" id="editquestion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">แก้ไขคำถาม</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="<?= base_url('/editquestion') ?>" method="post">
+                    <div class="form-group">
+                        <label for="">คำถาม</label>
+                        <input type="text" name="courses_id" id="" value="<?= $id; ?>" hidden>
+                        <input type="text" name="question_id" id="question_id" hidden>
+                        <input type="text" name="question_name" id="question_name" class="form-control">
+
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">บันทึก</button>
                 </form>
             </div>
         </div>

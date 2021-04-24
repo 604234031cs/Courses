@@ -6,7 +6,7 @@ use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\Filters\FilterInterface;
 
-class Auth implements FilterInterface
+class Authadmin implements FilterInterface
 {
     public function before(RequestInterface $request, $arguments = null)
     {
@@ -15,6 +15,14 @@ class Auth implements FilterInterface
             //     $session->setFlashdata('msg', 'กรุณา Login ก่อนเข้าใช้');
             // echo "BEFORE:=>" . date('H:i:s') . "<br>";
             return redirect()->to(base_url('/login'));
+        } else {
+            if (!session()->get('A_status') && session()->get('A_status') != null) {
+                // echo "OK Admin";
+                // echo session()->get('A_status');
+                // return redirect()->to(base_url('/courses'));
+            } else {
+                return redirect()->to('/courses');
+            }
         }
     }
 
@@ -22,7 +30,5 @@ class Auth implements FilterInterface
 
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
     {
-        // echo "AFTER:=>" . date('H:i:s');
-        // Do something here
     }
 }

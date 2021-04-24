@@ -91,20 +91,25 @@ function loadpage2(gr_name, gr_id) {
     },
     success: function (resulte) {
       var json = JSON.parse(resulte);
+      option += "<option value='" + gr_id + "'>" + gr_name + "</option>";
       json["group"].forEach((element) => {
         // console.log(element["name"]);
-        option +=
-          "<option value='" +
-          element["id"] +
-          "'>" +
-          element["name"] +
-          "</option>";
+
+        if (element["id"] != gr_id) {
+          option +=
+            "<option value='" +
+            element["id"] +
+            "'>" +
+            element["name"] +
+            "</option>";
+        }
       });
 
       $("#group_e").append(option);
     },
   });
 }
+
 function loadpage() {
   var value = $("#main").val();
   var option = "";
@@ -136,18 +141,15 @@ var rows = 0;
 
 function addinput2() {
   var tr = "<tr id='coltr" + rows + "'>";
-
-  tr =
-    tr +
+  tr +=
     "<td><input type='text' name='name-group" +
     rows +
     "' class='form-control' required></td>";
-  tr =
-    tr +
-    "<td class='text-right'><button type ='button' class='btn btn-danger' ' onclick='delcol2(" +
+  tr +=
+    "<td class='text-right'><button type ='button' class='btn btn-danger' onclick='delcol3(" +
     rows +
-    ")' >ลบ</button ></td>";
-  tr = tr + "</tr>";
+    ")' >ลบ</button></td>";
+  tr += "</tr>";
   $("#mytable > tbody:last").append(tr);
   $("#hdnCount").val(rows);
   rows = rows + 1;
@@ -174,16 +176,17 @@ function clearinput2() {
   rows = 0;
   $("#hdnCount").val(rows);
   $("#mytable > tbody:last").empty(); // remove all
-  if ($("#id_resort").val() != "" && rows != 0) {
-    document.getElementById("save").disabled = false;
-  } else {
-    document.getElementById("save").disabled = true;
-  }
+  // if ($("#id_resort").val() != "" && rows != 0) {
+  //   document.getElementById("save").disabled = false;
+  // } else {
+  //   document.getElementById("save").disabled = true;
+  // }
   // console.log(rows);
 }
 
-function delcol2(x) {
+function delcol3(x) {
+  // alert(x);
   var str = "#coltr" + x;
   // console.log($(str));
-  $(str).remove();
+  $(str).empty();
 }

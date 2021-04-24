@@ -153,6 +153,9 @@ class Mimes
 			'application/x-rar',
 			'application/rar',
 			'application/x-rar-compressed',
+			'application/s-compressed',
+			'multipart/x-rar',
+
 		],
 		'mid'   => 'audio/midi',
 		'midi'  => 'audio/midi',
@@ -477,7 +480,7 @@ class Mimes
 			'image/x-ico',
 			'image/vnd.microsoft.icon',
 		],
-		'rar' => 'application/x-rar-compressed'
+
 	];
 
 	//--------------------------------------------------------------------

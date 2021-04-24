@@ -8,5 +8,5 @@ class Documents extends Model
 {
     protected $table = 'documents';
     protected $primaryKey  = 'id';
-    protected $allowedFields = ['name', 'url', 'id_subcourses', 'id_category'];
+    protected $allowedFields = ['name', 'url', 'id_subcourses', 'id_category', 'name_key'];
 }

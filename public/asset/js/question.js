@@ -57,6 +57,7 @@ $("#option-add-modal").modal("hide");
 
 function openmodal() {
   $("#question-add-modal").modal("show");
+
   if (!$("#question-add").val()) {
     $("#btn-submit").prop("disabled", "true");
   }
@@ -178,6 +179,7 @@ function viewoption(question, answer) {
         tr += "</tr>";
         num++;
       });
+      $("#q_id").val(question);
       $("#table-option > tbody:last").append(tr);
     },
   });
@@ -230,7 +232,10 @@ function addoption2() {
   $("#btn-submit2").empty();
   tr += "<tr id='_coltr" + rows2 + "'>";
   tr += "<td colspan=2>";
-  tr += "<input class='form-control' type='text' required>";
+  tr +=
+    "<input class='form-control' type='text' name='option_value" +
+    rows2 +
+    "'  required>";
   tr += "</td>";
   tr += "<td>";
   tr +=
@@ -238,12 +243,11 @@ function addoption2() {
     rows2 +
     ")'>ลบ</button>";
   tr += "</tr>";
-  btn = "<button type='submit' class='btn btn-success'>เพิ่มตัวเลือก</button>";
   $("#rows2").val(rows2);
   rows2++;
 
   $("#table-option > tbody:last").append(tr);
-  $("#btn-submit2").append(btn);
+  // $("#btn-submit2").append(btn);
 }
 
 function delcol2(x) {
@@ -253,4 +257,8 @@ function delcol2(x) {
   $(str).remove();
 }
 
-function delbnt2() {}
+function openmodal_edit_question(q_id, q_name) {
+  $("#editquestion").modal("show");
+  $(".modal-content #question_id").val(q_id);
+  $(".modal-content #question_name").val(q_name);
+}

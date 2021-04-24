@@ -10,7 +10,7 @@
                 <span style="font-size:1.2em;"><?= $question['q_name']; ?></span>
             </div>
             <div class="card-body">
-                <table class="table">
+                <table class="table  ">
                     <thead>
                         <tr class="text-center">
                             <th>#</th>

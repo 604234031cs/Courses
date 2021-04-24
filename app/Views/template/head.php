@@ -56,8 +56,6 @@ $group = $query->getResult();
             color: white;
         }
 
-
-
         @media (min-width: 992px) {
             .dropdown-menu .dropdown-toggle:after {
                 border-top: .3em solid transparent;
@@ -98,14 +96,14 @@ $group = $query->getResult();
     </style>
 </head>
 
-<body ondragstart="return false" onselectstart="return false">
+<body ondragstart="return false" onselectstart="return false" id="body">
 
     <nav class="sb-topnav navbar navbar-expand navbar-dark " style="background-color: turquoise;">
         <a class="navbar-brand" href="<?= base_url('/') ?>"><strong>COURSES</strong></a>
         <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
         <ul class="navbar-nav mr-auto ml-lg-5">
             <li class="nav-item dropdown a ml-5">
-                <a class="navbar-brand dropdown-toggle ml-5" id="userDropdown" href="<?= base_url('/') ?>" data-toggle="dropdown">คอร์สเรียน</a>
+                <a class="navbar-brand dropdown-toggle ml-5" href="<?= base_url('/') ?>" data-toggle="dropdown">คอร์สเรียน</a>
                 <ul class="dropdown-menu">
                     <div class=" dropdown-header"><strong>ประเภทคอร์สหลัก</strong></div>
                     <?php foreach ($cetegory as $list) : ?>
@@ -145,5 +143,9 @@ $group = $query->getResult();
                 </li>
             </ul>
         </div>
+       
     </nav>
+
+
+
     <!-- <span id='base_url' style="display: none;"> <?= base_url(); ?></span> -->

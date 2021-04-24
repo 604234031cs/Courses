@@ -18,15 +18,15 @@ $count_regis = count($regis);
     <meta name="author" content="" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.css">
-
     <link href="<?php echo base_url('public/theme/dist/css/styles.css'); ?>" rel="stylesheet" />
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!-- <title>หน้าแรก</title> -->
 </head>
 
 <body>
-    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark" style="position: sticky;top:0;">
+    <nav class="sb-topnav navbar navbar-expand navbar-light bg-warning" style="position: sticky;top:0;">
         <a class="navbar-brand" href=""><strong>Courses</strong></a>
         <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
         <!-- Navbar Search-->

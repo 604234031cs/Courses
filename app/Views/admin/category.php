@@ -1,12 +1,18 @@
 <section>
-    <div class="container-fluid">
-        <h1 class="mt-4">ประเภทคอร์สหลัก</h1>
+    <title>ประเภทคอร์ส</title>
+    <div class="card">
+        <div class="card-header">
+            <h1 class="mt-2 ml-4">ประเภทคอร์สหลัก</h1>
+        </div>
+    </div>
+    <div class="container-fluid mt-3">
+
         <div class="card mb-4">
             <div class="card-header text-right">
                 <button class="btn btn-primary" data-toggle="modal" data-target="#modal">เพิ่มประเภท</button>
             </div>
             <div class="card-body">
-                <table class="table" id="courses-list">
+                <table class="table " id="courses-list">
                     <thead>
                         <tr class="text-center">
                             <th>

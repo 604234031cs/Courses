@@ -1,6 +1,6 @@
 <section>
     <!-- <link rel="stylesheet" href="<?php echo base_url('public/asset/css/listvdo.css'); ?>"> -->
-
+    <title>คอร์สเรียนทั้งหมด</title>
     <main>
         <link rel="stylesheet" href="<?php echo base_url('public/asset/css/index.css'); ?>">
         <div class="container  mt-5">

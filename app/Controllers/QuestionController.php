@@ -58,6 +58,22 @@ class QuestionController extends BaseController
         return  redirect()->to(base_url('/admin/question/' . $id_courses));
     }
 
+    public function editquestion()
+    {
+        helper(['form']);
+        $modal_question  =  new Question();
+        $id_question = $this->request->getVar('question_id');
+        $name_question = $this->request->getVar('question_name');
+        $courses_id  = $this->request->getVar('courses_id');
+
+        $update_set =  [
+            'q_name' => $name_question
+        ];
+
+        $modal_question->update($id_question, $update_set);
+        return  redirect()->to(base_url('/admin/question/' . $courses_id));
+    }
+
 
 
     public function editoption()
@@ -76,5 +92,33 @@ class QuestionController extends BaseController
         $modal_option->update($s_id, $dataset);
 
         return redirect()->to(base_url('/admin/question/' . $s_courses));
+    }
+
+    public function afteroption()
+    {
+        helper(['form']);
+        $select_value_model = new Value_question();
+
+        $row2 =  $this->request->getVar('rows2');
+        $q_id = $this->request->getVar('q_id');
+        $courses_id = $this->request->getVar('course_id');
+
+        $count_option =  count($select_value_model->where('q_id', $q_id)->findAll());
+
+        for ($i = 1; $i <= $row2; $i++) {
+            if ($this->request->getVar('option_value' . $i) != null) {
+                $count_option++;
+                $option_set = [
+                    'sl_name' => $this->request->getVar('option_value' . $i),
+                    'q_id' => $q_id,
+                    'option_number' => $count_option
+                ];
+                // echo json_encode($option_set);
+                $select_value_model->insert($option_set);
+            }
+
+            // $option_title2 =  $this->request->getVar('option_value' . $i) . "<br>";
+        }
+        return redirect()->to(base_url('/admin/question/' . $courses_id));
     }
 }

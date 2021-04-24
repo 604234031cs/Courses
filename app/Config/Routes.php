@@ -33,11 +33,8 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 
 
-
 $routes->get('/videos/(:any)', 'Home::video_has/$1');
 // $routes->get('/base_url', function () {
-
-
 // 	echo json_encode(base_url());
 // });
 
@@ -63,14 +60,14 @@ $routes->post('/succesquiz', 'Home::successquiz');
 
 // Admin
 $routes->group('admin', function ($routes) {
-	$routes->get('courses', 'Admin::courses', ['filter' => 'auth']);
-	$routes->get('lectures/(:num)', 'Admin::subcourses/$1', ['filter' => 'auth']);
-	$routes->get('(:num)/(:num)', 'Admin::videos/$1/$2', ['filter' => 'auth']);
-	$routes->get('document/(:num)/(:num)', 'Admin::documents/$1/$2', ['filter' => 'auth']);
-	$routes->get('category', 'Admin::category', ['filter' => 'auth']);
-	$routes->get('category/(:num)', 'Admin::group_courses/$1', ['filter' => 'auth']);
-	$routes->get('register', 'Admin::list_regis', ['filter' => 'auth']);
-	$routes->get('register/(:num)/(:num)', 'Admin::approve/$1/$2', ['filter' => 'auth']);
+	$routes->get('courses', 'Admin::courses', ['filter' => 'authadmin']);
+	$routes->get('lectures/(:num)', 'Admin::subcourses/$1', ['filter' => 'authadmin']);
+	$routes->get('(:num)/(:num)', 'Admin::videos/$1/$2', ['filter' => 'authadmin']);
+	$routes->get('document/(:num)/(:num)', 'Admin::documents/$1/$2', ['filter' => 'authadmin']);
+	$routes->get('category', 'Admin::category', ['filter' => 'authadmin']);
+	$routes->get('category/(:num)', 'Admin::group_courses/$1', ['filter' => 'authadmin']);
+	$routes->get('register', 'Admin::list_regis', ['filter' => 'authadmin']);
+	$routes->get('register/(:num)/(:num)', 'Admin::approve/$1/$2', ['filter' => 'authadmin']);
 	$routes->get('question/(:num)', 'Admin::question/$1');
 	$routes->post('val_question/(:num)', 'Admin::val_question/$1');
 	// $routes->add('blog', 'Admin\Blog::index');
@@ -106,12 +103,14 @@ $routes->get('/logout', 'Login::logout');
 
 //Question
 $routes->post('/addquestion', 'QuestionController::addquestion');
+$routes->post('/editquestion', 'QuestionController::editquestion');
 
 //Option 
 $routes->post('/ajax/reanswer', 'Ajaxdata::reanswer');
 $routes->get('/ajax/delanswer/(:num)/(:num)', 'AJaxdata::delanswer/$1/$2');
 $routes->get('/option/(:num)', 'Ajaxdata::option/$1');
 $routes->post('/editoption', 'QuestionController::editoption');
+$routes->post('/option_afeter_add', 'QuestionController::afteroption');
 
 //Ajax Controller
 $routes->post('/ajax/checkvideo', 'Ajaxdata::videocheck');

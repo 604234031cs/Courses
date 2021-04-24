@@ -27,12 +27,13 @@ class  Lectures extends BaseController
                 $model_lectures->insert($dataset);
             }
         }
-        // $dataset = [
-        //     'id_category' => $this->request->getVar('id_courses'),
-        //     'name' => $this->request->getVar('add-lectures')
-        // ];
 
-
+        $status = [
+            "status" => "success",
+            "text" => "เพิ่มข้อมูลสำเร็จ",
+            "msg" => "สำเร็จ !"
+        ];
+        session()->setFlashdata('msg', $status);
         return redirect()->to(base_url('/admin/lectures/' . $id_courses));
     }
 
@@ -50,8 +51,14 @@ class  Lectures extends BaseController
             "name" => $this->request->getVar('edit-lectures')
         ];
 
-        $model_lectures->update($id, $dataset);
-
+        if ($model_lectures->update($id, $dataset)) {
+            $status = [
+                "status" => "success",
+                "text" => "แก้ไขข้อมูลสำเร็จ",
+                "msg" => "สำเร็จ !"
+            ];
+        }
+        session()->setFlashdata('msg', $status);
         return redirect()->to(base_url('/admin/lectures/' . $id_courses));
     }
 }

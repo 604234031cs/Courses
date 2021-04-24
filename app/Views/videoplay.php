@@ -1,5 +1,6 @@
 <section>
     <link rel="stylesheet" href="<?php echo site_url('public/asset/css/videoplay.css'); ?>">
+    <title>วิดีโอ</title>
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
             <nav class="sb-sidenav accordion " id="sidenavAccordion" style="background-color:turquoise;">
@@ -11,7 +12,8 @@
                         <div class="mt-2 mx-auto p-4" style="font-size: 20px;color:white;">
                             <?php echo  $category['name']; ?>
                         </div>
-                        <div class="mx-5">
+
+                        <div class="mx-2">
                             <span id="with" style="display: none;"><?= $calculat; ?></span>
                             <div class="progress">
                                 <div id="progree" class="progress-bar progress-bar-striped " role="progressbar" style="background-color:#ff00bf;" aria-valuenow="<?= $calculat; ?>" aria-valuemin="0" aria-valuemax="100"><?= $calculat . '  %'; ?></div>
@@ -36,7 +38,7 @@
                                         <?php if ($getsub['id'] == $getlist->id_subcourses) : ?>
                                             <tr id="tr" onclick="playvdo('<?= $getlist->name_key; ?>','<?= $getlist->name; ?>','<?= $getlist->id; ?>')">
                                                 <td>
-                                                    <?= $getlist->id; ?>
+                                                    <!-- <?= $getlist->id; ?> -->
                                                     <i class="fab fa-youtube"></i> <?= $getlist->name; ?>
                                                 </td>
                                             </tr>

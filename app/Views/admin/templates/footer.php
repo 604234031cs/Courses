@@ -19,7 +19,19 @@
 
 <script>
     $(document).ready(function() {
-        $("#courses-list").DataTable();
+        $("#courses-list").DataTable({
+            "language": {
+                "lengthMenu": "แสดง _MENU_ หน้า",
+                "search": "ค้นหา ",
+                "infoEmpty": "ไม่พบข้อมูล",
+                "info": "แสดง _START_ ถึง _END_ ของ _TOTAL_ เร็คคอร์ด",
+                "InfoFiltered": "(จากเร็คคอร์ดทั้งหมด _MAX_ เร็คคอร์ด)",
+                "paginate": {
+                    "previous": "ย้อนกลับ",
+                    "next": "ถัดไป"
+                }
+            }
+        });
     });
 </script>
 </body>

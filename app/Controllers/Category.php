@@ -16,8 +16,15 @@ class Category extends BaseController
             "name" => $this->request->getVar('name')
         ];
 
-        $modal_main->insert($dataset);
+        if ($modal_main->insert($dataset)) {
+            $status = [
+                "status" => "success",
+                "text" => "เพิ่มข้อมูลสำเร็จ",
+                "msg" => "สำเร็จ !"
+            ];
+        }
 
+        session()->setFlashdata('msg', $status);
         return redirect()->to(base_url('/admin/category'));
     }
 
@@ -39,7 +46,12 @@ class Category extends BaseController
                 $model_group->insert($dataset);
             }
         }
-
+        $status = [
+            "status" => "success",
+            "text" => "เพิ่มข้อมูลสำเร็จ",
+            "msg" => "สำเร็จ !"
+        ];
+        session()->setFlashdata('msg', $status);
         return redirect()->to(base_url('admin/category/' . $id_category));
     }
 
@@ -51,8 +63,20 @@ class Category extends BaseController
             "name" => $this->request->getVar('ca_name')
         ];
 
-        $modal_main->update($this->request->getVar('id_category'), $dataset);
-
+        if ($modal_main->update($this->request->getVar('id_category'), $dataset)) {
+            $status = [
+                "status" => "success",
+                "text" => "แก้ไขข้อมูลสำเร็จ",
+                "msg" => "สำเร็จ !"
+            ];
+        } else {
+            $status = [
+                "status" => "error",
+                "text" => "แก้ไขข้อมูลไม่สำเร็จ",
+                "msg" => "เกิดข้อผิดพลาด !!"
+            ];
+        }
+        session()->setFlashdata('msg', $status);
         return redirect()->to(base_url('admin/category'));
     }
 
@@ -66,11 +90,23 @@ class Category extends BaseController
             'c_id' => $this->request->getVar('ca_id'),
         ];
 
-        $model_group->update($this->request->getVar('gr_id'), $dataset);
+        if ($model_group->update($this->request->getVar('gr_id'), $dataset)) {
+            $status = [
+                "status" => "success",
+                "text" => "แก้ไขข้อมูลสำเร็จ",
+                "msg" => "สำเร็จ !"
+            ];
+        } else {
+            $status = [
+                "status" => "error",
+                "text" => "แก้ไขข้อมูลไม่สำเร็จ",
+                "msg" => "เกิดข้อผิดพลาด !!"
+            ];
+        }
         // echo $this->request->getVar('gr_id');
         // echo $this->request->getVar('gr_name');
         // echo $this->request->getVar('ca_id');
-
+        session()->setFlashdata('msg', $status);
         return redirect()->to(base_url('admin/category/' . $id_ca));
     }
 }

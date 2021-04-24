@@ -1,31 +1,41 @@
 <section>
-    <div class="container-fluid">
-        <h1 class="mt-4">คอร์สเรียน</h1>
+    <title>คอร์สเรียน</title>
+    <div class="card" style="border:none;">
+        <div class="card-hader">
+            <h1 class="mt-2 ml-4">คอร์สเรียน</h1>
+        </div>
+    </div>
+    <div class="container-fluid mt-3">
+
         <div class="card mb-4">
             <div class="card-header text-right">
                 <button class="btn btn-success" data-toggle="modal" data-target="#exampleModal">เพิ่มคอร์สเรียน</button>
             </div>
-            <div class="card-body">
-                <table class="table" id="courses-list">
+            <div class="card-body ">
+                <table class="table " id="courses-list">
                     <thead>
                         <tr class="text-center">
                             <th>#</th>
                             <th>คอร์สเรียน</th>
+                            <th>ประเภท</th>
+                            <th>หมวดหมู่</th>
                             <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="text-center">
                         <?php $i = 1; ?>
                         <?php foreach ($category as $get) : ?>
-                            <tr class="tr-hover">
-                                <td class="text-center ">
+                            <tr class="tr-hover  ">
+                                <td>
                                     <?= $i; ?>
                                 </td>
                                 <td>
                                     <?= $get['name']; ?>
                                 </td>
+                                <td><?= $get['ca_name']; ?></td>
+                                <td><?= $get['gr_name']; ?></td>
                                 <td class="text-center">
-                                    <a href="<?= base_url('/admin/lectures/' . $get['id']) ?>" class="btn btn-success ">เพิ่มหัวข้อ</a>
+                                    <a href="<?= base_url('/admin/lectures/' . $get['id']) ?>" class="btn btn-success ">หัวข้อ</a>
                                     <a onclick="edit('<?= $get['name']; ?>','<?= $get['id']; ?>','<?= $get['ca_name']; ?>','<?= $get['ca_id']; ?>','<?= $get['gr_name']; ?>','<?= $get['gr_id']; ?>','<?= $get['img']; ?>')" href="" class="btn btn-warning " data-toggle="modal" data-target="#editcourses">แก้ไข</a>
                                     <a href="<?= base_url('/admin/question/' . $get['id']); ?>" class="btn btn-primary">คำถาม</a>
                                 </td>
@@ -69,7 +79,7 @@
                     </div>
                     <div class="form-group">
                         <label for="">ภาพหน้าปก</label>
-                        <input type="file" name="file_img" class="form-control">
+                        <input type="file" name="file_img" class="form-control" required>
                     </div>
             </div>
             <div class="modal-footer">
@@ -114,8 +124,9 @@
                         <label for="">หมวดหมู่</label>
                         <span id="option2-value"></span>
                         <span id="option2-html"></span>
-                        <select name="group_e" id="group_e" class="form-control">
-                            <!-- <option value="" id="option2"></option> -->
+                        <select name="group_e" id="group_e" class="form-control" required>
+
+                            <option value="" id="option2"></option>
                         </select>
                     </div>
 

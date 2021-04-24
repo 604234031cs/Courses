@@ -1,8 +1,15 @@
 <section>
+    <title>แบบทดสอบ</title>
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
             <nav class="sb-sidenav accordion " id="sidenavAccordion" style="background-color:turquoise;">
                 <div class="sb-sidenav-menu">
+                    <div class="nav">
+                        <div class="mt-2 mx-auto p-4" style="font-size: 1.5rem;color:white;">
+
+                            <a style=" text-decoration: none;color:white;" href="<?= base_url('/') ?>"><strong>หน้าแรก</strong></a>
+                        </div>
+                    </div>
                 </div>
 
             </nav>
@@ -14,7 +21,7 @@
                         แบบทดสอบ
                     </h3>
                     <div class="text-right">
-                        <h5 class="h5">คะแนนที่ได้ <?= $user_exam['score_exam'] ?></h5>
+                        <h5 class="h5">คะแนนที่ได้ <?= $user_exam['score_exam'] != null ? $user_exam['score_exam'] : 0 ?></h5>
 
                     </div>
                     <form action="<?= base_url('/succesquiz') ?>" method="POST">

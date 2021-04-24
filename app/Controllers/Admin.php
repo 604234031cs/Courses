@@ -15,8 +15,11 @@ use App\Models\Value_question;
 
 class Admin extends BaseController
 {
+
     public function courses()
     {
+
+        // echo session()->get('A_status');
         $data = [];
         $db = \Config\Database::connect();
         $query = $db->query('SELECT courses_category.id,courses_category.name ,courses_category.url,courses_category.img,
@@ -33,9 +36,11 @@ class Admin extends BaseController
         // echo json_encode($data);
         $data['main_c'] = $model_mainc->findAll();
         echo view('admin/templates/head');
+        echo view('admin/script/script');
         echo view('admin/courses', $data);
         echo view('admin/templates/footer');
         // $part = site_url()
+
     }
 
     public function category()
@@ -44,6 +49,7 @@ class Admin extends BaseController
         $model_mainc = new CategoryGroup();
         $data['main'] = $model_mainc->findAll();
         echo view('admin/templates/head');
+        echo view('admin/script/script');
         echo view('admin/category', $data);
         echo view('admin/templates/footer');
     }
@@ -60,6 +66,7 @@ class Admin extends BaseController
 
 
         echo view('admin/templates/head');
+        echo view('admin/script/script');
         echo view('admin/group', $data);
         echo view('admin/templates/footer');
     }
@@ -79,6 +86,7 @@ class Admin extends BaseController
         $data['courses'] = $model_courses->where('id', $id_courses)->first();
 
         echo view('admin/templates/head');
+        echo view('admin/script/script');
         echo view('admin/lectures', $data);
         echo view('admin/templates/footer');
     }
@@ -110,6 +118,7 @@ class Admin extends BaseController
         // // echo json_encode($data);
 
         echo view('admin/templates/head');
+        echo view('admin/script/script');
         echo view('admin/showvideo', $data);
         echo view('admin/templates/footer');
     }
@@ -136,6 +145,7 @@ class Admin extends BaseController
         // echo json_encode($data);
 
         echo view('admin/templates/head');
+        echo view('admin/script/script');
         echo view('admin/documents', $data);
         echo view('admin/templates/footer');
         // echo WRITEPATH .'upload';
@@ -147,6 +157,7 @@ class Admin extends BaseController
         $model_regis = new Regis();
         $data['list_regis'] = $model_regis->findAll();
         echo view('admin/templates/head');
+        // echo view('admin/script/script');
         echo view('admin/register', $data);
         echo view('admin/templates/footer');
     }
@@ -173,6 +184,7 @@ class Admin extends BaseController
                 }
             } else {
                 $model_regis->delete($id_regis);
+
                 return redirect()->to(base_url('/admin/register'));
             }
         }
@@ -188,6 +200,7 @@ class Admin extends BaseController
         $data['id'] = $id;
         // $data['val_question'] = $model_val_question->where('q_id', $data['id'])->findAll();
         echo view("admin/templates/head");
+        echo view('admin/script/script');
         echo view("admin/question", $data);
         echo view("admin/templates/footer");
     }
@@ -203,5 +216,11 @@ class Admin extends BaseController
         // echo view("admin/val_question", $data);
         // echo view("admin/templates/footer");
         echo json_encode($data['val_question']);
+    }
+
+
+    public function cll_script()
+    {
+        echo view('script/script');
     }
 }

@@ -34,15 +34,10 @@ class Home extends BaseController
 		$model_video = new Listvdo();
 
 		$video = $model_video->where('name_key', $key)->first();
+			
 
-		// print_r($video);
-		// echo $video['url'];
-
-		// if ($key = '2') {
 
 		return redirect()->to(base_url() . '/upload/category' . $video['id_category'] . '/allvdo/' . $video['url']);
-		// }
-		// echo "ss";
 	}
 
 
@@ -50,6 +45,8 @@ class Home extends BaseController
 	{
 		// echo view('template/head');
 		echo view('login');
+		$session = session();
+		$session->destroy();
 		// echo view('responsivepage');
 		// echo view('template/footer');
 	}

@@ -138,13 +138,8 @@ function autoselect(value) {
       option += "<option value='' disabled selected>หมวดหมู่</option>";
       json["group"].forEach((element) => {
         // console.log(element["name"]);
-
-        option +=
-          "<option value='" +
-          element["id"] +
-          "'>" +
-          element["name"] +
-          "</option>";
+        
+        option +=  "<option value='" +    element["id"] +      "'>" +    element["name"] +    "</option>";
       });
       $("#group_sel").append(option);
       let name_sel = $("#group_sel option:selected").text();

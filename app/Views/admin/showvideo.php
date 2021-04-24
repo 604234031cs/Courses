@@ -1,9 +1,14 @@
 <section>
-    <div class="container-fluid">
-        <h1 class="mt-4"><?= $courses['name']; ?></h1>
-        <h2 class="mt-4">หัวข้อบรรยาย : <?= $lectures['name']; ?></h2>
+    <div class="card">
+        <div class="card-header">
+            <h1 class="mt-1 ml-4"><?= $courses['name']; ?></h1>
+            <h4 class="mt-1 ml-4">หัวข้อบรรยาย : <?= $lectures['name']; ?></h4>
+        </div>
 
-        <div class="card mt-4">
+    </div>
+    <div class="container-fluid mt-4">
+
+        <div class="card mb-4">
             <div class="card-header">
                 <form action="<?= base_url('/addvideos') ?>" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
@@ -18,7 +23,7 @@
                 </form>
             </div>
             <div class="card-body">
-                <table class="table" id="courses-list">
+                <table class="table  " id="courses-list">
                     <thead>
                         <tr class="text-center">
                             <th>
@@ -35,8 +40,8 @@
                     <tbody>
                         <?php $i = 1; ?>
                         <?php foreach ($videos as $get) : ?>
-                            <tr class="tr-hover">
-                                <td class="text-center">
+                            <tr class="tr-hover text-center">
+                                <td >
                                     <?= $i; ?>
                                 </td>
                                 <td>
@@ -86,7 +91,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="videoname">Modal title</h5>
+                <h5 class="modal-title" id="videoname">แก้ไข</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="closevideo()">
                     <span aria-hidden="true">&times;</span>
                 </button>

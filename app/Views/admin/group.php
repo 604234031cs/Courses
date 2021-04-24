@@ -1,13 +1,20 @@
+
 <section>
-    <div class="container-fluid">
-        <h1 class="mt-4"><?= $name['name']; ?></h1>
-        <h2 class="mt-4">หมวดหมู่</h2>
-        <div class="card">
+    <title>หมวดหมู่</title>
+    <div class="card">
+        <div class="card-header">
+            <h1 class="mt-1 ml-4"><?= $name['name']; ?></h1>
+            <h4 class="mt-1 ml-4">หมวดหมู่</h4>
+        </div>
+    </div>
+    <div class="container-fluid mt-4">
+
+        <div class="card mb-4">
             <div class="card-header text-right">
                 <button class="btn btn-success" data-toggle="modal" data-target="#exampleModal">เพิ่มหมวดหมู่</button>
             </div>
             <div class="card-body">
-                <table class="table" id="courses-list">
+                <table class="table " id="courses-list">
                     <thead>
                         <tr class="text-center">
                             <th>#</th>
@@ -45,7 +52,7 @@
             </div>
             <div class="modal-body">
                 <button class="btn btn-primary mb-3" onclick="addinput2()">เพิ่ม</button>
-                <button class="btn btn-warning mb-3" onclick="clearinpu2t()">Clare</button>
+                <button class="btn btn-warning mb-3" onclick="clearinput2()">Clare</button>
                 <form action="<?= base_url('/addgroup') ?>" method="POST">
                     <table class="table" id="mytable">
                         <thead>
@@ -75,7 +82,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">แก้ไขหมวดหมู่</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -87,7 +94,9 @@
                         <select name="ca_id" class="form-control">
                             <option value="<?= $name['id']; ?>"><?= $name['name']; ?></option>
                             <?php foreach ($mains as $get) : ?>
-                                <option value="<?= $get['id'] ?>"><?= $get['name']; ?></option>
+                                <?php if ($get['id'] != $name['id']) : ?>
+                                    <option value="<?= $get['id'] ?>"><?= $get['name']; ?></option>
+                                <?php endif; ?>
                             <?php endforeach; ?>
                         </select>
                     </div>

@@ -307,18 +307,31 @@ class Ajaxdata extends BaseController
 
     public function delanswer($del, $q_id)
     {
+
         $db = \Config\Database::connect();
         $model_val_question = new Value_question();
         $model_question = new Question();
-        $query = $db->query("SELECT * FROM select_value where q_id='$q_id' and s_id='$del'");
+        $query = $db->query("SELECT * FROM select_value where s_id='$del' and q_id='$q_id'");
+        //Option ที่ลบ
         $data = $query->getResult();
-        $model_val_question->delete($del);
+
 
         $options = $model_val_question->where('q_id', $q_id)->findAll();
-        $update = [
-            'answer' => null
-        ];
-        $model_question->update($q_id, $update);
+        $question  = $model_question->where('q_id', $q_id)->findAll();
+
+        if ($question[0]['answer'] == $data[0]->option_number) {
+            $update = [
+                'answer' => null
+            ];
+            $model_question->update($q_id, $update);
+            $model_val_question->delete($del);
+        } else {
+            $model_val_question->delete($del);
+        }
+
+        // echo json_encode($data);
+        // echo $question[0]['q_name']
+
 
         // echo $data[0]->option_number . "<br>";
         // $options = $model_val_question->where('q_id', $q_id)->findAll();

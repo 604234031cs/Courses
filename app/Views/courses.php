@@ -1,5 +1,6 @@
 <section>
     <link rel="stylesheet" href="<?php echo base_url('public/asset/css/listvdo.css'); ?>">
+    <title>เนื้อหา</title>
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
             <nav class="sb-sidenav accordion " id="sidenavAccordion" style="background-color:turquoise;">
@@ -11,8 +12,8 @@
                         <!-- </div> -->
                         <div class="mt-2 mx-auto p-4" style="font-size: 20px;color:white;">
                             <?= $category['name']; ?>
-
                         </div>
+                        
                         <div class="mx-2">
                             <div class="progress mt-2">
                                 <div class="progress-bar progress-bar-striped " role="progressbar" style="width: <?= $calculat; ?>%; background-color:#ff00bf" aria-valuenow="<?= $calculat; ?>" aria-valuemin="0" aria-valuemax="100.00"><?= $calculat . '  %'; ?></div>

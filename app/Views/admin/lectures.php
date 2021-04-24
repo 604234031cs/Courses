@@ -1,14 +1,21 @@
+
 <section>
-    <div class="container-fluid">
-        <h1 class="mt-4"><?= $courses['name']; ?></h1>
-        <h2 class="mt-4">หัวข้อบรรยาย</h2>
+    <title>คอร์สเรียน</title>
+    <div class="card" style="border:none">
+        <div class="card-haeder">
+            <h1 class="mt-1 ml-4"><?= $courses['name']; ?></h1>
+            <h2 class="mt-1 ml-4">หัวข้อบรรยาย</h2>
+        </div>
+    </div>
+    <div class="container-fluid mt-4">
+
 
         <div class="card mb-4">
             <div class="card-header text-right">
                 <button class="btn btn-success" data-toggle="modal" data-target="#exampleModal">เพิ่มหัวข้อบรรยาย</button>
             </div>
             <div class="card-body">
-                <table class="table" id="courses-list">
+                <table class="table " id="courses-list">
                     <thead>
                         <tr class="text-center">
                             <th>
@@ -25,8 +32,8 @@
                     <tbody>
                         <?php $i = 1; ?>
                         <?php foreach ($subcourses as $get) : ?>
-                            <tr class="tr-hover">
-                                <td class="text-center">
+                            <tr class="tr-hover text-center">
+                                <td>
                                     <?= $i; ?>
                                 </td>
                                 <td>

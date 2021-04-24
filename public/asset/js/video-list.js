@@ -21,6 +21,17 @@ function editvideo(name, id) {
   $("#video-id").val(id);
 }
 
+function editdoc(name, id, url) {
+  // console.log(name, id);
+  // $("#editvideo").modal("show");
+  // $("#video-name").val(name);
+  // $("#video-id").val(id);
+  $("#editdoc").modal("show");
+  $("#doc_name").val(name);
+  $("#doc_id").val(id);
+  $("#doc_url_defaul").val(url);
+}
+
 // function endvideo() {
 //   alert("END VIDEo");
 // }

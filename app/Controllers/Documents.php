@@ -2,20 +2,32 @@
 
 namespace App\Controllers;
 
+use App\Models\CourseCategory;
 use App\Models\Documents as ModelsDocuments;
 use App\Models\Listvdo;
 
+
+
 class Documents extends BaseController
 {
+    // public  $model_docs = new ModelsDocuments();
+
+
+
     public function adddocs()
     {
+        helper(['form']);
         $model_docs = new ModelsDocuments();
-        $files = $this->request->getFileMultiple('fileupload');
-        $id_courses = $this->request->getVar('id_courses');
-        $id_lectures = $this->request->getVar('id_lectures');
-        $count = $this->request->getVar('count');
-        $url = $this->request->getVar('url');
+
         if ($this->request->getMethod() == 'post') {
+
+
+            $files = $this->request->getFileMultiple('fileupload');
+            $id_courses = $this->request->getVar('id_courses');
+            $id_lectures = $this->request->getVar('id_lectures');
+            $count = $this->request->getVar('count');
+            $url = $this->request->getVar('url');
+
             foreach ($files  as $file) {
                 $count = $count + 1;
                 $type = '.' . $file->guessExtension();
@@ -26,15 +38,17 @@ class Documents extends BaseController
                     "name" => $name,
                     "url" => $url_video,
                     "id_subcourses" => $id_lectures,
-                    "id_category" => $id_courses
+                    "id_category" => $id_courses,
+                    "name_key" => md5($name)
                 ];
 
                 if ($model_docs->insert($datset)) {
-                    $file->move(FCPATH . 'upload/' . $url . '/alldocs', $url_video);
+                    $file->move(FCPATH . '/upload/' . $url . '/alldocs/', $url_video);
                 }   // echo $name . "<br>";
 
 
             }
+
             return redirect()->to(base_url('/admin/document/' . $id_courses . '/' . $id_lectures));
         }
     }
@@ -43,17 +57,63 @@ class Documents extends BaseController
     public function updatedocs()
     {
         helper(['form']);
+        $model_docs = new ModelsDocuments();
+        $model_courses = new CourseCategory();
+        $edit_id_doc = $this->request->getVar('edit_doc_id');
+        $doc_file = $this->request->getFile('edut_doc_file');
 
-        $model_videos = new Listvdo();
-        $id_edit = $this->request->getVar('edit-id');
-        $video_name = $this->request->getVar('edit-video');
+        $folder = $this->request->getVar('folder');
+
+        $url_default = $this->request->getVar('doc_url_defaul');
+        echo $mime = '.' . $doc_file->guessExtension();
+        $name = md5($this->request->getFile('edit_doc_file')) . $mime;
+
         $id_courses = $this->request->getVar('id_courses');
         $id_lectures = $this->request->getVar('id_lectures');
-        $dataset = [
-            "name" => $video_name
-        ];
 
-        $model_videos->update($id_edit, $dataset);
-        return redirect()->to(base_url('/admin/' . $id_courses . '/' . $id_lectures));
+        $colum = $this->countcolum($url_default);
+        // echo $colum;
+
+        // echo "<br>";
+        $url = $id_courses . '.' . $id_lectures . '.' . $colum . $mime;
+        // echo $name;
+        // echo $url;
+        // echo var_dump($url_default) . "<br>";
+        if (isset($doc_file) && $doc_file != '') {
+
+            $dataset = [
+                'name' => $this->request->getVar('edit_doc_name'),
+                'url' => $url,
+                'name_key' => $name
+            ];
+            if ($model_docs->update($edit_id_doc, $dataset)) {
+                $path = FCPATH . '/upload/' . $folder . '/alldocs/' . $url_default;
+                unlink($path);
+                $doc_file->move(FCPATH . '/upload/' . $folder . '/alldocs/', $url);
+            }
+        } else {
+            $dataset = [
+                'name' => $this->request->getVar('edit_doc_name'),
+            ];
+            $model_docs->update($edit_id_doc, $dataset);
+        }
+
+        return redirect()->to(base_url('/admin/document/' . $id_courses . '/' . $id_lectures));
+    }
+
+    public function countcolum($url)
+    {
+        $model_docs = new ModelsDocuments();
+        $docs = $model_docs->findAll();
+        $i = 1;
+        foreach ($docs as $doc) {
+            if ($url == $doc['url']) {
+
+                break;
+            } else {
+                $i += 1;
+            }
+        }
+        return $i;
     }
 }

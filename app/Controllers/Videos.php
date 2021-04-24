@@ -10,7 +10,6 @@ class Videos extends BaseController
     {
         helper(['form']);
         $model_video = new Listvdo();
-        $encrypter = \Config\Services::encrypter();
         if ($this->request->getMethod() == 'post') {
             $rules = [
                 'fileupload' => 'uploaded[fileupload]|ext_in[fileupload,mp4]',
@@ -40,11 +39,24 @@ class Videos extends BaseController
 
                     if ($model_video->insert($datset)) {
                         $file->move(FCPATH . '/upload/' . $url . '/allvdo/', $url_video);
-                    }   // echo $name . "<br>";
+                    }
                 }
-
-                return redirect()->to(base_url('/admin/' . $id_courses . '/' . $id_lectures));
+                $status = [
+                    "status" => "success",
+                    "text" => "เพิ่มข้อมูลสำเร็จ",
+                    "msg" => "สำเร็จ !"
+                ];
+            } else {
+                $status = [
+                    "status" => "error",
+                    "text" => "เพิ่มข้อมูลไม่สำเร็จ",
+                    "msg" => "เกิดข้อผิดพลาด !!"
+                ];
             }
+
+
+            session()->setFlashdata('msg', $status);
+            return redirect()->to(base_url('/admin/' . $id_courses . '/' . $id_lectures));
         }
     }
 
@@ -62,7 +74,23 @@ class Videos extends BaseController
             "name" => $video_name
         ];
 
-        $model_videos->update($id_edit, $dataset);
+        if ($model_videos->update($id_edit, $dataset)) {
+            $status = [
+                "status" => "success",
+                "text" => "แก้ไขข้อมูลสำเร็จ",
+                "msg" => "สำเร็จ !"
+            ];
+        } else {
+            $status = [
+                "status" => "error",
+                "text" => "แก้ไขข้อมูลไม่สำเร็จ",
+                "msg" => "เกิดข้อผิดพลาด !!"
+            ];
+        }
+
+
+
+        session()->setFlashdata('msg', $status);
         return redirect()->to(base_url('/admin/' . $id_courses . '/' . $id_lectures));
     }
 }
