@@ -20,37 +20,50 @@ class Documents extends BaseController
         $model_docs = new ModelsDocuments();
 
         if ($this->request->getMethod() == 'post') {
+            $rules = [
+                'fileupload' => 'uploaded[fileupload]|ext_in[fileupload,csv,rar,zip,pptx,doc,xls,xlsx,docx,pdf]',
 
+            ];
 
             $files = $this->request->getFileMultiple('fileupload');
             $id_courses = $this->request->getVar('id_courses');
             $id_lectures = $this->request->getVar('id_lectures');
             $count = $this->request->getVar('count');
             $url = $this->request->getVar('url');
+            if ($this->validate($rules)) {
+                foreach ($files  as $file) {
+                    $count = $count + 1;
+                    $type = '.' . $file->guessExtension();
+                    $url_video = (string)$id_courses . '.' . (string)$id_lectures . '.' . (string)$count . $type;
+                    $name  = str_replace($type, ' ', $file->getName(), $var);
 
-            foreach ($files  as $file) {
-                $count = $count + 1;
-                $type = '.' . $file->guessExtension();
-                $url_video = (string)$id_courses . '.' . (string)$id_lectures . '.' . (string)$count . $type;
-                $name  = str_replace($type, ' ', $file->getName(), $var);
+                    $datset = [
+                        "name" => $name,
+                        "url" => $url_video,
+                        "id_subcourses" => $id_lectures,
+                        "id_category" => $id_courses,
+                        "name_key" => md5($name)
+                    ];
 
-                $datset = [
-                    "name" => $name,
-                    "url" => $url_video,
-                    "id_subcourses" => $id_lectures,
-                    "id_category" => $id_courses,
-                    "name_key" => md5($name)
+                    if ($model_docs->insert($datset)) {
+                        $file->move(FCPATH . '/upload/' . $url . '/alldocs/', $url_video);
+                    }   // echo $name . "<br>";
+                }
+                $status = [
+                    "status" => "success",
+                    "text" => "เพิ่มข้อมูลสำเร็จ",
+                    "msg" => "สำเร็จ !"
                 ];
-
-                if ($model_docs->insert($datset)) {
-                    $file->move(FCPATH . '/upload/' . $url . '/alldocs/', $url_video);
-                }   // echo $name . "<br>";
-
-
+            } else {
+                $status = [
+                    "status" => "error",
+                    "text" => "เพิ่มข้อมูลไม่สำเร็จ",
+                    "msg" => "เกิดข้อผิดพลาด !!"
+                ];
             }
-
-            return redirect()->to(base_url('/admin/document/' . $id_courses . '/' . $id_lectures));
         }
+        session()->setFlashdata('msg', $status);
+        return redirect()->to(base_url('/admin/document/' . $id_courses . '/' . $id_lectures));
     }
 
 
@@ -90,14 +103,26 @@ class Documents extends BaseController
                 $path = FCPATH . '/upload/' . $folder . '/alldocs/' . $url_default;
                 unlink($path);
                 $doc_file->move(FCPATH . '/upload/' . $folder . '/alldocs/', $url);
+                $status = [
+                    "status" => "success",
+                    "text" => "แก้ไขข้อมูลสำเร็จ",
+                    "msg" => "สำเร็จ !"
+                ];
             }
         } else {
             $dataset = [
                 'name' => $this->request->getVar('edit_doc_name'),
             ];
-            $model_docs->update($edit_id_doc, $dataset);
+            if ($model_docs->update($edit_id_doc, $dataset)) {
+                $status = [
+                    "status" => "success",
+                    "text" => "แก้ไขข้อมูลสำเร็จ",
+                    "msg" => "สำเร็จ !"
+                ];
+            }
         }
 
+        session()->setFlashdata('msg', $status);
         return redirect()->to(base_url('/admin/document/' . $id_courses . '/' . $id_lectures));
     }
 

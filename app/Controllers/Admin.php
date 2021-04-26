@@ -218,9 +218,4 @@ class Admin extends BaseController
         echo json_encode($data['val_question']);
     }
 
-
-    public function cll_script()
-    {
-        echo view('script/script');
-    }
 }

@@ -213,13 +213,13 @@ function delanswer(del, q_id) {
 
 function modal_edit_option(s_id) {
   // console.log(s_id);
-
   $.ajax({
     url: base_url + "/option/" + s_id,
     type: "get",
     success: function (result) {
       let json = JSON.parse(result);
       // console.log(json['s_id']);
+      console.log(json);
       $(".modal-body .form-group #option_tilte").val(json["sl_name"]);
       $(".modal-body #s_id").val(json["s_id"]);
     },

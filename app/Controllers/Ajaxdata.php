@@ -287,7 +287,6 @@ class Ajaxdata extends BaseController
     {
         $question = $this->request->getVar('quesion');
         $answer = $this->request->getVar('answer');
-
         $modal_question = new Question();
         $dataset = [
             'answer' => $answer
@@ -302,7 +301,6 @@ class Ajaxdata extends BaseController
             ];
         }
         echo json_encode($status);
-        // 
     }
 
     public function delanswer($del, $q_id)

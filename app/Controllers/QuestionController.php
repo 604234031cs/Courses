@@ -55,6 +55,13 @@ class QuestionController extends BaseController
             }
             // echo $this->request->getVar('option_value' . $i) . "<br>";
         }
+
+        $status = [
+            "status" => "success",
+            "text" => "เพิ่มข้อมูลสำเร็จ",
+            "msg" => "สำเร็จ !"
+        ];
+        session()->setFlashdata('msg', $status);
         return  redirect()->to(base_url('/admin/question/' . $id_courses));
     }
 
@@ -70,7 +77,14 @@ class QuestionController extends BaseController
             'q_name' => $name_question
         ];
 
-        $modal_question->update($id_question, $update_set);
+        if ($modal_question->update($id_question, $update_set)) {
+            $status = [
+                "status" => "success",
+                "text" => "แก้ไขข้อมูลสำเร็จ",
+                "msg" => "สำเร็จ !"
+            ];
+        }
+        session()->setFlashdata('msg', $status);
         return  redirect()->to(base_url('/admin/question/' . $courses_id));
     }
 
@@ -89,8 +103,15 @@ class QuestionController extends BaseController
         $dataset = [
             'sl_name' => $option_title
         ];
-        $modal_option->update($s_id, $dataset);
+        if ($modal_option->update($s_id, $dataset)) {
+            $status = [
+                "status" => "success",
+                "text" => "แก้ไขข้อมูลสำเร็จ",
+                "msg" => "สำเร็จ !"
+            ];
+        }
 
+        session()->setFlashdata('msg', $status);
         return redirect()->to(base_url('/admin/question/' . $s_courses));
     }
 
@@ -119,6 +140,14 @@ class QuestionController extends BaseController
 
             // $option_title2 =  $this->request->getVar('option_value' . $i) . "<br>";
         }
+        $status = [
+            "status" => "success",
+            "text" => "เพิ่มข้อมูลสำเร็จ",
+            "msg" => "สำเร็จ !"
+        ];
+
+        
+        session()->setFlashdata('msg', $status);
         return redirect()->to(base_url('/admin/question/' . $courses_id));
     }
 }

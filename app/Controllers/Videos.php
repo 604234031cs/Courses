@@ -12,7 +12,7 @@ class Videos extends BaseController
         $model_video = new Listvdo();
         if ($this->request->getMethod() == 'post') {
             $rules = [
-                'fileupload' => 'uploaded[fileupload]|ext_in[fileupload,mp4]',
+                'fileupload' => 'uploaded[fileupload]|ext_in[fileupload,mp4,wmv]',
 
             ];
             $files = $this->request->getFileMultiple('fileupload');
