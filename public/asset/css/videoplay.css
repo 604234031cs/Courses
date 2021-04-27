@@ -4,7 +4,7 @@
   background-color: black;
   margin-left: auto;
   margin-right: auto;
-  /* position: absolute; */
+  position: relative;
 }
 
 .mainscore {
@@ -21,10 +21,11 @@
   background-color: indianred;
 }
 
-video {
+#player {
   position: absolute;
   width: 100%;
   height: 800px;
+  background-color: aqua;
 }
 
 #tr:hover {

@@ -60,14 +60,21 @@
                     <span id="id_category" style="display: none;"><?= $category['id'] ?></span>
                     <h3 class="mt-3 ml-3">
                         <i class="fab fa-youtube"></i> <strong id="videoname"> <?php echo $courses['name']; ?></strong>
-                        <input type="text" class="hidden">
+                        <!-- <input type="text" class="hidden"> -->
                     </h3>
                     <div class="card ">
                         <input type="text" hidden id="key" value="<?= $courses['name_key']; ?>">
                         <div class="mainvideo mt-2 ">
-                            <video src="<?= base_url('/videos/' . $courses['name_key']); ?>" id="video" onended="endVideo()" onplay="playvideo()" onpause="updatetime(this)" controls="controls" controlsList="nodownload">
-                                <!-- <source src="<?= base_url('/videos/' . "key_1"); ?>" type="video/mp4" id="source"> -->
-                            </video>
+                            <!-- <video src="<?= base_url('/videos/' . $courses['name_key']); ?>" id="video" onended="endVideo()" onplay="playvideo()" onpause="updatetime(this)" controls="controls" controlsList="nodownload"> -->
+                            <!-- <source src="<?= base_url('/videos/' . "key_1"); ?>" type="video/mp4" id="source"> -->
+                            <!-- </video> -->
+                            <!-- <video  controls='controls' src="https://www.youtube.com/embded/<?= $courses['name_key'] ?>&html5=1" type="video/mp4"></video> -->
+                           
+                            <div id="player" >
+                            </div>
+
+
+                            <!-- <iframe src="https://www.youtube.com/embed/<?= $courses['name_key']; ?>" frameborder="0" width="100%" height="800px"></iframe> -->
                         </div>
                         <br>
                     </div>

@@ -6,6 +6,11 @@ $cetegory = $query->getResult();
 $query = $db->query('SELECT * FROM group_courses');
 $group = $query->getResult();
 
+// header('Access-Control-Allow-Credentials', true);
+// header('Access-Control-Allow-Origin,*');
+// header('Access-Control-Allow-Methods:GET');
+// header('Access-Control-Allow-Headers,application/json');
+
 
 
 ?>
@@ -143,7 +148,7 @@ $group = $query->getResult();
                 </li>
             </ul>
         </div>
-       
+
     </nav>
 
 

@@ -16,6 +16,7 @@
 <script src="<?= base_url('public/asset/js/subcourses.js'); ?>"></script>
 <script src="<?= base_url('public/asset/js/category.js'); ?>"></script>
 <script src="<?= base_url('public/asset/js/question.js') ?>"></script>
+<script src="<?= base_url('public/asset/js/youtube.js') ?>"></script>
 
 <script>
     $(document).ready(function() {
