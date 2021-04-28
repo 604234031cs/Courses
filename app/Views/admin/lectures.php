@@ -67,7 +67,7 @@
             </div>
             <div class="modal-body">
                 <button class="btn btn-primary mb-3" onclick="addinput()">เพิ่ม</button>
-                <button class="btn btn-warning mb-3" onclick="clearinput()">Clare</button>
+                <button class="btn btn-warning mb-3" onclick="clearinput_lectures()">Clare</button>
                 <form action="<?= base_url('/addlectures') ?>" method="post">
                     <table class="table" id="mytable">
                         <thead>

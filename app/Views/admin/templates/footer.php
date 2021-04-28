@@ -12,7 +12,7 @@
 <script src="<?= base_url('public/theme/dist/js/scripts.js'); ?>"></script>
 <script src="<?= base_url('public/asset/js/courses.js'); ?>"></script>
 <script src="<?= base_url('public/asset/js/lectures.js'); ?>"></script>
-<script src="<?= base_url('public/asset/js/video-list.js'); ?>"></script>
+
 <script src="<?= base_url('public/asset/js/subcourses.js'); ?>"></script>
 <script src="<?= base_url('public/asset/js/category.js'); ?>"></script>
 <script src="<?= base_url('public/asset/js/question.js') ?>"></script>

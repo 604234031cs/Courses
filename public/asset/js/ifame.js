@@ -1,5 +1,6 @@
 var base_url = window.location.origin + "/courses";
-var scriptUrl = https://www.youtube.com/s/player/fa244a41/www-widgetapi.vflset/www-widgetapi.js;
+// var scriptUrl = "https://www.youtube.com/s/player/fa244a41/www-widgetapi.vflset/www-widgetapi.js";
+var scriptUrl = base_url + "/public/asset/js/youtube.js";
 try {
   var ttPolicy = window.trustedTypes.createPolicy("youtube-widget-api", {
     createScriptURL: function (x) {

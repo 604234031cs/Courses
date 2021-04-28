@@ -1,11 +1,19 @@
 // let myVideo = document.getElementById("video");
 var base_url = window.location.origin + "/courses";
+var tag = document.createElement("script");
+// tag.src = "https://www.youtube.com/iframe_api";
+tag.src = base_url + "/public/asset/js/ifame.js";
+
+var firstScriptTag = document.getElementsByTagName("script")[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+var player;
 
 // $(".hidden").hide();
-// // $(".hidden").show(1000);
+// $(".hidden").show(1000);
 
-// $("#progree").css("width", $("#with").html() + "%");
-// // document.getElementById("progree").style.width = $("#with").html() + "%";
+$("#progree").css("width", $("#with").html() + "%");
+// document.getElementById("progree").style.width = $("#with").html() + "%";
 
 // function playvdo(url, name, id) {
 //   var id_user = $("#id_user").html();
@@ -103,11 +111,6 @@ function endVideo() {
   });
 }
 
-function openlink(c, l) {
-  // alert(base_url + "/courses/" + c + "/lectures/" + l);
-  window.location.href = base_url + "/courses/" + c + "/lectures/" + l;
-}
-
 // function updatetime(event) {
 //   var id_user = $("#id_user").html();
 //   var id_video = $("#id_video").html();
@@ -130,7 +133,7 @@ function openlink(c, l) {
 // }
 
 function playvideo() {
-  // console.log("Video Play Video");
+  console.log("Video Play Video");
   var id_user = $("#id_user").html();
   var id_video = $("#id_video").html();
   var id_category = $("#id_category").html();
@@ -163,22 +166,18 @@ function playvideo() {
 // // }
 
 /////////////////////////////----New Js Video----//////////////////////////////////////////////////
+// alert("2");
+_Loadfirst();
 
-var tag = document.createElement("script");
-tag.src = "https://www.youtube.com/iframe_api";
+function _Loadfirst() {
+  // alert("1");
 
-var firstScriptTag = document.getElementsByTagName("script")[0];
-firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-var player;
-
-function onYouTubeIframeAPIReady() {
   var id_user = $("#id_user").html();
   var id_video = $("#id_video").html();
   // var url = $("#id_category").html();
   // var url = $("#urlvideo").html();
   // var category = $("#url").html();
-  var category = $("#key").val();
+  // var category = $("#key").val();
   // var flievideo = base_url + "/videos/" + category;
 
   $.ajax({
@@ -197,8 +196,7 @@ function onYouTubeIframeAPIReady() {
         }
       }
       var time = parseInt(position);
-      console.log(position);
-
+      // console.log(position);
       player = new YT.Player("player", {
         height: "390",
         width: "640",
@@ -209,31 +207,42 @@ function onYouTubeIframeAPIReady() {
           start: time,
         },
         events: {
-          onReady: onPlayerReady,
+          // onReady: onPlayerReady,
           onStateChange: onPlayerStateChange,
         },
       });
+      // console.log(player);
     },
   });
 }
 
-function onPlayerReady(event) {
-  playvideo();
-  event.target.playVideo();
-}
+// function onYouTubeIframeAPIReady() {}
+
+// function onPlayerReady(event) {
+//   // playvideo();
+//   // event.target.playVideo();
+// }
 
 // var done = false;
 function onPlayerStateChange(event) {
   if (event.data == YT.PlayerState.PAUSED) {
-    stopVideo();
+    // console.log(player.getCurrentTime());
+    stopVideo(player.getCurrentTime());
   } else if (event.data == YT.PlayerState.ENDED) {
     endVideo();
+  } else if (event.data == YT.PlayerState.PLAYING) {
+    playvideo();
   }
 }
-function stopVideo() {
+function stopVideo(time) {
+  
+  // console.log("Video Stop Video position Time :=>" + time);
   var id_user = $("#id_user").html();
   var id_video = $("#id_video").html();
-  var position = player.getCurrentTime();
+    // console.log(id_user);
+    // console.log(id_video);
+    // console.log(time);
+  // var position = player.getCurrentTime();
   // alert(id_video);
   // var id_category = $("#id_category").html();
   // $("#sh_time").html(event.currentTime);
@@ -244,42 +253,73 @@ function stopVideo() {
     data: {
       id_user: id_user,
       id_vdo: id_video,
-      duration: position,
+      duration: time,
     },
-    success: function (reulte) {},
+    success: function (reulte) {
+    },
   });
-
+  // console.log("Stop");
+  // console.log(player.getCurrentTime());
   player.pauseVideo();
 }
 
 function playvdo(key, name, id) {
-  // onYouTubeIframeAPIReady(key);
-  // alert(name);
-  // player = new YT.Player("player", {
-  //   height: "390",
-  //   width: "640",
-  //   videoId: key,
-  //   playerVars: {
-  //     controls: "0",
-  //     rel: "0",
-  //     disablekb: "1",
-  //   },
-  //   events: {
-  //     onReady: onPlayerReady,
-  //     onStateChange: onPlayerStateChange,
-  //   },
-  // });
+  // console.log(player.getVideoEmbedCode());
+  // player.loadVideoById(key);
 
-  
-  $("iframe").attr(
-    "src",
-    "https://www.youtube.com/embed/" +  key + "?&rel=0&disablekb=1&start=105&enablejsapi=1&origin=http%3A%2F%2Flocalhost&widgetid=1"
-  );
+  // console.log($("iframe").attr('src'));
+  var id_user = $("#id_user").html();
+  $.ajax({
+    type: "post",
+    url: base_url + "/ajax/getcurrtiem",
+    data: {
+      id_user: id_user,
+      id_video: id,
+    },
+    success: function (result) {
+      let val = JSON.parse(result);
+      let position = 0;
+      if (val != null) {
+        if (val["duration"] != null && val["duration"] != "") {
+          position = val["duration"];
+        }
+      }
 
+      var time = parseInt(position);
+      // player.loadVideoById(key);
+      // player = new YT.Player("player", {
+      //   height: "390",
+      //   width: "640",
+      //   videoId: key,
+      //   playerVars: {
+      //     rel: "0",
+      //     disablekb: "1",
+      //     start: time,
+      //   },
+      //   events: {
+      //     onReady: onPlayerReady,
+      //     onStateChange: onPlayerStateChange,
+      //   },
+      // });
+      player.loadVideoByUrl("https://www.youtube.com/embed/" + key, time);
 
-  https://www.youtube.com/embed/VHzlaXRzl1w?rel=0&disablekb=1&start=105&enablejsapi=1&origin=http%3A%2F%2Flocalhost&widgetid=1
+      // $("iframe").attr(
+      //   "src",
+      //   "https://www.youtube.com/embed/" +
+      //     key +
+      //     "?&rel=0&disablekb=1&start=" +
+      //     time +
+      //     "&enablejsapi=1&origin=http%3A%2F%2Flocalhost&widgetid=1"
+      // );
+    },
+  });
+
+  //www.youtube.com/embed/VHzlaXRzl1w?rel=0&disablekb=1&start=105&enablejsapi=1&origin=http%3A%2F%2Flocalhost&widgetid=1
   $("#videoname").html(name);
   $("#id_video").html(id);
   $("#key").val(key);
   // console.log($("iframe")[0]);
 }
+
+// https://www.youtube.com/embed/VHzlaXRzl1w?&rel=0&disablekb=1&start=0&enablejsapi=1&origin=http%3A%2F%2Flocalhost&widgetid=1
+// https://www.youtube.com/embed/HsD_45UNA8k?rel=0&disablekb=1&start=101&enablejsapi=1&origin=http%3A%2F%2Flocalhost&widgetid=1

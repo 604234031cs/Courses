@@ -1,5 +1,6 @@
 <section>
     <link rel="stylesheet" href="<?php echo site_url('public/asset/css/videoplay.css'); ?>">
+
     <title>วิดีโอ</title>
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
@@ -69,8 +70,8 @@
                             <!-- <source src="<?= base_url('/videos/' . "key_1"); ?>" type="video/mp4" id="source"> -->
                             <!-- </video> -->
                             <!-- <video  controls='controls' src="https://www.youtube.com/embded/<?= $courses['name_key'] ?>&html5=1" type="video/mp4"></video> -->
-                           
-                            <div id="player" >
+
+                            <div id="player">
                             </div>
 
 
@@ -112,7 +113,4 @@
 
         </div>
     </div>
-
-
-
 </section>

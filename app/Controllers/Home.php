@@ -115,7 +115,7 @@ class Home extends BaseController
 		$id_user = $session->get('id');
 
 		$model_category = new CourseCategory();
-		$model_documents  = new Documents();
+		// $model_documents  = new Documents();
 		$data['category'] = $model_category->where('id', $id)->first();
 
 		$model_subcoruses = new Subcourses();

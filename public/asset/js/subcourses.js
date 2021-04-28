@@ -36,7 +36,8 @@ function addinput() {
 //   }
 // }
 
-function clearinput() {
+function clearinput_lectures() {
+ 
   rows = 0;
   $("#hdnCount").val(rows);
   $("#mytable > tbody:last").empty(); // remove all

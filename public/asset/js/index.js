@@ -25,7 +25,7 @@ function loadpage(text = null) {
           html +=
             ' <a href="' +
             base_url +
-            " /courses/" +
+            "/courses/" +
             get["id"] +
             '"style=" text-decoration: none;">';
           html += ' <div class="card mb-4">';
@@ -72,8 +72,7 @@ function loadpage(text = null) {
           html += '<div class="col-sm-4" id="col">';
           html +=
             ' <a href="' +
-            base_url +
-            " /courses/" +
+            base_url +"/courses/" +
             get["id"] +
             '"  style=" text-decoration: none;">';
           html += ' <div class="card mb-4">';
@@ -138,8 +137,13 @@ function autoselect(value) {
       option += "<option value='' disabled selected>หมวดหมู่</option>";
       json["group"].forEach((element) => {
         // console.log(element["name"]);
-        
-        option +=  "<option value='" +    element["id"] +      "'>" +    element["name"] +    "</option>";
+
+        option +=
+          "<option value='" +
+          element["id"] +
+          "'>" +
+          element["name"] +
+          "</option>";
       });
       $("#group_sel").append(option);
       let name_sel = $("#group_sel option:selected").text();
@@ -156,4 +160,9 @@ function changevalue(value) {
   $("#group-name ").html(name_sel);
   window.location.href =
     base_url + "/category/" + $("#group_sel option:selected").val();
+}
+
+function openlink(c, l) {
+  // alert(base_url + "/courses/" + c + "/lectures/" + l);
+  window.location.href = base_url + "/courses/" + c + "/lectures/" + l;
 }

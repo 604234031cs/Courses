@@ -28,21 +28,22 @@
             <div class="row mt-5" id="row_c">
                 <?php if ($courses) : ?>
                     <?php foreach ($courses  as $list) : ?>
+
                         <div class="col col-3">
-                            <div class="card mb-3" style="height:350px;">
-                                <img class="card-img-top" src="https://process.fs.teachablecdn.com/ADNupMnWyR7kCWRvm76Laz/resize=width:705/https://www.filepicker.io/api/file/5Cr0YJWRBqYw3zpCKImc" alt="Card image" width="332" height="187">
-                                <div class="card-body">
-                                    <h5 class="card-title mt-3"><?= $list['name']; ?></h5>
+                            <a href="<?= base_url('/courses/' . $list['id']) ?>" style="text-decoration: none; color:black;">
+                                <div class="card mb-3" style="height:350px;">
+                                    <img class="card-img-top" src="<?= base_url('/public/img/' . $list['img']); ?>" alt="Card image" width="332" height="187">
+                                    <div class="card-body">
+                                        <h5 class="card-title mt-3"><?= $list['name']; ?></h5>
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
                         </div>
+
                     <?php endforeach; ?>
                 <?php else : ?>
                     ไม่พบข้อมูล
                 <?php endif; ?>
-
-
-
 
             </div>
         </div>
